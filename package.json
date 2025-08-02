@@ -1,0 +1,38 @@
+{
+  "name": "ib-club-website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build-client && node index.js",
+    "dev": "npm run dev-client & nodemon index.js",
+    "build-client": "npm run clean && parcel build client/src/index.html --out-dir client/dist",
+    "dev-client": "npm run clean && parcel client/src/index.html --out-dir client/dist",
+    "clean": "rmdir /s /q .cache client\\dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InteliBlockchain-IBC/ib-club-website.git"
+  },
+  "keywords": [],
+  "author": "Inteli Blockchain",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/InteliBlockchain-IBC/ib-club-website/issues"
+  },
+  "homepage": "https://github.com/InteliBlockchain-IBC/ib-club-website#readme",
+  "description": "The official website of the Inteli Blockchain Club.",
+  "dependencies": {
+    "@thirdweb-dev/react": "^4.9.4",
+    "@thirdweb-dev/sdk": "^4.0.99",
+    "ethers": "^5.8.0",
+    "express": "^4.21.2",
+    "parcel-bundler": "^1.12.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^6.30.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

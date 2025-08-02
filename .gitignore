@@ -1,0 +1,5 @@
+# Ignorar pastas específicas
+/.cache/
+/node_modules/
+
+.vercel
