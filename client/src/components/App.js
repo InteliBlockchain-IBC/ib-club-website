@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import inteliLogo from './imgs/inteliblcok.jpg';
+import QuemSomos from './QuemSomos';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [currentPage, setCurrentPage] = useState('home');
 
   useEffect(() => {
     // Check for saved theme preference or default to light mode
@@ -19,8 +21,6 @@ const App = () => {
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
 
-
-
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
   };
@@ -28,6 +28,10 @@ const App = () => {
   const connectWallet = () => {
     // Simulate wallet connection
     setIsWalletConnected(!isWalletConnected);
+  };
+
+  const handleNavigation = (page) => {
+    setCurrentPage(page);
   };
 
   const partners = [
@@ -76,13 +80,13 @@ const App = () => {
   const achievements = [
     {
       number: "10+",
-      title: "Projetos Desenvolvidos",
-      description: "Smart contracts e aplicações blockchain",
+      title: "Projetos",
+      description: "Aplicações blockchain",
       icon: "fas fa-code"
     },
     {
-      number: "50+",
-      title: "Membros Ativos",
+      number: "30+",
+      title: "Membros",
       description: "Comunidade crescente de entusiastas",
       icon: "fas fa-users"
     },
@@ -95,10 +99,113 @@ const App = () => {
     {
       number: "20+",
       title: "Eventos Realizados",
-      description: "Workshops, hackathons e meetups",
+      description: "Bootcamps, hackathons e workshops",
       icon: "fas fa-calendar-alt"
     }
   ];
+
+  const renderContent = () => {
+    if (currentPage === 'sobre') {
+      return <QuemSomos />;
+    }
+    
+        return (
+      <>
+        {/* Hero Section */}
+        <section className="hero">
+        <div className="hero-content">
+          <h1 className="hero-title">
+            A
+            <span> Liberdade </span> <br />
+            Começa Aqui
+          </h1>
+          <p className="hero-subtitle">
+            Conectando inovação, tecnologia e comunidade
+          </p>
+          <p className="hero-description">
+            O Inteli Blockchain é o epicentro da revolução blockchain no Inteli. 
+            Desenvolvemos projetos inovadores, educamos a próxima geração de desenvolvedores 
+            e construímos o futuro da tecnologia descentralizada.
+          </p>
+        </div>
+        </section>
+
+        {/* Partners Section */}
+        <section className="partners">
+          <div className="container">
+            <div className="partners-content">
+              <h2 className="section-title">Nossos Parceiros</h2>
+              <p className="section-subtitle">
+                Trabalhamos com as principais empresas e organizações do ecossistema blockchain
+              </p>
+              
+              <div className="partners-carousel">
+                <div className="partners-track">
+                  {/* Primeira passagem dos parceiros */}
+                  {partners.map((partner, index) => (
+                    <div key={`first-${index}`} className="partner-card">
+                      <div className="partner-logo">
+                        <img src={partner.logo} alt={partner.name} />
+                      </div>
+                    </div>
+                  ))}
+                  {/* Segunda passagem dos parceiros para loop infinito */}
+                  {partners.map((partner, index) => (
+                    <div key={`second-${index}`} className="partner-card">
+                      <div className="partner-logo">
+                        <img src={partner.logo} alt={partner.name} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Achievements Section */}
+        <section className="achievements">
+          <div className="container">
+            <div className="partners-content">
+              <h2 className="section-title">Nossas Conquistas</h2>
+              <p className="section-subtitle">
+                Números que mostram nosso impacto no ecossistema blockchain
+              </p>
+              
+              <div className="achievements-grid">
+                {achievements.map((achievement, index) => (
+                  <div key={index} className="achievement-card">
+                    <div className="achievement-icon">
+                      <i className={achievement.icon}></i>
+                    </div>
+                    <div className="achievement-number">{achievement.number}</div>
+                    <h3 className="achievement-title">{achievement.title}</h3>
+                    <p className="achievement-description">{achievement.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="footer">
+          <div className="footer-content">
+            <div className="footer-logo">
+              <img src={inteliLogo} alt="Inteli Blockchain" className="footer-logo-img" />
+            </div>
+            <p className="footer-text">
+              Conectando o futuro da tecnologia blockchain através de inovação, 
+              educação e colaboração.
+            </p>
+            <p className="footer-copyright">
+              © 2025 Inteli Blockchain. Todos os direitos reservados.
+            </p>
+          </div>
+        </footer>
+      </>
+    );
+  };
 
   return (
     <div className="app">
@@ -110,11 +217,36 @@ const App = () => {
           </div>
           
           <div className="nav-links-center">
-            <a href="/" className="nav-link active">Inicio</a>
-            <a href="/projetos" className="nav-link">Projetos</a>
-            <a href="/comunidade" className="nav-link">Calendário</a>
-            <a href="/eventos" className="nav-link">Memórias</a>
-            <a href="/sobre" className="nav-link">Quem Somos</a>
+            <button 
+              onClick={() => handleNavigation('home')} 
+              className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}
+            >
+              Inicio
+            </button>
+            <button 
+              onClick={() => handleNavigation('projetos')} 
+              className={`nav-link ${currentPage === 'projetos' ? 'active' : ''}`}
+            >
+              Projetos
+            </button>
+            <button 
+              onClick={() => handleNavigation('comunidade')} 
+              className={`nav-link ${currentPage === 'comunidade' ? 'active' : ''}`}
+            >
+              Calendário
+            </button>
+            <button 
+              onClick={() => handleNavigation('eventos')} 
+              className={`nav-link ${currentPage === 'eventos' ? 'active' : ''}`}
+            >
+              Memórias
+            </button>
+            <button 
+              onClick={() => handleNavigation('sobre')} 
+              className={`nav-link ${currentPage === 'sobre' ? 'active' : ''}`}
+            >
+              Quem Somos
+            </button>
           </div>
           
           <div className="nav-links-right">
@@ -128,100 +260,10 @@ const App = () => {
         </div>
       </nav>
 
-            {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1 className="hero-title">
-            A
-            <span> Liberdade </span> <br />
-            Começa Aqui
-          </h1>
-          <p className="hero-subtitle">
-            Conectando inovação, tecnologia e comunidade
-          </p>
-          <p className="hero-description">
-            O Inteli Blockchain é o epicentro da revolução blockchain no Brasil. 
-            Desenvolvemos projetos inovadores, educamos a próxima geração de desenvolvedores 
-            e construímos o futuro da tecnologia descentralizada.
-          </p>
-        </div>
-      </section>
-
-      {/* Partners Section */}
-      <section className="partners">
-        <div className="container">
-          <div className="partners-content">
-            <h2 className="section-title">Nossos Parceiros</h2>
-            <p className="section-subtitle">
-              Trabalhamos com as principais empresas e organizações do ecossistema blockchain
-            </p>
-            
-            <div className="partners-carousel">
-              <div className="partners-track">
-                {/* Primeira passagem dos parceiros */}
-                {partners.map((partner, index) => (
-                  <div key={`first-${index}`} className="partner-card">
-                    <div className="partner-logo">
-                      <img src={partner.logo} alt={partner.name} />
-                    </div>
-                  </div>
-                ))}
-                {/* Segunda passagem dos parceiros para loop infinito */}
-                {partners.map((partner, index) => (
-                  <div key={`second-${index}`} className="partner-card">
-                    <div className="partner-logo">
-                      <img src={partner.logo} alt={partner.name} />
-                    </div>
-                  </div>
-                ))}
-              </div>
+      {/* Render content based on current page */}
+      {renderContent()}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Achievements Section */}
-      <section className="achievements">
-        <div className="container">
-          <div className="partners-content">
-            <h2 className="section-title">Nossas Conquistas</h2>
-            <p className="section-subtitle">
-              Números que mostram nosso impacto no ecossistema blockchain
-            </p>
-            
-            <div className="achievements-grid">
-              {achievements.map((achievement, index) => (
-                <div key={index} className="achievement-card">
-                  <div className="achievement-icon">
-                    <i className={achievement.icon}></i>
-                  </div>
-                  <div className="achievement-number">{achievement.number}</div>
-                  <h3 className="achievement-title">{achievement.title}</h3>
-                  <p className="achievement-description">{achievement.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-logo">
-            <img src={inteliLogo} alt="Inteli Blockchain" className="footer-logo-img" />
-          </div>
-          <p className="footer-text">
-            Conectando o futuro da tecnologia blockchain através de inovação, 
-            educação e colaboração.
-          </p>
-                     <p className="footer-copyright">
-             © 2025 Inteli Blockchain. Todos os direitos reservados.
-           </p>
-        </div>
-      </footer>
-    </div>
-  );
+        );
 };
 
 export default App;

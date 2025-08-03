@@ -38693,7 +38693,344 @@ function useViewTransitionState(to, opts) {
 //#endregion
 },{"react":"../../node_modules/react/index.js","react-dom":"../../node_modules/react-dom/index.js","react-router":"../../node_modules/react-router/dist/index.js","@remix-run/router":"../../node_modules/@remix-run/router/dist/router.js"}],"components/imgs/inteliblcok.jpg":[function(require,module,exports) {
 module.exports = "/inteliblcok.d60d2544.jpg";
-},{}],"components/imgs/inteli.jpeg":[function(require,module,exports) {
+},{}],"components/imgs/franciscofilho.jpg":[function(require,module,exports) {
+module.exports = "/franciscofilho.b62b6916.jpg";
+},{}],"components/QuemSomos.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _inteliblcok = _interopRequireDefault(require("./imgs/inteliblcok.jpg"));
+var _franciscofilho = _interopRequireDefault(require("./imgs/franciscofilho.jpg"));
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+var QuemSomos = function QuemSomos() {
+  var membrosAtivos = [{
+    nome: "Vinicius Testa",
+    funcao: "Presidente",
+    foto: "https://media.licdn.com/dms/image/v2/D4E03AQGUqyOXV2R4jw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728412680730?e=1756944000&v=beta&t=0-5CwxAivSaJhXSqmYisxWM9h4st1tmQ3ra5MVFeyWM",
+    linkedin: "https://www.linkedin.com/in/vinicius-testa-passos/"
+  }, {
+    nome: "Giovanna Britto",
+    funcao: "Presidente",
+    foto: "https://media.licdn.com/dms/image/v2/D5603AQEhNNprd7IbxA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1710704389038?e=1756944000&v=beta&t=0zYSUMRMX2nxSkb1nPh9EfwuiC0_QYyuI85EjBmors8",
+    linkedin: "https://www.linkedin.com/in/giovanna-britto/"
+  }, {
+    nome: "Daniel Gonçalves",
+    funcao: "Diretor de Relações Externas",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQElr3HLsXZZUw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1723344865206?e=1756944000&v=beta&t=wETIb22UUO6bl8SS98Ya5ugPhgqzQjTsZsZ1zEu0wb0",
+    linkedin: "https://www.linkedin.com/in/danielaraujogonncalves/"
+  }, {
+    nome: "Victor Garcia",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQFjLdkmaOoMag/profile-displayphoto-shrink_800_800/B4DZb35c7KGgAg-/0/1747915755719?e=1756944000&v=beta&t=6VyqV9iLDmkiH2Yw219NjTS1l_Ujp3jbFKjxnQOgqOY",
+    linkedin: "https://www.linkedin.com/in/victor-garcia-dos-santos/"
+  }, {
+    nome: "Kethlen Martins",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQGGTYx6qQ70NQ/profile-displayphoto-shrink_800_800/B4DZZtPc0EGsAg-/0/1745589490328?e=1756944000&v=beta&t=5MU4gLCoXZo4cu7mdTPgI38urcBpuSPJISHlS6ROAQU",
+    linkedin: "https://www.linkedin.com/in/kethlenmartins/"
+  }, {
+    nome: "Marco Ruas",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4E03AQF8-iAVEnkOfg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1710803425000?e=1756944000&v=beta&t=IWBgxZp84fikHndnuPptB0gDIk8ZMpIE9fjxTZqiMlk",
+    linkedin: "https://www.linkedin.com/in/marcoruas/"
+  }, {
+    nome: "Messias Olivindo",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQHp5KG5dVEQWw/profile-displayphoto-shrink_800_800/B4DZUbfJtjG8Ak-/0/1739922907012?e=1756944000&v=beta&t=SpGj3fpzKimqDCyluYJNpKjilJu4iUwWssNosspc7EY",
+    linkedin: "https://www.linkedin.com/in/messias-olivindo/"
+  }, {
+    nome: "Mirela Bianchi",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQEA5rbZcw5EoQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1703695250753?e=1756944000&v=beta&t=ztyT1I-CFSkF624wGMUm3tIsjHXOF-3FaHcxLstc8e0",
+    linkedin: "https://www.linkedin.com/in/mirela-bianchi-608601254/"
+  }, {
+    nome: "Livia Cavalcanti",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQFKFNLH_HbLLw/profile-displayphoto-shrink_800_800/B4DZUUxr5XHYAc-/0/1739810325486?e=1756944000&v=beta&t=aflTh64K1c9OthE00bRxN7IXSgw-WVioKBCbtPoB1OQ",
+    linkedin: "https://www.linkedin.com/in/liviacavalcantioliveira/"
+  }, {
+    nome: "Lorena Garcia",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4E03AQE87Ua83B0SZw/profile-displayphoto-shrink_800_800/B4EZVnqJFcH0Ac-/0/1741200856232?e=1756944000&v=beta&t=59uOeja5fkBL5co2NMBhfL7p0P0aAEP9whyayMJ9gLk",
+    linkedin: "https://www.linkedin.com/in/llorengarcia/"
+  }, {
+    nome: "Maria Arielly",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQGV5mZsfjQCgA/profile-displayphoto-shrink_800_800/B4DZcT7_dUGkAc-/0/1748386183565?e=1756944000&v=beta&t=7D1b_ZvHooKMp_0aGRJb5YxzUSQ-Y18xouQw7NUci2Q",
+    linkedin: "https://www.linkedin.com/in/maria-arielly/"
+  }, {
+    nome: "Giovanna Neves",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D5603AQFksP2NHvPz4A/profile-displayphoto-shrink_800_800/B56ZaSIsyPHsAc-/0/1746208476886?e=1756944000&v=beta&t=fV6Kv1x4FZpfYERESnU7Eo9SVqE-Mp35xWg4es1bdKQ",
+    linkedin: "https://www.linkedin.com/in/giovanna-neves-rodrigues/"
+  }, {
+    nome: "Pedro Jorge",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQG3ILxvJmR-lQ/profile-displayphoto-shrink_800_800/B4DZUVWJRDHwAc-/0/1739819882533?e=1756944000&v=beta&t=kzeiZgNj4PvaJbPRl8vqHJfG5iBWfYL3Z6ER8ESo_mM",
+    linkedin: "https://www.linkedin.com/in/pedro-jorge-alves/"
+  }, {
+    nome: "Francisco Filho",
+    funcao: "Membro",
+    foto: "".concat(_franciscofilho.default)
+  }, {
+    nome: "Davi Duarte",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQHuktAytEyaGw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1708210393339?e=1756944000&v=beta&t=nIgqN_55IBMY0HraMge7WjEmrFH0QmrRXxJN414tuXw",
+    linkedin: "https://www.linkedin.com/in/daviduarte/"
+  }, {
+    nome: "Maria Eduarda",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4E03AQHLx3TxYnYr9w/profile-displayphoto-shrink_800_800/B4EZUwT7z3GgAc-/0/1740272287481?e=1756944000&v=beta&t=Gna_8v3ZFg9PIrHdNv3F3pd1xJoT78dcjKlF5feFZaU",
+    linkedin: "https://www.linkedin.com/in/mariaeduardaoliveiraa/"
+  }, {
+    nome: "Maria Vitória",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQHsvfMIc01Ojg/profile-displayphoto-shrink_800_800/B4DZWK3TvyHIAc-/0/1741791510590?e=1756944000&v=beta&t=mElj0QJqP5N0jgczNBeX33PiB_sIy9olP0rQhWzJUhk",
+    linkedin: "https://www.linkedin.com/in/maria-vit%C3%B3ria-dos-santos/"
+  }, {
+    nome: "Leunam Sousa",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQEsUIvwIj1yww/profile-displayphoto-shrink_800_800/B4DZbOTzbxGwAg-/0/1747218022100?e=1756944000&v=beta&t=6mldpeXxvORSNxadGaevydQ3vbbEijiCIOFaWE16ndU",
+    linkedin: "https://www.linkedin.com/in/leunam/"
+  }, {
+    nome: "Gustavo Costa",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQEuvRMTPnXlcQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728386807104?e=1756944000&v=beta&t=W4_7Vlszb6mu49sBv4tWf-7MQcRXYgnNgh-Y-zzOWT0",
+    linkedin: "https://www.linkedin.com/in/gustavo-dacosta/"
+  }, {
+    nome: "Davi Abreu",
+    funcao: "Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQEpxucBy_KJCQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1720059817581?e=1756944000&v=beta&t=4ZD3E_8vkjO7P57c2wIUy-w4gVdViro28iMC2z76JZw",
+    linkedin: "https://www.linkedin.com/in/davi-abreu-da-silveira/"
+  }];
+  var exMembros = [{
+    nome: "Paulo Evangelista",
+    funcao: "Co-Fundador",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQF08yrjyaHdfA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1712272657106?e=1756944000&v=beta&t=olurtjWndQXN-mbhc_avi4a_yi_Y9yq7Er7Rq1RTBXQ",
+    linkedin: "https://www.linkedin.com/in/paulo-evangelista/"
+  }, {
+    nome: "Lyorrei Shono",
+    funcao: "Co-Fundador",
+    foto: "https://media.licdn.com/dms/image/v2/C4D03AQGFg5YFfbx_xw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1659193121458?e=1756944000&v=beta&t=6nYvlA6aZ88ewLC9WVMqhf1IYS1-4Uf8wduWPZxQ4Bc",
+    linkedin: "https://www.linkedin.com/in/lyorrei/"
+  }, {
+    nome: "Abner Silva",
+    funcao: "Co-Fundador",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQE1TqbwOY1yZw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1722540851356?e=1756944000&v=beta&t=iHyoxv5JnIg4YZXajNLzvBdUfsrXd_DBdvNkRh_v8cI",
+    linkedin: "https://www.linkedin.com/in/abner-silva-barbosa-8a3542225/"
+  }, {
+    nome: "Henrique Lemos",
+    funcao: "Co-Fundador",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQFzDk8AX1Ybww/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1728583548588?e=1756944000&v=beta&t=kG0o6YgEPuyCkWE51XMAeHpm7kfpT4oNv7HFVcwVSkc",
+    linkedin: "https://www.linkedin.com/in/henriquelfmatias/"
+  }, {
+    nome: "João Carazzato",
+    funcao: "Co-Fundador",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQE9rWK6h9PV7Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1697737707973?e=1756944000&v=beta&t=QWz_B4WlRP8Djaq3mIj6vg-OltjJLLJUVGTnlLQwCYM",
+    linkedin: "https://www.linkedin.com/in/joaocarazzato/"
+  }, {
+    nome: "Yago Phellipe",
+    funcao: "Ex-Presidente",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQFAtG5UxxiPgA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1696286109030?e=1756944000&v=beta&t=phNk9rtaMXtEP18lsF5U3WJ5y2UBUQZM2b9qmBtFjhA",
+    linkedin: "https://www.linkedin.com/in/yago-phellipe/"
+  }, {
+    nome: "Hugo Noyma",
+    funcao: "Ex-Presidente",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQG8_RlD-Qs7qA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1683156942667?e=1756944000&v=beta&t=EF3dzoi-zstlwylRfi-d3jNShKzm9qnZgJ9h6UI08yQ",
+    linkedin: "https://www.linkedin.com/in/hugo-noyma/"
+  }, {
+    nome: "Rafael Coutinho",
+    funcao: "Ex-Presidente",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQFZLnTySOVCtA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1682441582735?e=1756944000&v=beta&t=oCGkIVjIuRUR_y9-UcVWsBaoADUK-8wxGwfWkyCLYpQ",
+    linkedin: "https://www.linkedin.com/in/rafael-coutinho2004/"
+  }, {
+    nome: "Murilo Couto",
+    funcao: "Ex-Diretor de Marketing",
+    foto: "https://media.licdn.com/dms/image/v2/D4E03AQFIMn-odBbfEg/profile-displayphoto-crop_800_800/B4EZhiB.BAGwAU-/0/1753991340918?e=1756944000&v=beta&t=oEwrvmkfDLirAlgDspqYAhNbdtK_lq5CJ5WXBFTLzwY",
+    linkedin: "https://www.linkedin.com/in/murilo-couto-oliveira/"
+  }, {
+    nome: "Henrique Marlon",
+    funcao: "Ex-Diretor de Relações Externas",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQGDiz0i9sfhew/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1703971977459?e=1756944000&v=beta&t=Y_YcP5tFovHQZp93jMIbDxaWTvegi3WWvVXuwppysAo",
+    linkedin: "https://www.linkedin.com/in/henriquemarlon/"
+  }, {
+    nome: "Emanuele Morais",
+    funcao: "Ex-Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQF0-Y-DLeB7gQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731711004310?e=1756944000&v=beta&t=J9amW0YJfDfi9FEo3_q3YT7ZULp_ToystBALt2czLtE",
+    linkedin: "https://www.linkedin.com/in/emanuele-morais/"
+  }, {
+    nome: "Bianca Cassemiro",
+    funcao: "Ex-Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQFFaef8n1Kwpg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1695507611304?e=1756944000&v=beta&t=qlo3KChkEFj-tS7uNbeXQWb5NvuATYnjkW75fDISZB4",
+    linkedin: "https://www.linkedin.com/in/bianca-cassemiro/"
+  }, {
+    nome: "Marcos Teixeira",
+    funcao: "Ex-Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQE98-0GnOzjtg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1683762873493?e=1756944000&v=beta&t=Kys0BbzrOEOiPB3RVKpIXQ5dBYj8lAxY6cFDjQTcrEg",
+    linkedin: "https://www.linkedin.com/in/marcos-teixeira-37676a24a/"
+  }, {
+    nome: "Ian Pereira",
+    funcao: "Ex-Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D5603AQHNBBIBUsCNVQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1708359490553?e=1756944000&v=beta&t=bSj2B9-kYqdZWkG86kfSvnNk7EIm3Aw8F8FZMhx1kRs",
+    linkedin: "https://www.linkedin.com/in/ian-pereira-simao/"
+  }, {
+    nome: "Isabelle Dantas",
+    funcao: "Ex-Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQHwUNL74kCtJg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1725482980705?e=1756944000&v=beta&t=1YmoLxHdS-FRU75X4daqe138sxYb05xTSiQVdBq_UXA",
+    linkedin: "https://www.linkedin.com/in/iisabelledantas/"
+  }, {
+    nome: "Vinicius Ibiapina",
+    funcao: "Ex-Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQHzC4gBmXI9Gg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1708378799274?e=1756944000&v=beta&t=VyoZkyWdNABHlIiUxeTuE-1b-KEdQgAXAc9tcI020Kc",
+    linkedin: "https://www.linkedin.com/in/vinicius-ibiapina/"
+  }, {
+    nome: "Leonardo Ogata",
+    funcao: "Ex-Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQHx9xLPmHToJQ/profile-displayphoto-shrink_800_800/B4DZWNumT8HIAg-/0/1741839558467?e=1756944000&v=beta&t=qf6Xa9pyQ0cAG6bJACGKjQoIOPZNl_FoJPoRBR8veNg",
+    linkedin: "https://www.linkedin.com/in/leonardo-ogata-983b032b5/"
+  }, {
+    nome: "Gabrio Lina",
+    funcao: "Ex-Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQGONP4HE5zGAg/profile-displayphoto-shrink_800_800/B4DZao0RH2HwAc-/0/1746588997659?e=1756944000&v=beta&t=NjywjaLnbWiD5Ml1iaYrPG8edEGeMRV_2Jbogt2MeZI",
+    linkedin: "https://www.linkedin.com/in/gabrio-lina-17ba60205/"
+  }, {
+    nome: "Alexandre Fonseca",
+    funcao: "Ex-Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQFeZxpc6jYiSA/profile-displayphoto-shrink_800_800/B4DZbLHCxkGUAk-/0/1747164344545?e=1756944000&v=beta&t=pr2ccpcHgUSex42k0CAz24heforVLVxbSmoG1SjAisA",
+    linkedin: "https://www.linkedin.com/in/alexandrefonseca00/"
+  }, {
+    nome: "Enya Oliveira",
+    funcao: "Ex-Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQEG_jyedakqJw/profile-displayphoto-shrink_800_800/B4DZaxG5HcG4Ag-/0/1746728096981?e=1756944000&v=beta&t=uyeXoTxXHoMMCU5aLlM6e7y3jZt1gRlGX0M0hvflDr0",
+    linkedin: "https://www.linkedin.com/in/enya-oliveira/"
+  }, {
+    nome: "Marcelo Maia",
+    funcao: "Ex-Membro",
+    foto: "https://media.licdn.com/dms/image/v2/D4D03AQGUbtCNEfjXjQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718265539850?e=1756944000&v=beta&t=c3qI-jPoTvpHrcgFwz1bn1P0XhAL4ICuBAVZjyw0CrA",
+    linkedin: "https://www.linkedin.com/in/marcelomaiaf/"
+  }];
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", {
+    className: "hero quem-somos-hero"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "hero-content"
+  }, /*#__PURE__*/_react.default.createElement("h1", {
+    className: "hero-title"
+  }, "Quem ", /*#__PURE__*/_react.default.createElement("span", null, "Somos")), /*#__PURE__*/_react.default.createElement("p", {
+    className: "hero-subtitle"
+  }, "Conectando inova\xE7\xE3o, tecnologia e comunidade"), /*#__PURE__*/_react.default.createElement("p", {
+    className: "hero-description"
+  }, "O Inteli Blockchain \xE9 uma organiza\xE7\xE3o dedicada ao desenvolvimento e promo\xE7\xE3o da tecnologia blockchain no Brasil. Nossa miss\xE3o \xE9 educar, conectar e capacitar a pr\xF3xima gera\xE7\xE3o de desenvolvedores e entusiastas blockchain no Inteli."))), /*#__PURE__*/_react.default.createElement("section", {
+    className: "membros-section"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "membros-content"
+  }, /*#__PURE__*/_react.default.createElement("h2", {
+    className: "section-title"
+  }, "Membros Ativos"), /*#__PURE__*/_react.default.createElement("p", {
+    className: "section-subtitle"
+  }, "Nossa equipe atual que lidera os projetos e iniciativas"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "membros-grid"
+  }, membrosAtivos.map(function (membro, index) {
+    return membro.linkedin ? /*#__PURE__*/_react.default.createElement("a", {
+      key: index,
+      href: membro.linkedin,
+      target: "_blank",
+      rel: "noopener noreferrer",
+      className: "membro-card"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "membro-foto"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: membro.foto,
+      alt: membro.nome
+    }), /*#__PURE__*/_react.default.createElement("div", {
+      className: "linkedin-overlay"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fab fa-linkedin"
+    }))), /*#__PURE__*/_react.default.createElement("h3", {
+      className: "membro-nome"
+    }, membro.nome), /*#__PURE__*/_react.default.createElement("p", {
+      className: "membro-funcao"
+    }, membro.funcao)) : /*#__PURE__*/_react.default.createElement("div", {
+      key: index,
+      className: "membro-card"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "membro-foto"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: membro.foto,
+      alt: membro.nome
+    })), /*#__PURE__*/_react.default.createElement("h3", {
+      className: "membro-nome"
+    }, membro.nome), /*#__PURE__*/_react.default.createElement("p", {
+      className: "membro-funcao"
+    }, membro.funcao));
+  }))))), /*#__PURE__*/_react.default.createElement("section", {
+    className: "membros-section ex-membros"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "membros-content"
+  }, /*#__PURE__*/_react.default.createElement("h2", {
+    className: "section-title"
+  }, "Ex-Membros"), /*#__PURE__*/_react.default.createElement("p", {
+    className: "section-subtitle"
+  }, "Membros que contribu\xEDram para o crescimento da organiza\xE7\xE3o"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "membros-grid"
+  }, exMembros.map(function (membro, index) {
+    return membro.linkedin ? /*#__PURE__*/_react.default.createElement("a", {
+      key: index,
+      href: membro.linkedin,
+      target: "_blank",
+      rel: "noopener noreferrer",
+      className: "membro-card ex-membro"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "membro-foto"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: membro.foto,
+      alt: membro.nome
+    }), /*#__PURE__*/_react.default.createElement("div", {
+      className: "linkedin-overlay"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fab fa-linkedin"
+    }))), /*#__PURE__*/_react.default.createElement("h3", {
+      className: "membro-nome"
+    }, membro.nome), /*#__PURE__*/_react.default.createElement("p", {
+      className: "membro-funcao"
+    }, membro.funcao)) : /*#__PURE__*/_react.default.createElement("div", {
+      key: index,
+      className: "membro-card ex-membro"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "membro-foto"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: membro.foto,
+      alt: membro.nome
+    })), /*#__PURE__*/_react.default.createElement("h3", {
+      className: "membro-nome"
+    }, membro.nome), /*#__PURE__*/_react.default.createElement("p", {
+      className: "membro-funcao"
+    }, membro.funcao));
+  }))))), /*#__PURE__*/_react.default.createElement("footer", {
+    className: "footer"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-content"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-logo"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _inteliblcok.default,
+    alt: "Inteli Blockchain",
+    className: "footer-logo-img"
+  })), /*#__PURE__*/_react.default.createElement("p", {
+    className: "footer-text"
+  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("p", {
+    className: "footer-copyright"
+  }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
+};
+var _default = exports.default = QuemSomos;
+},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg","./imgs/franciscofilho.jpg":"components/imgs/franciscofilho.jpg"}],"components/imgs/inteli.jpeg":[function(require,module,exports) {
 module.exports = "/inteli.0a0b82b9.jpeg";
 },{}],"components/imgs/Stellar_Symbol.png":[function(require,module,exports) {
 module.exports = "/Stellar_Symbol.ab42ed8e.png";
@@ -38722,6 +39059,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _inteliblcok = _interopRequireDefault(require("./imgs/inteliblcok.jpg"));
+var _QuemSomos = _interopRequireDefault(require("./QuemSomos"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
@@ -38739,6 +39077,10 @@ var App = function App() {
     _useState4 = _slicedToArray(_useState3, 2),
     isWalletConnected = _useState4[0],
     setIsWalletConnected = _useState4[1];
+  var _useState5 = (0, _react.useState)('home'),
+    _useState6 = _slicedToArray(_useState5, 2),
+    currentPage = _useState6[0],
+    setCurrentPage = _useState6[1];
   (0, _react.useEffect)(function () {
     // Check for saved theme preference or default to light mode
     var savedTheme = localStorage.getItem('theme');
@@ -38757,6 +39099,9 @@ var App = function App() {
   var connectWallet = function connectWallet() {
     // Simulate wallet connection
     setIsWalletConnected(!isWalletConnected);
+  };
+  var handleNavigation = function handleNavigation(page) {
+    setCurrentPage(page);
   };
   var partners = [{
     name: "Inteli",
@@ -38791,12 +39136,12 @@ var App = function App() {
   }];
   var achievements = [{
     number: "10+",
-    title: "Projetos Desenvolvidos",
-    description: "Smart contracts e aplicações blockchain",
+    title: "Projetos",
+    description: "Aplicações blockchain",
     icon: "fas fa-code"
   }, {
-    number: "50+",
-    title: "Membros Ativos",
+    number: "30+",
+    title: "Membros",
     description: "Comunidade crescente de entusiastas",
     icon: "fas fa-users"
   }, {
@@ -38807,9 +39152,100 @@ var App = function App() {
   }, {
     number: "20+",
     title: "Eventos Realizados",
-    description: "Workshops, hackathons e meetups",
+    description: "Bootcamps, hackathons e workshops",
     icon: "fas fa-calendar-alt"
   }];
+  var renderContent = function renderContent() {
+    if (currentPage === 'sobre') {
+      return /*#__PURE__*/_react.default.createElement(_QuemSomos.default, null);
+    }
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", {
+      className: "hero"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "hero-content"
+    }, /*#__PURE__*/_react.default.createElement("h1", {
+      className: "hero-title"
+    }, "A", /*#__PURE__*/_react.default.createElement("span", null, " Liberdade "), " ", /*#__PURE__*/_react.default.createElement("br", null), "Come\xE7a Aqui"), /*#__PURE__*/_react.default.createElement("p", {
+      className: "hero-subtitle"
+    }, "Conectando inova\xE7\xE3o, tecnologia e comunidade"), /*#__PURE__*/_react.default.createElement("p", {
+      className: "hero-description"
+    }, "O Inteli Blockchain \xE9 o epicentro da revolu\xE7\xE3o blockchain no Inteli. Desenvolvemos projetos inovadores, educamos a pr\xF3xima gera\xE7\xE3o de desenvolvedores e constru\xEDmos o futuro da tecnologia descentralizada."))), /*#__PURE__*/_react.default.createElement("section", {
+      className: "partners"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "container"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "partners-content"
+    }, /*#__PURE__*/_react.default.createElement("h2", {
+      className: "section-title"
+    }, "Nossos Parceiros"), /*#__PURE__*/_react.default.createElement("p", {
+      className: "section-subtitle"
+    }, "Trabalhamos com as principais empresas e organiza\xE7\xF5es do ecossistema blockchain"), /*#__PURE__*/_react.default.createElement("div", {
+      className: "partners-carousel"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "partners-track"
+    }, partners.map(function (partner, index) {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        key: "first-".concat(index),
+        className: "partner-card"
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "partner-logo"
+      }, /*#__PURE__*/_react.default.createElement("img", {
+        src: partner.logo,
+        alt: partner.name
+      })));
+    }), partners.map(function (partner, index) {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        key: "second-".concat(index),
+        className: "partner-card"
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "partner-logo"
+      }, /*#__PURE__*/_react.default.createElement("img", {
+        src: partner.logo,
+        alt: partner.name
+      })));
+    })))))), /*#__PURE__*/_react.default.createElement("section", {
+      className: "achievements"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "container"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "partners-content"
+    }, /*#__PURE__*/_react.default.createElement("h2", {
+      className: "section-title"
+    }, "Nossas Conquistas"), /*#__PURE__*/_react.default.createElement("p", {
+      className: "section-subtitle"
+    }, "N\xFAmeros que mostram nosso impacto no ecossistema blockchain"), /*#__PURE__*/_react.default.createElement("div", {
+      className: "achievements-grid"
+    }, achievements.map(function (achievement, index) {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        key: index,
+        className: "achievement-card"
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "achievement-icon"
+      }, /*#__PURE__*/_react.default.createElement("i", {
+        className: achievement.icon
+      })), /*#__PURE__*/_react.default.createElement("div", {
+        className: "achievement-number"
+      }, achievement.number), /*#__PURE__*/_react.default.createElement("h3", {
+        className: "achievement-title"
+      }, achievement.title), /*#__PURE__*/_react.default.createElement("p", {
+        className: "achievement-description"
+      }, achievement.description));
+    }))))), /*#__PURE__*/_react.default.createElement("footer", {
+      className: "footer"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "footer-content"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "footer-logo"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: _inteliblcok.default,
+      alt: "Inteli Blockchain",
+      className: "footer-logo-img"
+    })), /*#__PURE__*/_react.default.createElement("p", {
+      className: "footer-text"
+    }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("p", {
+      className: "footer-copyright"
+    }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
+  };
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "app"
   }, /*#__PURE__*/_react.default.createElement("nav", {
@@ -38824,21 +39260,31 @@ var App = function App() {
     className: "logo-img"
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "nav-links-center"
-  }, /*#__PURE__*/_react.default.createElement("a", {
-    href: "/",
-    className: "nav-link active"
-  }, "Inicio"), /*#__PURE__*/_react.default.createElement("a", {
-    href: "/projetos",
-    className: "nav-link"
-  }, "Projetos"), /*#__PURE__*/_react.default.createElement("a", {
-    href: "/comunidade",
-    className: "nav-link"
-  }, "Calend\xE1rio"), /*#__PURE__*/_react.default.createElement("a", {
-    href: "/eventos",
-    className: "nav-link"
-  }, "Mem\xF3rias"), /*#__PURE__*/_react.default.createElement("a", {
-    href: "/sobre",
-    className: "nav-link"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return handleNavigation('home');
+    },
+    className: "nav-link ".concat(currentPage === 'home' ? 'active' : '')
+  }, "Inicio"), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return handleNavigation('projetos');
+    },
+    className: "nav-link ".concat(currentPage === 'projetos' ? 'active' : '')
+  }, "Projetos"), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return handleNavigation('comunidade');
+    },
+    className: "nav-link ".concat(currentPage === 'comunidade' ? 'active' : '')
+  }, "Calend\xE1rio"), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return handleNavigation('eventos');
+    },
+    className: "nav-link ".concat(currentPage === 'eventos' ? 'active' : '')
+  }, "Mem\xF3rias"), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      return handleNavigation('sobre');
+    },
+    className: "nav-link ".concat(currentPage === 'sobre' ? 'active' : '')
   }, "Quem Somos")), /*#__PURE__*/_react.default.createElement("div", {
     className: "nav-links-right"
   }, /*#__PURE__*/_react.default.createElement("button", {
@@ -38849,95 +39295,10 @@ var App = function App() {
   })), /*#__PURE__*/_react.default.createElement("button", {
     className: "connect-wallet",
     onClick: connectWallet
-  }, isWalletConnected ? "Conectado" : "Connect")))), /*#__PURE__*/_react.default.createElement("section", {
-    className: "hero"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "hero-content"
-  }, /*#__PURE__*/_react.default.createElement("h1", {
-    className: "hero-title"
-  }, "A", /*#__PURE__*/_react.default.createElement("span", null, " Liberdade "), " ", /*#__PURE__*/_react.default.createElement("br", null), "Come\xE7a Aqui"), /*#__PURE__*/_react.default.createElement("p", {
-    className: "hero-subtitle"
-  }, "Conectando inova\xE7\xE3o, tecnologia e comunidade"), /*#__PURE__*/_react.default.createElement("p", {
-    className: "hero-description"
-  }, "O Inteli Blockchain \xE9 o epicentro da revolu\xE7\xE3o blockchain no Brasil. Desenvolvemos projetos inovadores, educamos a pr\xF3xima gera\xE7\xE3o de desenvolvedores e constru\xEDmos o futuro da tecnologia descentralizada."))), /*#__PURE__*/_react.default.createElement("section", {
-    className: "partners"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "container"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "partners-content"
-  }, /*#__PURE__*/_react.default.createElement("h2", {
-    className: "section-title"
-  }, "Nossos Parceiros"), /*#__PURE__*/_react.default.createElement("p", {
-    className: "section-subtitle"
-  }, "Trabalhamos com as principais empresas e organiza\xE7\xF5es do ecossistema blockchain"), /*#__PURE__*/_react.default.createElement("div", {
-    className: "partners-carousel"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "partners-track"
-  }, partners.map(function (partner, index) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      key: "first-".concat(index),
-      className: "partner-card"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "partner-logo"
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: partner.logo,
-      alt: partner.name
-    })));
-  }), partners.map(function (partner, index) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      key: "second-".concat(index),
-      className: "partner-card"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "partner-logo"
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: partner.logo,
-      alt: partner.name
-    })));
-  })))))), /*#__PURE__*/_react.default.createElement("section", {
-    className: "achievements"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "container"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "partners-content"
-  }, /*#__PURE__*/_react.default.createElement("h2", {
-    className: "section-title"
-  }, "Nossas Conquistas"), /*#__PURE__*/_react.default.createElement("p", {
-    className: "section-subtitle"
-  }, "N\xFAmeros que mostram nosso impacto no ecossistema blockchain"), /*#__PURE__*/_react.default.createElement("div", {
-    className: "achievements-grid"
-  }, achievements.map(function (achievement, index) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      key: index,
-      className: "achievement-card"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "achievement-icon"
-    }, /*#__PURE__*/_react.default.createElement("i", {
-      className: achievement.icon
-    })), /*#__PURE__*/_react.default.createElement("div", {
-      className: "achievement-number"
-    }, achievement.number), /*#__PURE__*/_react.default.createElement("h3", {
-      className: "achievement-title"
-    }, achievement.title), /*#__PURE__*/_react.default.createElement("p", {
-      className: "achievement-description"
-    }, achievement.description));
-  }))))), /*#__PURE__*/_react.default.createElement("footer", {
-    className: "footer"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "footer-content"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "footer-logo"
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: _inteliblcok.default,
-    alt: "Inteli Blockchain",
-    className: "footer-logo-img"
-  })), /*#__PURE__*/_react.default.createElement("p", {
-    className: "footer-text"
-  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("p", {
-    className: "footer-copyright"
-  }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
+  }, isWalletConnected ? "Conectado" : "Connect")))), renderContent());
 };
 var _default = exports.default = App;
-},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg","./imgs/inteli.jpeg":"components/imgs/inteli.jpeg","./imgs/Stellar_Symbol.png":"components/imgs/Stellar_Symbol.png","./imgs/ethereumbrasil_logo.jpeg":"components/imgs/ethereumbrasil_logo.jpeg","./imgs/vinteum.png":"components/imgs/vinteum.png","./imgs/ethsamba.jpg":"components/imgs/ethsamba.jpg","./imgs/ethlatam.png":"components/imgs/ethlatam.png","./imgs/starknet_foundation_logo.jpeg":"components/imgs/starknet_foundation_logo.jpeg","./imgs/chainlink_labs_logo.jpeg":"components/imgs/chainlink_labs_logo.jpeg","./imgs/cryptostargames.jpeg":"components/imgs/cryptostargames.jpeg","./imgs/nearx.jpeg":"components/imgs/nearx.jpeg"}],"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg","./QuemSomos":"components/QuemSomos.js","./imgs/inteli.jpeg":"components/imgs/inteli.jpeg","./imgs/Stellar_Symbol.png":"components/imgs/Stellar_Symbol.png","./imgs/ethereumbrasil_logo.jpeg":"components/imgs/ethereumbrasil_logo.jpeg","./imgs/vinteum.png":"components/imgs/vinteum.png","./imgs/ethsamba.jpg":"components/imgs/ethsamba.jpg","./imgs/ethlatam.png":"components/imgs/ethlatam.png","./imgs/starknet_foundation_logo.jpeg":"components/imgs/starknet_foundation_logo.jpeg","./imgs/chainlink_labs_logo.jpeg":"components/imgs/chainlink_labs_logo.jpeg","./imgs/cryptostargames.jpeg":"components/imgs/cryptostargames.jpeg","./imgs/nearx.jpeg":"components/imgs/nearx.jpeg"}],"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -39029,7 +39390,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52477" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64992" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
