@@ -66106,7 +66106,674 @@ var QuemSomos = function QuemSomos() {
   }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
 };
 var _default = exports.default = QuemSomos;
-},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg","./imgs/franciscofilho.jpg":"components/imgs/franciscofilho.jpg"}],"components/imgs/inteli.jpeg":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg","./imgs/franciscofilho.jpg":"components/imgs/franciscofilho.jpg"}],"components/Conquistas.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _react = _interopRequireWildcard(require("react"));
+var _inteliblcok = _interopRequireDefault(require("./imgs/inteliblcok.jpg"));
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+var Conquistas = function Conquistas(_ref) {
+  var walletAddress = _ref.walletAddress;
+  var _useState = (0, _react.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    nfts = _useState2[0],
+    setNfts = _useState2[1];
+  var _useState3 = (0, _react.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+  var _useState5 = (0, _react.useState)('all'),
+    _useState6 = _slicedToArray(_useState5, 2),
+    filter = _useState6[0],
+    setFilter = _useState6[1];
+
+  // Mock data - NFTs do usuário (vazio por enquanto)
+  var mockNfts = [];
+  (0, _react.useEffect)(function () {
+    // Simular carregamento de dados da API
+    setTimeout(function () {
+      setNfts(mockNfts);
+      setLoading(false);
+    }, 1000);
+  }, []);
+  var getFilteredNfts = function getFilteredNfts() {
+    if (filter === 'all') return nfts;
+    return nfts.filter(function (nft) {
+      return nft.category === filter;
+    });
+  };
+  var getRarityColor = function getRarityColor(rarity) {
+    switch (rarity) {
+      case 'Legendary':
+        return '#FFD700';
+      case 'Epic':
+        return '#9932CC';
+      case 'Rare':
+        return '#4169E1';
+      case 'Common':
+        return '#808080';
+      default:
+        return '#808080';
+    }
+  };
+  var getCategoryIcon = function getCategoryIcon(category) {
+    switch (category) {
+      case 'achievement':
+        return 'fas fa-trophy';
+      case 'community':
+        return 'fas fa-users';
+      case 'education':
+        return 'fas fa-graduation-cap';
+      case 'defi':
+        return 'fas fa-chart-line';
+      case 'development':
+        return 'fas fa-code';
+      default:
+        return 'fas fa-star';
+    }
+  };
+  var getCategoryName = function getCategoryName(category) {
+    switch (category) {
+      case 'achievement':
+        return 'Conquistas';
+      case 'community':
+        return 'Comunidade';
+      case 'education':
+        return 'Educação';
+      case 'defi':
+        return 'DeFi';
+      case 'development':
+        return 'Desenvolvimento';
+      default:
+        return 'Geral';
+    }
+  };
+  if (loading) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      className: "conquistas-loading"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "loading-spinner"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fas fa-spinner fa-spin"
+    })), /*#__PURE__*/_react.default.createElement("p", null, "Carregando suas conquistas..."));
+  }
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "conquistas-page"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "conquistas-header"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "conquistas-header-content"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "conquistas-title-section"
+  }, /*#__PURE__*/_react.default.createElement("h1", {
+    className: "conquistas-title"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-trophy"
+  }), "Minhas Conquistas"), /*#__PURE__*/_react.default.createElement("p", {
+    className: "conquistas-subtitle"
+  }, "Sua cole\xE7\xE3o de NFTs e conquistas na comunidade blockchain"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "wallet-info-display"
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: "wallet-address-display"
+  }, walletAddress ? "".concat(walletAddress.slice(0, 6), "...").concat(walletAddress.slice(-4)) : 'Carteira não conectada')))))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "conquistas-filters"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "filters-content"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "filter-button ".concat(filter === 'all' ? 'active' : ''),
+    onClick: function onClick() {
+      return setFilter('all');
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-th"
+  }), "Todas"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "filter-button ".concat(filter === 'achievement' ? 'active' : ''),
+    onClick: function onClick() {
+      return setFilter('achievement');
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-trophy"
+  }), "Conquistas"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "filter-button ".concat(filter === 'community' ? 'active' : ''),
+    onClick: function onClick() {
+      return setFilter('community');
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-users"
+  }), "Comunidade"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "filter-button ".concat(filter === 'education' ? 'active' : ''),
+    onClick: function onClick() {
+      return setFilter('education');
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-graduation-cap"
+  }), "Educa\xE7\xE3o"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "filter-button ".concat(filter === 'defi' ? 'active' : ''),
+    onClick: function onClick() {
+      return setFilter('defi');
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-chart-line"
+  }), "DeFi"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "filter-button ".concat(filter === 'development' ? 'active' : ''),
+    onClick: function onClick() {
+      return setFilter('development');
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-code"
+  }), "Desenvolvimento")))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "conquistas-content"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "container"
+  }, getFilteredNfts().length === 0 ? /*#__PURE__*/_react.default.createElement("div", {
+    className: "no-nfts"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-search"
+  }), /*#__PURE__*/_react.default.createElement("h3", null, "Nenhuma NFT encontrada"), /*#__PURE__*/_react.default.createElement("p", null, "N\xE3o h\xE1 NFTs nesta categoria ainda.")) : /*#__PURE__*/_react.default.createElement("div", {
+    className: "nfts-grid"
+  }, getFilteredNfts().map(function (nft) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: nft.id,
+      className: "nft-card"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "nft-image-container"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: nft.image,
+      alt: nft.name,
+      className: "nft-image"
+    }), /*#__PURE__*/_react.default.createElement("div", {
+      className: "nft-rarity-badge",
+      style: {
+        backgroundColor: getRarityColor(nft.rarity)
+      }
+    }, nft.rarity), /*#__PURE__*/_react.default.createElement("div", {
+      className: "nft-category-badge"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: getCategoryIcon(nft.category)
+    }), getCategoryName(nft.category))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "nft-info"
+    }, /*#__PURE__*/_react.default.createElement("h3", {
+      className: "nft-name"
+    }, nft.name), /*#__PURE__*/_react.default.createElement("p", {
+      className: "nft-description"
+    }, nft.description), /*#__PURE__*/_react.default.createElement("div", {
+      className: "nft-details"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "nft-detail-item"
+    }, /*#__PURE__*/_react.default.createElement("span", {
+      className: "detail-label"
+    }, "Cole\xE7\xE3o:"), /*#__PURE__*/_react.default.createElement("span", {
+      className: "detail-value"
+    }, nft.collection)), /*#__PURE__*/_react.default.createElement("div", {
+      className: "nft-detail-item"
+    }, /*#__PURE__*/_react.default.createElement("span", {
+      className: "detail-label"
+    }, "Token ID:"), /*#__PURE__*/_react.default.createElement("span", {
+      className: "detail-value"
+    }, nft.tokenId)), /*#__PURE__*/_react.default.createElement("div", {
+      className: "nft-detail-item"
+    }, /*#__PURE__*/_react.default.createElement("span", {
+      className: "detail-label"
+    }, "Data:"), /*#__PURE__*/_react.default.createElement("span", {
+      className: "detail-value"
+    }, new Date(nft.date).toLocaleDateString('pt-BR'))))));
+  })))), /*#__PURE__*/_react.default.createElement("footer", {
+    className: "footer"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-content"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-logo"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _inteliblcok.default,
+    alt: "Inteli Blockchain",
+    className: "footer-logo-img"
+  })), /*#__PURE__*/_react.default.createElement("p", {
+    className: "footer-text"
+  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("p", {
+    className: "footer-copyright"
+  }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
+};
+var _default = exports.default = Conquistas;
+},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg"}],"components/Calendario.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _react = _interopRequireWildcard(require("react"));
+var _inteliblcok = _interopRequireDefault(require("./imgs/inteliblcok.jpg"));
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+var Calendario = function Calendario() {
+  var _useState = (0, _react.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    events = _useState2[0],
+    setEvents = _useState2[1];
+  var _useState3 = (0, _react.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+  var _useState5 = (0, _react.useState)('all'),
+    _useState6 = _slicedToArray(_useState5, 2),
+    filter = _useState6[0],
+    setFilter = _useState6[1];
+
+  // Mock data for upcoming events
+  var mockEvents = [];
+  (0, _react.useEffect)(function () {
+    setTimeout(function () {
+      setEvents(mockEvents);
+      setLoading(false);
+    }, 1000);
+  }, []);
+  var getFilteredEvents = function getFilteredEvents() {
+    if (filter === 'all') return events;
+    return events.filter(function (event) {
+      return event.category === filter;
+    });
+  };
+  var getCategoryIcon = function getCategoryIcon(category) {
+    switch (category) {
+      case 'bootcamp':
+        return 'fas fa-tools';
+      case 'hackathon':
+        return 'fas fa-code';
+      case 'palestra':
+        return 'fas fa-microphone';
+      case 'meetup':
+        return 'fas fa-users';
+      case 'curso':
+        return 'fas fa-graduation-cap';
+      case 'conferencia':
+        return 'fas fa-building';
+      default:
+        return 'fas fa-calendar';
+    }
+  };
+  var getCategoryName = function getCategoryName(category) {
+    switch (category) {
+      case 'bootcamp':
+        return 'Bootcamp';
+      case 'hackathon':
+        return 'Hackathon';
+      case 'palestra':
+        return 'Palestra';
+      case 'meetup':
+        return 'Meetup';
+      case 'curso':
+        return 'Curso';
+      case 'conferencia':
+        return 'Conferência';
+      default:
+        return 'Evento';
+    }
+  };
+  var getCategoryColor = function getCategoryColor(category) {
+    switch (category) {
+      case 'bootcamp':
+        return '#ff6b6b';
+      case 'hackathon':
+        return '#4ecdc4';
+      case 'palestra':
+        return '#45b7d1';
+      case 'meetup':
+        return '#96ceb4';
+      case 'curso':
+        return '#feca57';
+      case 'conferencia':
+        return '#ff9ff3';
+      default:
+        return '#6c5ce7';
+    }
+  };
+  var formatDate = function formatDate(dateString) {
+    var date = new Date(dateString);
+    return date.toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+  };
+  var getStatusColor = function getStatusColor(status) {
+    switch (status) {
+      case 'upcoming':
+        return '#00b894';
+      case 'ongoing':
+        return '#fdcb6e';
+      case 'completed':
+        return '#6c5ce7';
+      default:
+        return '#636e72';
+    }
+  };
+  var shareEvent = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(event) {
+      var shareData, _t, _t2;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.p = _context.n) {
+          case 0:
+            shareData = {
+              title: event.title,
+              text: "".concat(event.title, " - ").concat(event.description),
+              url: window.location.href
+            };
+            _context.p = 1;
+            if (!navigator.share) {
+              _context.n = 3;
+              break;
+            }
+            _context.n = 2;
+            return navigator.share(shareData);
+          case 2:
+            _context.n = 5;
+            break;
+          case 3:
+            _context.n = 4;
+            return navigator.clipboard.writeText("".concat(event.title, "\n").concat(event.description, "\n").concat(window.location.href));
+          case 4:
+            alert('Link do evento copiado para a área de transferência!');
+          case 5:
+            _context.n = 10;
+            break;
+          case 6:
+            _context.p = 6;
+            _t = _context.v;
+            console.error('Erro ao compartilhar:', _t);
+            // Fallback to clipboard
+            _context.p = 7;
+            _context.n = 8;
+            return navigator.clipboard.writeText("".concat(event.title, "\n").concat(event.description, "\n").concat(window.location.href));
+          case 8:
+            alert('Link do evento copiado para a área de transferência!');
+            _context.n = 10;
+            break;
+          case 9:
+            _context.p = 9;
+            _t2 = _context.v;
+            console.error('Erro ao copiar para área de transferência:', _t2);
+            alert('Erro ao compartilhar o evento');
+          case 10:
+            return _context.a(2);
+        }
+      }, _callee, null, [[7, 9], [1, 6]]);
+    }));
+    return function shareEvent(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+  if (loading) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      className: "calendario-page"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "calendario-loading"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fas fa-spinner fa-spin"
+    }), /*#__PURE__*/_react.default.createElement("p", null, "Carregando eventos...")));
+  }
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "calendario-page"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "calendario-header"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "calendario-header-content"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "calendario-title"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-calendar-alt"
+  }), /*#__PURE__*/_react.default.createElement("h1", null, "Calend\xE1rio de Eventos")), /*#__PURE__*/_react.default.createElement("p", null, "Confira os pr\xF3ximos eventos da comunidade blockchain")), /*#__PURE__*/_react.default.createElement("div", {
+    className: "calendario-logo"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _inteliblcok.default,
+    alt: "Inteli Logo"
+  }))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "calendario-filters"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "filter-btn ".concat(filter === 'all' ? 'active' : ''),
+    onClick: function onClick() {
+      return setFilter('all');
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-list"
+  }), "Todos"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "filter-btn ".concat(filter === 'bootcamp' ? 'active' : ''),
+    onClick: function onClick() {
+      return setFilter('bootcamp');
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-tools"
+  }), "Bootcamps"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "filter-btn ".concat(filter === 'hackathon' ? 'active' : ''),
+    onClick: function onClick() {
+      return setFilter('hackathon');
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-code"
+  }), "Hackathons"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "filter-btn ".concat(filter === 'palestra' ? 'active' : ''),
+    onClick: function onClick() {
+      return setFilter('palestra');
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-microphone"
+  }), "Palestras"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "filter-btn ".concat(filter === 'meetup' ? 'active' : ''),
+    onClick: function onClick() {
+      return setFilter('meetup');
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-users"
+  }), "Meetups")), /*#__PURE__*/_react.default.createElement("div", {
+    className: "events-timeline"
+  }, getFilteredEvents().map(function (event, index) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: event.id,
+      className: "event-card"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "event-timeline"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "event-dot",
+      style: {
+        backgroundColor: getCategoryColor(event.category)
+      }
+    }), index < getFilteredEvents().length - 1 && /*#__PURE__*/_react.default.createElement("div", {
+      className: "timeline-line"
+    })), /*#__PURE__*/_react.default.createElement("div", {
+      className: "event-content"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "event-header"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "event-category"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: getCategoryIcon(event.category)
+    }), /*#__PURE__*/_react.default.createElement("span", null, getCategoryName(event.category))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "event-status",
+      style: {
+        backgroundColor: getStatusColor(event.status)
+      }
+    }, event.status === 'upcoming' ? 'Próximo' : event.status)), /*#__PURE__*/_react.default.createElement("h3", {
+      className: "event-title"
+    }, event.title), /*#__PURE__*/_react.default.createElement("p", {
+      className: "event-description"
+    }, event.description), /*#__PURE__*/_react.default.createElement("div", {
+      className: "event-details"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "event-info"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fas fa-calendar"
+    }), /*#__PURE__*/_react.default.createElement("span", null, formatDate(event.date), " \xE0s ", event.time)), /*#__PURE__*/_react.default.createElement("div", {
+      className: "event-info"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fas fa-map-marker-alt"
+    }), /*#__PURE__*/_react.default.createElement("span", null, event.location)), /*#__PURE__*/_react.default.createElement("div", {
+      className: "event-info"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fas fa-users"
+    }), /*#__PURE__*/_react.default.createElement("span", null, event.attendees, "/", event.maxAttendees, " participantes"))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "event-actions"
+    }, /*#__PURE__*/_react.default.createElement("button", {
+      className: "event-btn secondary",
+      onClick: function onClick() {
+        return shareEvent(event);
+      }
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fas fa-share"
+    }), "Compartilhar"))));
+  })), /*#__PURE__*/_react.default.createElement("footer", {
+    className: "footer"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-content"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-logo"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _inteliblcok.default,
+    alt: "Inteli Blockchain",
+    className: "footer-logo-img"
+  })), /*#__PURE__*/_react.default.createElement("p", {
+    className: "footer-text"
+  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("p", {
+    className: "footer-copyright"
+  }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
+};
+var _default = exports.default = Calendario;
+},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg"}],"components/Memorias.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _inteliblcok = _interopRequireDefault(require("./imgs/inteliblcok.jpg"));
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+var Memorias = function Memorias() {
+  var memories = [{
+    id: 1,
+    title: "Primeiro Hackathon",
+    date: "2023",
+    image: "hackathon-2023.jpg",
+    description: "Nosso primeiro hackathon com 50+ participantes"
+  }, {
+    id: 2,
+    title: "Workshop Smart Contracts",
+    date: "2023",
+    image: "workshop-smart-contracts.jpg",
+    description: "Workshop intensivo sobre Solidity"
+  }, {
+    id: 3,
+    title: "Meetup DeFi",
+    date: "2023",
+    image: "meetup-defi.jpg",
+    description: "Discussões sobre finanças descentralizadas"
+  }, {
+    id: 4,
+    title: "Bootcamp Web3",
+    date: "2023",
+    image: "bootcamp-web3.jpg",
+    description: "Bootcamp completo de 2 semanas"
+  }, {
+    id: 5,
+    title: "Conferência Blockchain",
+    date: "2023",
+    image: "conferencia-blockchain.jpg",
+    description: "Conferência sobre blockchain na educação"
+  }, {
+    id: 6,
+    title: "Hackathon NFTs",
+    date: "2023",
+    image: "hackathon-nft.jpg",
+    description: "Hackathon focado em NFTs e metaverso"
+  }, {
+    id: 7,
+    title: "Palestra Layer 2",
+    date: "2023",
+    image: "palestra-layer2.jpg",
+    description: "Palestra técnica sobre escalabilidade"
+  }, {
+    id: 8,
+    title: "Workshop ZKP",
+    date: "2023",
+    image: "workshop-zkp.jpg",
+    description: "Workshop sobre Zero Knowledge Proofs"
+  }];
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "memorias-page"
+  }, /*#__PURE__*/_react.default.createElement("section", {
+    className: "memorias-hero"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "memorias-hero-content"
+  }, /*#__PURE__*/_react.default.createElement("h1", {
+    className: "memorias-hero-title"
+  }, "Linha do Tempo"))), /*#__PURE__*/_react.default.createElement("section", {
+    className: "memorias-timeline-section"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "timeline-container"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "timeline-line"
+  }), memories.map(function (memory, index) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: memory.id,
+      className: "timeline-item"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "timeline-dot"
+    }), /*#__PURE__*/_react.default.createElement("div", {
+      className: "timeline-content"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "timeline-image"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "image-placeholder"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fas fa-image"
+    }))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "timeline-info"
+    }, /*#__PURE__*/_react.default.createElement("h3", null, memory.title), /*#__PURE__*/_react.default.createElement("p", null, memory.date), /*#__PURE__*/_react.default.createElement("span", {
+      className: "timeline-description"
+    }, memory.description))));
+  })))), /*#__PURE__*/_react.default.createElement("footer", {
+    className: "footer"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-content"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-logo"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _inteliblcok.default,
+    alt: "Inteli Blockchain",
+    className: "footer-logo-img"
+  })), /*#__PURE__*/_react.default.createElement("p", {
+    className: "footer-text"
+  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("p", {
+    className: "footer-copyright"
+  }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
+};
+var _default = exports.default = Memorias;
+},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg"}],"components/imgs/inteli.jpeg":[function(require,module,exports) {
 module.exports = "/inteli.0a0b82b9.jpeg";
 },{}],"components/imgs/Stellar_Symbol.png":[function(require,module,exports) {
 module.exports = "/Stellar_Symbol.ab42ed8e.png";
@@ -66137,6 +66804,9 @@ var _react = _interopRequireWildcard(require("react"));
 var _ethers = require("ethers");
 var _inteliblcok = _interopRequireDefault(require("./imgs/inteliblcok.jpg"));
 var _QuemSomos = _interopRequireDefault(require("./QuemSomos"));
+var _Conquistas = _interopRequireDefault(require("./Conquistas"));
+var _Calendario = _interopRequireDefault(require("./Calendario"));
+var _Memorias = _interopRequireDefault(require("./Memorias"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
@@ -66544,6 +67214,17 @@ var App = function App() {
     if (currentPage === 'sobre') {
       return /*#__PURE__*/_react.default.createElement(_QuemSomos.default, null);
     }
+    if (currentPage === 'conquistas') {
+      return /*#__PURE__*/_react.default.createElement(_Conquistas.default, {
+        walletAddress: walletAddress
+      });
+    }
+    if (currentPage === 'calendario') {
+      return /*#__PURE__*/_react.default.createElement(_Calendario.default, null);
+    }
+    if (currentPage === 'eventos') {
+      return /*#__PURE__*/_react.default.createElement(_Memorias.default, null);
+    }
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", {
       className: "hero"
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -66657,9 +67338,9 @@ var App = function App() {
     className: "nav-link ".concat(currentPage === 'projetos' ? 'active' : '')
   }, "Projetos"), /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
-      return handleNavigation('comunidade');
+      return handleNavigation('calendario');
     },
-    className: "nav-link ".concat(currentPage === 'comunidade' ? 'active' : '')
+    className: "nav-link ".concat(currentPage === 'calendario' ? 'active' : '')
   }, "Calend\xE1rio"), /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
       return handleNavigation('eventos');
@@ -66750,6 +67431,13 @@ var App = function App() {
   }, (networkInfo === null || networkInfo === void 0 ? void 0 : networkInfo.name) || 'Unknown Network'))), /*#__PURE__*/_react.default.createElement("div", {
     className: "wallet-modal-actions"
   }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "conquistas-button",
+    onClick: function onClick() {
+      return handleNavigation('conquistas');
+    }
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fas fa-trophy"
+  }), "Ver Conquistas"), /*#__PURE__*/_react.default.createElement("button", {
     className: "disconnect-button",
     onClick: disconnectWallet
   }, /*#__PURE__*/_react.default.createElement("i", {
@@ -66757,7 +67445,7 @@ var App = function App() {
   }), "Desconectar")))), renderContent());
 };
 var _default = exports.default = App;
-},{"react":"../../node_modules/react/index.js","ethers":"../../node_modules/ethers/lib.esm/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg","./QuemSomos":"components/QuemSomos.js","./imgs/inteli.jpeg":"components/imgs/inteli.jpeg","./imgs/Stellar_Symbol.png":"components/imgs/Stellar_Symbol.png","./imgs/ethereumbrasil_logo.jpeg":"components/imgs/ethereumbrasil_logo.jpeg","./imgs/vinteum.png":"components/imgs/vinteum.png","./imgs/ethsamba.jpg":"components/imgs/ethsamba.jpg","./imgs/ethlatam.png":"components/imgs/ethlatam.png","./imgs/starknet_foundation_logo.jpeg":"components/imgs/starknet_foundation_logo.jpeg","./imgs/chainlink_labs_logo.jpeg":"components/imgs/chainlink_labs_logo.jpeg","./imgs/cryptostargames.jpeg":"components/imgs/cryptostargames.jpeg","./imgs/nearx.jpeg":"components/imgs/nearx.jpeg"}],"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","ethers":"../../node_modules/ethers/lib.esm/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg","./QuemSomos":"components/QuemSomos.js","./Conquistas":"components/Conquistas.js","./Calendario":"components/Calendario.js","./Memorias":"components/Memorias.js","./imgs/inteli.jpeg":"components/imgs/inteli.jpeg","./imgs/Stellar_Symbol.png":"components/imgs/Stellar_Symbol.png","./imgs/ethereumbrasil_logo.jpeg":"components/imgs/ethereumbrasil_logo.jpeg","./imgs/vinteum.png":"components/imgs/vinteum.png","./imgs/ethsamba.jpg":"components/imgs/ethsamba.jpg","./imgs/ethlatam.png":"components/imgs/ethlatam.png","./imgs/starknet_foundation_logo.jpeg":"components/imgs/starknet_foundation_logo.jpeg","./imgs/chainlink_labs_logo.jpeg":"components/imgs/chainlink_labs_logo.jpeg","./imgs/cryptostargames.jpeg":"components/imgs/cryptostargames.jpeg","./imgs/nearx.jpeg":"components/imgs/nearx.jpeg"}],"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -66849,7 +67537,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54178" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59242" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

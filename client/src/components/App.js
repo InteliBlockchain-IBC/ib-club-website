@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import inteliLogo from './imgs/inteliblcok.jpg';
 import QuemSomos from './QuemSomos';
+import Conquistas from './Conquistas';
+import Calendario from './Calendario';
+import Memorias from './Memorias';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -258,6 +261,18 @@ const App = () => {
       return <QuemSomos />;
     }
     
+    if (currentPage === 'conquistas') {
+      return <Conquistas walletAddress={walletAddress} />;
+    }
+    
+    if (currentPage === 'calendario') {
+      return <Calendario />;
+    }
+    
+    if (currentPage === 'eventos') {
+      return <Memorias />;
+    }
+    
         return (
       <>
         {/* Hero Section */}
@@ -379,8 +394,8 @@ const App = () => {
               Projetos
             </button>
             <button 
-              onClick={() => handleNavigation('comunidade')} 
-              className={`nav-link ${currentPage === 'comunidade' ? 'active' : ''}`}
+              onClick={() => handleNavigation('calendario')} 
+              className={`nav-link ${currentPage === 'calendario' ? 'active' : ''}`}
             >
               Calendário
             </button>
@@ -488,6 +503,13 @@ const App = () => {
             </div>
             
             <div className="wallet-modal-actions">
+                             <button 
+                 className="conquistas-button"
+                 onClick={() => handleNavigation('conquistas')}
+               >
+                 <i className="fas fa-trophy"></i>
+                 Ver Conquistas
+               </button>
               <button 
                 className="disconnect-button"
                 onClick={disconnectWallet}
