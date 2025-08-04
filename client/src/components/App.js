@@ -5,6 +5,7 @@ import QuemSomos from './QuemSomos';
 import Conquistas from './Conquistas';
 import Calendario from './Calendario';
 import Memorias from './Memorias';
+import Projetos from './Projetos';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -271,6 +272,10 @@ const App = () => {
     
     if (currentPage === 'eventos') {
       return <Memorias />;
+    }
+    
+    if (currentPage === 'projetos') {
+      return <Projetos />;
     }
     
         return (

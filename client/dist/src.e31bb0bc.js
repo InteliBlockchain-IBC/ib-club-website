@@ -66865,7 +66865,124 @@ var Memorias = function Memorias() {
   }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
 };
 var _default = exports.default = Memorias;
-},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg"}],"components/imgs/inteli.jpeg":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg"}],"components/imgs/inteliblockchain.webp":[function(require,module,exports) {
+module.exports = "/inteliblockchain.7efa2ba9.webp";
+},{}],"components/imgs/ethereum10years.webp":[function(require,module,exports) {
+module.exports = "/ethereum10years.4a9b0240.webp";
+},{}],"components/Projetos.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _inteliblcok = _interopRequireDefault(require("./imgs/inteliblcok.jpg"));
+var _inteliblockchain = _interopRequireDefault(require("./imgs/inteliblockchain.webp"));
+var _ethereum10years = _interopRequireDefault(require("./imgs/ethereum10years.webp"));
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+var Projetos = function Projetos() {
+  var projetos = [{
+    nome: "Blog",
+    descricao: "Documentação e artigos sobre blockchain e tecnologia",
+    link: "https://inteliblockchain-ibc.github.io/docs3/blog",
+    imagem: "".concat(_inteliblockchain.default),
+    status: "ativo"
+  }, {
+    nome: "High Block",
+    descricao: "Projeto de desenvolvimento em web3",
+    link: "https://inteliblockchain-ibc.github.io/docs3/docs/projeto/introducao",
+    imagem: "".concat(_ethereum10years.default),
+    status: "ativo"
+  }];
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", {
+    className: "hero projetos-hero"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "hero-content"
+  }, /*#__PURE__*/_react.default.createElement("h1", {
+    className: "hero-title"
+  }, "Nossos ", /*#__PURE__*/_react.default.createElement("span", null, "Projetos")), /*#__PURE__*/_react.default.createElement("p", {
+    className: "hero-subtitle"
+  }, "Inova\xE7\xE3o e desenvolvimento em blockchain"), /*#__PURE__*/_react.default.createElement("p", {
+    className: "hero-description"
+  }, "Conhe\xE7a os projetos desenvolvidos pelo Inteli Blockchain. Nossa equipe trabalha constantemente para criar solu\xE7\xF5es inovadoras e educar a comunidade sobre as possibilidades da tecnologia blockchain."))), /*#__PURE__*/_react.default.createElement("section", {
+    className: "projetos-section"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "projetos-content"
+  }, /*#__PURE__*/_react.default.createElement("h2", {
+    className: "section-title"
+  }, "Projetos Ativos"), /*#__PURE__*/_react.default.createElement("p", {
+    className: "section-subtitle"
+  }, "Conhe\xE7a nossas iniciativas e contribui\xE7\xF5es para o ecossistema blockchain"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "projetos-grid"
+  }, projetos.map(function (projeto, index) {
+    return /*#__PURE__*/_react.default.createElement("a", {
+      key: index,
+      href: projeto.link,
+      target: "_blank",
+      rel: "noopener noreferrer",
+      className: "projeto-card"
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "projeto-imagem"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: projeto.imagem,
+      alt: projeto.nome
+    }), /*#__PURE__*/_react.default.createElement("div", {
+      className: "projeto-overlay"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fas fa-external-link-alt"
+    }))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "projeto-info"
+    }, /*#__PURE__*/_react.default.createElement("h3", {
+      className: "projeto-nome"
+    }, projeto.nome), /*#__PURE__*/_react.default.createElement("p", {
+      className: "projeto-descricao"
+    }, projeto.descricao), /*#__PURE__*/_react.default.createElement("span", {
+      className: "projeto-status ".concat(projeto.status)
+    }, projeto.status === 'ativo' ? 'Ativo' : 'Em Desenvolvimento')));
+  }))))), /*#__PURE__*/_react.default.createElement("footer", {
+    className: "footer"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-content"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-logo"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _inteliblcok.default,
+    alt: "Inteli Blockchain",
+    className: "footer-logo-img"
+  })), /*#__PURE__*/_react.default.createElement("p", {
+    className: "footer-text"
+  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-social"
+  }, /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://github.com/InteliBlockchain-IBC",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon github"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-github"
+  })), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.linkedin.com/company/inteli-blockchain",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon linkedin"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-linkedin"
+  })), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.instagram.com/inteli_blockchain",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon instagram"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-instagram"
+  }))), /*#__PURE__*/_react.default.createElement("p", {
+    className: "footer-copyright"
+  }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
+};
+var _default = exports.default = Projetos;
+},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg","./imgs/inteliblockchain.webp":"components/imgs/inteliblockchain.webp","./imgs/ethereum10years.webp":"components/imgs/ethereum10years.webp"}],"components/imgs/inteli.jpeg":[function(require,module,exports) {
 module.exports = "/inteli.0a0b82b9.jpeg";
 },{}],"components/imgs/Stellar_Symbol.png":[function(require,module,exports) {
 module.exports = "/Stellar_Symbol.ab42ed8e.png";
@@ -66899,6 +67016,7 @@ var _QuemSomos = _interopRequireDefault(require("./QuemSomos"));
 var _Conquistas = _interopRequireDefault(require("./Conquistas"));
 var _Calendario = _interopRequireDefault(require("./Calendario"));
 var _Memorias = _interopRequireDefault(require("./Memorias"));
+var _Projetos = _interopRequireDefault(require("./Projetos"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
@@ -67317,6 +67435,9 @@ var App = function App() {
     if (currentPage === 'eventos') {
       return /*#__PURE__*/_react.default.createElement(_Memorias.default, null);
     }
+    if (currentPage === 'projetos') {
+      return /*#__PURE__*/_react.default.createElement(_Projetos.default, null);
+    }
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", {
       className: "hero"
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -67560,7 +67681,7 @@ var App = function App() {
   }), "Desconectar")))), renderContent());
 };
 var _default = exports.default = App;
-},{"react":"../../node_modules/react/index.js","ethers":"../../node_modules/ethers/lib.esm/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg","./QuemSomos":"components/QuemSomos.js","./Conquistas":"components/Conquistas.js","./Calendario":"components/Calendario.js","./Memorias":"components/Memorias.js","./imgs/inteli.jpeg":"components/imgs/inteli.jpeg","./imgs/Stellar_Symbol.png":"components/imgs/Stellar_Symbol.png","./imgs/ethereumbrasil_logo.jpeg":"components/imgs/ethereumbrasil_logo.jpeg","./imgs/vinteum.png":"components/imgs/vinteum.png","./imgs/ethsamba.jpg":"components/imgs/ethsamba.jpg","./imgs/ethlatam.png":"components/imgs/ethlatam.png","./imgs/starknet_foundation_logo.jpeg":"components/imgs/starknet_foundation_logo.jpeg","./imgs/chainlink_labs_logo.jpeg":"components/imgs/chainlink_labs_logo.jpeg","./imgs/cryptostargames.jpeg":"components/imgs/cryptostargames.jpeg","./imgs/nearx.jpeg":"components/imgs/nearx.jpeg"}],"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","ethers":"../../node_modules/ethers/lib.esm/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg","./QuemSomos":"components/QuemSomos.js","./Conquistas":"components/Conquistas.js","./Calendario":"components/Calendario.js","./Memorias":"components/Memorias.js","./Projetos":"components/Projetos.js","./imgs/inteli.jpeg":"components/imgs/inteli.jpeg","./imgs/Stellar_Symbol.png":"components/imgs/Stellar_Symbol.png","./imgs/ethereumbrasil_logo.jpeg":"components/imgs/ethereumbrasil_logo.jpeg","./imgs/vinteum.png":"components/imgs/vinteum.png","./imgs/ethsamba.jpg":"components/imgs/ethsamba.jpg","./imgs/ethlatam.png":"components/imgs/ethlatam.png","./imgs/starknet_foundation_logo.jpeg":"components/imgs/starknet_foundation_logo.jpeg","./imgs/chainlink_labs_logo.jpeg":"components/imgs/chainlink_labs_logo.jpeg","./imgs/cryptostargames.jpeg":"components/imgs/cryptostargames.jpeg","./imgs/nearx.jpeg":"components/imgs/nearx.jpeg"}],"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -67652,7 +67773,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60256" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60862" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
