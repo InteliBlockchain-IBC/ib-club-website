@@ -66101,7 +66101,30 @@ var QuemSomos = function QuemSomos() {
     className: "footer-logo-img"
   })), /*#__PURE__*/_react.default.createElement("p", {
     className: "footer-text"
-  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("p", {
+  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-social"
+  }, /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://github.com/InteliBlockchain-IBC",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon github"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-github"
+  })), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.linkedin.com/company/inteli-blockchain",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon linkedin"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-linkedin"
+  })), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.instagram.com/inteli_blockchain",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon instagram"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-instagram"
+  }))), /*#__PURE__*/_react.default.createElement("p", {
     className: "footer-copyright"
   }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
 };
@@ -66344,7 +66367,30 @@ var Conquistas = function Conquistas(_ref) {
     className: "footer-logo-img"
   })), /*#__PURE__*/_react.default.createElement("p", {
     className: "footer-text"
-  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("p", {
+  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-social"
+  }, /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://github.com/InteliBlockchain-IBC",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon github"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-github"
+  })), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.linkedin.com/company/inteli-blockchain",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon linkedin"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-linkedin"
+  })), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.instagram.com/inteli_blockchain",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon instagram"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-instagram"
+  }))), /*#__PURE__*/_react.default.createElement("p", {
     className: "footer-copyright"
   }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
 };
@@ -66656,7 +66702,30 @@ var Calendario = function Calendario() {
     className: "footer-logo-img"
   })), /*#__PURE__*/_react.default.createElement("p", {
     className: "footer-text"
-  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("p", {
+  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-social"
+  }, /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://github.com/InteliBlockchain-IBC",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon github"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-github"
+  })), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.linkedin.com/company/inteli-blockchain",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon linkedin"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-linkedin"
+  })), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.instagram.com/inteli_blockchain",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon instagram"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-instagram"
+  }))), /*#__PURE__*/_react.default.createElement("p", {
     className: "footer-copyright"
   }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
 };
@@ -66768,7 +66837,30 @@ var Memorias = function Memorias() {
     className: "footer-logo-img"
   })), /*#__PURE__*/_react.default.createElement("p", {
     className: "footer-text"
-  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("p", {
+  }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("div", {
+    className: "footer-social"
+  }, /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://github.com/InteliBlockchain-IBC",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon github"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-github"
+  })), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.linkedin.com/company/inteli-blockchain",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon linkedin"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-linkedin"
+  })), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.instagram.com/inteli_blockchain",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "social-icon instagram"
+  }, /*#__PURE__*/_react.default.createElement("i", {
+    className: "fab fa-instagram"
+  }))), /*#__PURE__*/_react.default.createElement("p", {
     className: "footer-copyright"
   }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
 };
@@ -67308,7 +67400,30 @@ var App = function App() {
       className: "footer-logo-img"
     })), /*#__PURE__*/_react.default.createElement("p", {
       className: "footer-text"
-    }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("p", {
+    }, "Conectando o futuro da tecnologia blockchain atrav\xE9s de inova\xE7\xE3o, educa\xE7\xE3o e colabora\xE7\xE3o."), /*#__PURE__*/_react.default.createElement("div", {
+      className: "footer-social"
+    }, /*#__PURE__*/_react.default.createElement("a", {
+      href: "https://github.com/InteliBlockchain-IBC",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      className: "social-icon github"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fab fa-github"
+    })), /*#__PURE__*/_react.default.createElement("a", {
+      href: "https://www.linkedin.com/company/inteli-blockchain",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      className: "social-icon linkedin"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fab fa-linkedin"
+    })), /*#__PURE__*/_react.default.createElement("a", {
+      href: "https://www.instagram.com/inteli_blockchain",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      className: "social-icon instagram"
+    }, /*#__PURE__*/_react.default.createElement("i", {
+      className: "fab fa-instagram"
+    }))), /*#__PURE__*/_react.default.createElement("p", {
       className: "footer-copyright"
     }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
   };
@@ -67537,7 +67652,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59242" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60256" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

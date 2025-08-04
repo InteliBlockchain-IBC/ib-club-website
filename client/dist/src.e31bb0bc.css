@@ -1110,6 +1110,67 @@ p {
   font-size: 0.9rem;
 }
 
+/* Social Media Icons */
+.footer-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: var(--bg-secondary-light);
+  color: var(--text-secondary-light);
+  text-decoration: none;
+  transition: var(--transition);
+  font-size: 1.2rem;
+  border: 2px solid transparent;
+}
+
+.dark-mode .social-icon {
+  background: var(--bg-secondary-dark);
+  color: var(--text-secondary-dark);
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-primary-light);
+  color: var(--accent-primary-light);
+}
+
+.dark-mode .social-icon:hover {
+  border-color: var(--accent-primary-dark);
+  color: var(--accent-primary-dark);
+}
+
+.social-icon.github:hover {
+  border-color: #333;
+  color: #333;
+}
+
+.dark-mode .social-icon.github:hover {
+  border-color: #f5f5f5;
+  color: #f5f5f5;
+}
+
+.social-icon.linkedin:hover {
+  border-color: #0077b5;
+  color: #0077b5;
+}
+
+.social-icon.instagram:hover {
+  border-color: #e4405f;
+  color: #e4405f;
+}
+
 /* Theme Toggle */
 .theme-toggle {
   background: none;
@@ -1256,6 +1317,17 @@ p {
   .footer-logo-img {
     width: 45px;
     height: 45px;
+  }
+  
+  .footer-social {
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
   }
 }
 

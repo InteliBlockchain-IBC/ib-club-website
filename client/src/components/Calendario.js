@@ -226,21 +226,32 @@ const Calendario = () => {
         ))}
       </div>
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-logo">
-            <img src={inteliLogo} alt="Inteli Blockchain" className="footer-logo-img" />
+              {/* Footer */}
+        <footer className="footer">
+          <div className="footer-content">
+            <div className="footer-logo">
+              <img src={inteliLogo} alt="Inteli Blockchain" className="footer-logo-img" />
+            </div>
+            <p className="footer-text">
+              Conectando o futuro da tecnologia blockchain através de inovação, 
+              educação e colaboração.
+            </p>
+                     <div className="footer-social">
+           <a href="https://github.com/InteliBlockchain-IBC" target="_blank" rel="noopener noreferrer" className="social-icon github">
+             <i className="fab fa-github"></i>
+           </a>
+              <a href="https://www.linkedin.com/company/inteli-blockchain" target="_blank" rel="noopener noreferrer" className="social-icon linkedin">
+                <i className="fab fa-linkedin"></i>
+              </a>
+              <a href="https://www.instagram.com/inteli_blockchain" target="_blank" rel="noopener noreferrer" className="social-icon instagram">
+                <i className="fab fa-instagram"></i>
+              </a>
+            </div>
+            <p className="footer-copyright">
+              © 2025 Inteli Blockchain. Todos os direitos reservados.
+            </p>
           </div>
-          <p className="footer-text">
-            Conectando o futuro da tecnologia blockchain através de inovação, 
-            educação e colaboração.
-          </p>
-          <p className="footer-copyright">
-            © 2025 Inteli Blockchain. Todos os direitos reservados.
-          </p>
-        </div>
-      </footer>
+        </footer>
     </div>
   );
 };
