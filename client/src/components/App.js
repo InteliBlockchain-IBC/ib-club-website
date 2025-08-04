@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ethers } from 'ethers';
 import inteliLogo from './imgs/inteliblcok.jpg';
 import QuemSomos from './QuemSomos';
 
@@ -6,12 +7,26 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
+  const [walletAddress, setWalletAddress] = useState('');
+  const [walletBalance, setWalletBalance] = useState('');
+  const [isConnecting, setIsConnecting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [provider, setProvider] = useState(null);
+  const [signer, setSigner] = useState(null);
+  const [showWalletModal, setShowWalletModal] = useState(false);
+  const [networkInfo, setNetworkInfo] = useState(null);
 
   useEffect(() => {
     // Check for saved theme preference or default to light mode
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       setIsDarkMode(true);
+    }
+
+    // Check if wallet was previously connected
+    const savedWalletAddress = localStorage.getItem('walletAddress');
+    if (savedWalletAddress) {
+      connectWalletFromStorage();
     }
   }, []);
 
@@ -21,13 +36,147 @@ const App = () => {
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
+  const connectWalletFromStorage = async () => {
+    try {
+      const savedAddress = localStorage.getItem('walletAddress');
+      if (savedAddress && window.ethereum) {
+        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+        if (accounts.length > 0) {
+          await setupWalletConnection(accounts[0]);
+        }
+      }
+    } catch (error) {
+      console.error('Error connecting from storage:', error);
+      localStorage.removeItem('walletAddress');
+    }
   };
 
-  const connectWallet = () => {
-    // Simulate wallet connection
-    setIsWalletConnected(!isWalletConnected);
+  const getNetworkInfo = async (provider) => {
+    try {
+      const network = await provider.getNetwork();
+      const chainId = network.chainId;
+      
+      const networks = {
+        1: { name: 'Ethereum Mainnet', symbol: 'ETH' },
+        5: { name: 'Goerli Testnet', symbol: 'ETH' },
+        11155111: { name: 'Sepolia Testnet', symbol: 'ETH' },
+        137: { name: 'Polygon', symbol: 'MATIC' },
+        80001: { name: 'Mumbai Testnet', symbol: 'MATIC' },
+        56: { name: 'BSC', symbol: 'BNB' },
+        97: { name: 'BSC Testnet', symbol: 'BNB' }
+      };
+      
+      return networks[chainId] || { name: `Chain ID: ${chainId}`, symbol: 'ETH' };
+    } catch (error) {
+      console.error('Error getting network info:', error);
+      return { name: 'Unknown Network', symbol: 'ETH' };
+    }
+  };
+
+  const setupWalletConnection = async (address) => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const balance = await provider.getBalance(address);
+      const balanceInEth = ethers.utils.formatEther(balance);
+      const network = await getNetworkInfo(provider);
+
+      setProvider(provider);
+      setSigner(signer);
+      setWalletAddress(address);
+      setWalletBalance(balanceInEth);
+      setNetworkInfo(network);
+      setIsWalletConnected(true);
+      localStorage.setItem('walletAddress', address);
+      setErrorMessage('');
+    } catch (error) {
+      console.error('Error setting up wallet:', error);
+      setErrorMessage('Erro ao configurar carteira');
+    }
+  };
+
+  const connectWallet = async () => {
+    if (isWalletConnected) {
+      setShowWalletModal(true);
+      return;
+    }
+
+    setIsConnecting(true);
+    setErrorMessage('');
+
+    try {
+      // Check if MetaMask is installed
+      if (!window.ethereum) {
+        setErrorMessage('MetaMask não está instalado. Por favor, instale a extensão MetaMask.');
+        setIsConnecting(false);
+        return;
+      }
+
+      // Request account access
+      const accounts = await window.ethereum.request({ 
+        method: 'eth_requestAccounts' 
+      });
+
+      if (accounts.length > 0) {
+        await setupWalletConnection(accounts[0]);
+      }
+
+      // Listen for account changes
+      window.ethereum.on('accountsChanged', (accounts) => {
+        if (accounts.length > 0) {
+          setupWalletConnection(accounts[0]);
+        } else {
+          disconnectWallet();
+        }
+      });
+
+      // Listen for chain changes
+      window.ethereum.on('chainChanged', async () => {
+        if (isWalletConnected) {
+          await setupWalletConnection(walletAddress);
+        }
+      });
+
+    } catch (error) {
+      console.error('Error connecting wallet:', error);
+      if (error.code === 4001) {
+        setErrorMessage('Conexão cancelada pelo usuário');
+      } else {
+        setErrorMessage('Erro ao conectar carteira. Tente novamente.');
+      }
+    } finally {
+      setIsConnecting(false);
+    }
+  };
+
+  const disconnectWallet = () => {
+    setIsWalletConnected(false);
+    setWalletAddress('');
+    setWalletBalance('');
+    setProvider(null);
+    setSigner(null);
+    setNetworkInfo(null);
+    localStorage.removeItem('walletAddress');
+    setErrorMessage('');
+    setShowWalletModal(false);
+  };
+
+  const getShortAddress = (address) => {
+    if (!address) return '';
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  };
+
+  const copyToClipboard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      // You could add a toast notification here
+    } catch (error) {
+      console.error('Error copying to clipboard:', error);
+    }
+  };
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
   };
 
   const handleNavigation = (page) => {
@@ -253,12 +402,103 @@ const App = () => {
             <button className="theme-toggle" onClick={toggleTheme}>
               <i className={isDarkMode ? "fas fa-sun" : "fas fa-moon"}></i>
             </button>
-            <button className="connect-wallet" onClick={connectWallet}>
-              {isWalletConnected ? "Conectado" : "Connect"}
-            </button>
+            
+            {/* Wallet Connection Section */}
+            <div className="wallet-section">
+              {errorMessage && (
+                <div className="error-message">
+                  {errorMessage}
+                </div>
+              )}
+              
+              {isWalletConnected ? (
+                <div className="wallet-info" onClick={() => setShowWalletModal(true)}>
+                  <div className="wallet-details">
+                    <span className="wallet-address">{getShortAddress(walletAddress)}</span>
+                    <span className="wallet-balance">{parseFloat(walletBalance).toFixed(4)} {networkInfo?.symbol || 'ETH'}</span>
+                  </div>
+                  <button className="connect-wallet connected">
+                    <i className="fas fa-wallet"></i>
+                  </button>
+                </div>
+              ) : (
+                <button 
+                  className={`connect-wallet ${isConnecting ? 'connecting' : ''}`} 
+                  onClick={connectWallet}
+                  disabled={isConnecting}
+                >
+                  {isConnecting ? (
+                    <>
+                      <i className="fas fa-spinner fa-spin"></i>
+                      Conectando...
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-wallet"></i>
+                      Conectar
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </nav>
+
+      {/* Wallet Modal */}
+      {showWalletModal && isWalletConnected && (
+        <div className="wallet-modal-overlay" onClick={() => setShowWalletModal(false)}>
+          <div className="wallet-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="wallet-modal-header">
+              <h3>Informações da Carteira</h3>
+              <button 
+                className="wallet-modal-close" 
+                onClick={() => setShowWalletModal(false)}
+              >
+                <i className="fas fa-times"></i>
+              </button>
+            </div>
+            
+            <div className="wallet-modal-content">
+              <div className="wallet-info-item">
+                <label>Endereço:</label>
+                <div className="wallet-address-container">
+                  <span className="wallet-full-address">{walletAddress}</span>
+                  <button 
+                    className="copy-button"
+                    onClick={() => copyToClipboard(walletAddress)}
+                    title="Copiar endereço"
+                  >
+                    <i className="fas fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div className="wallet-info-item">
+                <label>Saldo:</label>
+                <span className="wallet-balance-full">
+                  {parseFloat(walletBalance).toFixed(6)} {networkInfo?.symbol || 'ETH'}
+                </span>
+              </div>
+              
+              <div className="wallet-info-item">
+                <label>Rede:</label>
+                <span className="wallet-network">{networkInfo?.name || 'Unknown Network'}</span>
+              </div>
+            </div>
+            
+            <div className="wallet-modal-actions">
+              <button 
+                className="disconnect-button"
+                onClick={disconnectWallet}
+              >
+                <i className="fas fa-sign-out-alt"></i>
+                Desconectar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Render content based on current page */}
       {renderContent()}
