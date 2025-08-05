@@ -229,11 +229,6 @@ const App = () => {
       link: "https://chain.link/"
     },
     {
-      name: "CryptoStar Games",
-      logo: require('./imgs/cryptostargames.jpeg'),
-      link: "https://cryptostargames.com.br/"
-    },
-    {
       name: "NearX",
       logo: require('./imgs/nearx.jpeg'),
       link: "https://nearx.com.br/"
