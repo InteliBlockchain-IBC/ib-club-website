@@ -66730,7 +66730,35 @@ var Calendario = function Calendario() {
   }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
 };
 var _default = exports.default = Calendario;
-},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg"}],"components/Memorias.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg"}],"components/imgs/ethereumsp.jpg":[function(require,module,exports) {
+module.exports = "/ethereumsp.00ac1100.jpg";
+},{}],"components/imgs/devcon.jpg":[function(require,module,exports) {
+module.exports = "/devcon.bd98506a.jpg";
+},{}],"components/imgs/workshopsi.webp":[function(require,module,exports) {
+module.exports = "/workshopsi.7e9931ed.webp";
+},{}],"components/imgs/workshoprep.webp":[function(require,module,exports) {
+module.exports = "/workshoprep.95087813.webp";
+},{}],"components/imgs/challenge.jpg":[function(require,module,exports) {
+module.exports = "/challenge.9dce37e7.jpg";
+},{}],"components/imgs/processoseletivo.jpg":[function(require,module,exports) {
+module.exports = "/processoseletivo.10ab8231.jpg";
+},{}],"components/imgs/aulaintrodutoria.webp":[function(require,module,exports) {
+module.exports = "/aulaintrodutoria.3f669dee.webp";
+},{}],"components/imgs/starknet.jpeg":[function(require,module,exports) {
+module.exports = "/starknet.b11b126f.jpeg";
+},{}],"components/imgs/inteliblockchain.webp":[function(require,module,exports) {
+module.exports = "/inteliblockchain.7efa2ba9.webp";
+},{}],"components/imgs/tokennation.webp":[function(require,module,exports) {
+module.exports = "/tokennation.9727aed2.webp";
+},{}],"components/imgs/docussaurus.webp":[function(require,module,exports) {
+module.exports = "/docussaurus.e11e0579.webp";
+},{}],"components/imgs/workshopzkum.jpg":[function(require,module,exports) {
+module.exports = "/workshopzkum.7a1a9409.jpg";
+},{}],"components/imgs/workshopzkdois.jpg":[function(require,module,exports) {
+module.exports = "/workshopzkdois.820700d6.jpg";
+},{}],"components/imgs/ethcannes.jpg":[function(require,module,exports) {
+module.exports = "/ethcannes.b8438f38.jpg";
+},{}],"components/Memorias.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -66739,56 +66767,112 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _inteliblcok = _interopRequireDefault(require("./imgs/inteliblcok.jpg"));
+var _ethereumsp = _interopRequireDefault(require("./imgs/ethereumsp.jpg"));
+var _devcon = _interopRequireDefault(require("./imgs/devcon.jpg"));
+var _workshopsi = _interopRequireDefault(require("./imgs/workshopsi.webp"));
+var _workshoprep = _interopRequireDefault(require("./imgs/workshoprep.webp"));
+var _challenge = _interopRequireDefault(require("./imgs/challenge.jpg"));
+var _processoseletivo = _interopRequireDefault(require("./imgs/processoseletivo.jpg"));
+var _aulaintrodutoria = _interopRequireDefault(require("./imgs/aulaintrodutoria.webp"));
+var _starknet = _interopRequireDefault(require("./imgs/starknet.jpeg"));
+var _inteliblockchain = _interopRequireDefault(require("./imgs/inteliblockchain.webp"));
+var _tokennation = _interopRequireDefault(require("./imgs/tokennation.webp"));
+var _docussaurus = _interopRequireDefault(require("./imgs/docussaurus.webp"));
+var _workshopzkum = _interopRequireDefault(require("./imgs/workshopzkum.jpg"));
+var _workshopzkdois = _interopRequireDefault(require("./imgs/workshopzkdois.jpg"));
+var _ethcannes = _interopRequireDefault(require("./imgs/ethcannes.jpg"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 var Memorias = function Memorias() {
   var memories = [{
     id: 1,
-    title: "Primeiro Hackathon",
-    date: "2023",
-    image: "hackathon-2023.jpg",
-    description: "Nosso primeiro hackathon com 50+ participantes"
+    title: "Fundação",
+    date: "2022",
+    image: "https://media.licdn.com/dms/image/v2/C4D1BAQHWD2ZM_fhk5A/company-background_10000/company-background_10000/0/1652446492732/inteli_blockchain_cover?e=1755000000&v=beta&t=rexrSBbmKOhGjK6o6eEvHHHcPFWhYxFpxFssOvDjhfI",
+    description: "Fundação Oficial do Inteli Blockchain"
   }, {
     id: 2,
-    title: "Workshop Smart Contracts",
-    date: "2023",
-    image: "workshop-smart-contracts.jpg",
-    description: "Workshop intensivo sobre Solidity"
+    title: "EthereumSP",
+    date: "2022",
+    image: _ethereumsp.default,
+    description: "Participação no EthereumSP"
   }, {
     id: 3,
-    title: "Meetup DeFi",
-    date: "2023",
-    image: "meetup-defi.jpg",
-    description: "Discussões sobre finanças descentralizadas"
+    title: "DEVCON VI",
+    date: "2022",
+    image: _devcon.default,
+    description: "Viagem para a DEVCON VI em Bogotá"
   }, {
     id: 4,
-    title: "Bootcamp Web3",
+    title: "Workshop Web3",
     date: "2023",
-    image: "bootcamp-web3.jpg",
-    description: "Bootcamp completo de 2 semanas"
+    image: _workshopsi.default,
+    description: "Workshop Web3 para alunos de SI do Inteli"
   }, {
     id: 5,
-    title: "Conferência Blockchain",
+    title: "Workshop Preparatório",
     date: "2023",
-    image: "conferencia-blockchain.jpg",
-    description: "Conferência sobre blockchain na educação"
+    image: _workshoprep.default,
+    description: "Workshop Web3 preparatório para o Inteli Blockchain Challenge"
   }, {
     id: 6,
-    title: "Hackathon NFTs",
+    title: "Inteli Blockchain Challenge",
     date: "2023",
-    image: "hackathon-nft.jpg",
-    description: "Hackathon focado em NFTs e metaverso"
+    image: _challenge.default,
+    description: "Evento de Hackathon Web3 realizado pelo Inteli"
   }, {
     id: 7,
-    title: "Palestra Layer 2",
-    date: "2023",
-    image: "palestra-layer2.jpg",
-    description: "Palestra técnica sobre escalabilidade"
+    title: "Processo Seletivo",
+    date: "2024",
+    image: _processoseletivo.default,
+    description: "Processo Seletivo para o Inteli Blockchain"
   }, {
     id: 8,
-    title: "Workshop ZKP",
-    date: "2023",
-    image: "workshop-zkp.jpg",
-    description: "Workshop sobre Zero Knowledge Proofs"
+    title: "Aula Introdutória",
+    date: "2025",
+    image: _aulaintrodutoria.default,
+    description: "Aula Introdutória sobre Blockchain"
+  }, {
+    id: 9,
+    title: "Starknet Basecamp",
+    date: "2025",
+    image: _starknet.default,
+    description: "Basecamp Online da Starknet realizado com o Inteli"
+  }, {
+    id: 10,
+    title: "1° Bitcoin Students Day",
+    date: "2025",
+    image: _inteliblockchain.default,
+    description: "Ida ao evento de Bitcoin Students Day realizado pela Vinteum"
+  }, {
+    id: 11,
+    title: "Tokennation",
+    date: "2025",
+    image: _tokennation.default,
+    description: "Ida ao evento da Tokennation em São Paulo"
+  }, {
+    id: 12,
+    title: "Lançamento do Docs³",
+    date: "2025",
+    image: _docussaurus.default,
+    description: "Lançamento do Blog e Material de Estudo Oficial do Inteli Blockchain"
+  }, {
+    id: 13,
+    title: "1° Workshop ZK",
+    date: "2025",
+    image: _workshopzkum.default,
+    description: "Ida ao primeiro Workshop sobre Zero Knowledge"
+  }, {
+    id: 14,
+    title: "2° Workshop ZK",
+    date: "2025",
+    image: _workshopzkdois.default,
+    description: "Ida ao segundo Workshop sobre Zero Knowledge"
+  }, {
+    id: 15,
+    title: "ETHGlobal Cannes",
+    date: "2025",
+    image: _ethcannes.default,
+    description: "Ida ao evento ETHGlobal Cannes"
   }];
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "memorias-page"
@@ -66806,7 +66890,7 @@ var Memorias = function Memorias() {
     className: "timeline-container"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "timeline-line"
-  }), memories.map(function (memory, index) {
+  }), memories.slice().reverse().map(function (memory, index) {
     return /*#__PURE__*/_react.default.createElement("div", {
       key: memory.id,
       className: "timeline-item"
@@ -66816,11 +66900,10 @@ var Memorias = function Memorias() {
       className: "timeline-content"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "timeline-image"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "image-placeholder"
-    }, /*#__PURE__*/_react.default.createElement("i", {
-      className: "fas fa-image"
-    }))), /*#__PURE__*/_react.default.createElement("div", {
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: memory.image,
+      alt: memory.title
+    })), /*#__PURE__*/_react.default.createElement("div", {
       className: "timeline-info"
     }, /*#__PURE__*/_react.default.createElement("h3", null, memory.title), /*#__PURE__*/_react.default.createElement("p", null, memory.date), /*#__PURE__*/_react.default.createElement("span", {
       className: "timeline-description"
@@ -66865,9 +66948,7 @@ var Memorias = function Memorias() {
   }, "\xA9 2025 Inteli Blockchain. Todos os direitos reservados."))));
 };
 var _default = exports.default = Memorias;
-},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg"}],"components/imgs/inteliblockchain.webp":[function(require,module,exports) {
-module.exports = "/inteliblockchain.7efa2ba9.webp";
-},{}],"components/imgs/ethereum10years.webp":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","./imgs/inteliblcok.jpg":"components/imgs/inteliblcok.jpg","./imgs/ethereumsp.jpg":"components/imgs/ethereumsp.jpg","./imgs/devcon.jpg":"components/imgs/devcon.jpg","./imgs/workshopsi.webp":"components/imgs/workshopsi.webp","./imgs/workshoprep.webp":"components/imgs/workshoprep.webp","./imgs/challenge.jpg":"components/imgs/challenge.jpg","./imgs/processoseletivo.jpg":"components/imgs/processoseletivo.jpg","./imgs/aulaintrodutoria.webp":"components/imgs/aulaintrodutoria.webp","./imgs/starknet.jpeg":"components/imgs/starknet.jpeg","./imgs/inteliblockchain.webp":"components/imgs/inteliblockchain.webp","./imgs/tokennation.webp":"components/imgs/tokennation.webp","./imgs/docussaurus.webp":"components/imgs/docussaurus.webp","./imgs/workshopzkum.jpg":"components/imgs/workshopzkum.jpg","./imgs/workshopzkdois.jpg":"components/imgs/workshopzkdois.jpg","./imgs/ethcannes.jpg":"components/imgs/ethcannes.jpg"}],"components/imgs/ethereum10years.webp":[function(require,module,exports) {
 module.exports = "/ethereum10years.4a9b0240.webp";
 },{}],"components/Projetos.js":[function(require,module,exports) {
 "use strict";
@@ -67370,34 +67451,44 @@ var App = function App() {
   };
   var partners = [{
     name: "Inteli",
-    logo: require('./imgs/inteli.jpeg')
+    logo: require('./imgs/inteli.jpeg'),
+    link: "https://www.inteli.edu.br/"
   }, {
     name: "Stellar",
-    logo: require('./imgs/Stellar_Symbol.png')
+    logo: require('./imgs/Stellar_Symbol.png'),
+    link: "https://stellar.org/"
   }, {
     name: "Ethereum Brasil",
-    logo: require('./imgs/ethereumbrasil_logo.jpeg')
+    logo: require('./imgs/ethereumbrasil_logo.jpeg'),
+    link: "https://www.ethereumbrasil.com/"
   }, {
     name: "VinteUm",
-    logo: require('./imgs/vinteum.png')
+    logo: require('./imgs/vinteum.png'),
+    link: "https://vinteum.org/"
   }, {
     name: "EthSamba",
-    logo: require('./imgs/ethsamba.jpg')
+    logo: require('./imgs/ethsamba.jpg'),
+    link: "https://ethsamba.org/pt/"
   }, {
     name: "EthLatam",
-    logo: require('./imgs/ethlatam.png')
+    logo: require('./imgs/ethlatam.png'),
+    link: "https://ethereumlatam.org/"
   }, {
     name: "Starknet Foundation",
-    logo: require('./imgs/starknet_foundation_logo.jpeg')
+    logo: require('./imgs/starknet_foundation_logo.jpeg'),
+    link: "https://www.starknet.org/"
   }, {
     name: "Chainlink Labs",
-    logo: require('./imgs/chainlink_labs_logo.jpeg')
+    logo: require('./imgs/chainlink_labs_logo.jpeg'),
+    link: "https://chain.link/"
   }, {
     name: "CryptoStar Games",
-    logo: require('./imgs/cryptostargames.jpeg')
+    logo: require('./imgs/cryptostargames.jpeg'),
+    link: "https://cryptostargames.com.br/"
   }, {
     name: "NearX",
-    logo: require('./imgs/nearx.jpeg')
+    logo: require('./imgs/nearx.jpeg'),
+    link: "https://nearx.com.br/"
   }];
   var achievements = [{
     number: "10+",
@@ -67463,7 +67554,18 @@ var App = function App() {
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "partners-track"
     }, partners.map(function (partner, index) {
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return partner.link ? /*#__PURE__*/_react.default.createElement("a", {
+        key: "first-".concat(index),
+        href: partner.link,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        className: "partner-card"
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "partner-logo"
+      }, /*#__PURE__*/_react.default.createElement("img", {
+        src: partner.logo,
+        alt: partner.name
+      }))) : /*#__PURE__*/_react.default.createElement("div", {
         key: "first-".concat(index),
         className: "partner-card"
       }, /*#__PURE__*/_react.default.createElement("div", {
@@ -67473,7 +67575,18 @@ var App = function App() {
         alt: partner.name
       })));
     }), partners.map(function (partner, index) {
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return partner.link ? /*#__PURE__*/_react.default.createElement("a", {
+        key: "second-".concat(index),
+        href: partner.link,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        className: "partner-card"
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "partner-logo"
+      }, /*#__PURE__*/_react.default.createElement("img", {
+        src: partner.logo,
+        alt: partner.name
+      }))) : /*#__PURE__*/_react.default.createElement("div", {
         key: "second-".concat(index),
         className: "partner-card"
       }, /*#__PURE__*/_react.default.createElement("div", {
@@ -67773,7 +67886,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60862" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57852" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -190,44 +190,54 @@ const App = () => {
   const partners = [
     {
       name: "Inteli",
-      logo: require('./imgs/inteli.jpeg')
+      logo: require('./imgs/inteli.jpeg'),
+      link: "https://www.inteli.edu.br/"
     },
     {
       name: "Stellar",
-      logo: require('./imgs/Stellar_Symbol.png')
+      logo: require('./imgs/Stellar_Symbol.png'),
+      link: "https://stellar.org/"
     },
     {
       name: "Ethereum Brasil",
-      logo: require('./imgs/ethereumbrasil_logo.jpeg')
+      logo: require('./imgs/ethereumbrasil_logo.jpeg'),
+      link: "https://www.ethereumbrasil.com/"
     },
     {
       name: "VinteUm",
-      logo: require('./imgs/vinteum.png')
+      logo: require('./imgs/vinteum.png'),
+      link: "https://vinteum.org/"
     },
     {
       name: "EthSamba",
-      logo: require('./imgs/ethsamba.jpg')
+      logo: require('./imgs/ethsamba.jpg'),
+      link: "https://ethsamba.org/pt/"
     },
     {
       name: "EthLatam",
-      logo: require('./imgs/ethlatam.png')
+      logo: require('./imgs/ethlatam.png'),
+      link: "https://ethereumlatam.org/"
     },
     {
       name: "Starknet Foundation",
-      logo: require('./imgs/starknet_foundation_logo.jpeg')
+      logo: require('./imgs/starknet_foundation_logo.jpeg'),
+      link: "https://www.starknet.org/"
     },
     {
       name: "Chainlink Labs",
-      logo: require('./imgs/chainlink_labs_logo.jpeg')
+      logo: require('./imgs/chainlink_labs_logo.jpeg'),
+      link: "https://chain.link/"
     },
     {
       name: "CryptoStar Games",
-      logo: require('./imgs/cryptostargames.jpeg')
+      logo: require('./imgs/cryptostargames.jpeg'),
+      link: "https://cryptostargames.com.br/"
     },
     {
       name: "NearX",
-      logo: require('./imgs/nearx.jpeg')
-    }
+      logo: require('./imgs/nearx.jpeg'),
+      link: "https://nearx.com.br/"
+    },
   ];
 
   const achievements = [
@@ -312,19 +322,47 @@ const App = () => {
                 <div className="partners-track">
                   {/* Primeira passagem dos parceiros */}
                   {partners.map((partner, index) => (
-                    <div key={`first-${index}`} className="partner-card">
-                      <div className="partner-logo">
-                        <img src={partner.logo} alt={partner.name} />
+                    partner.link ? (
+                      <a 
+                        key={`first-${index}`} 
+                        href={partner.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="partner-card"
+                      >
+                        <div className="partner-logo">
+                          <img src={partner.logo} alt={partner.name} />
+                        </div>
+                      </a>
+                    ) : (
+                      <div key={`first-${index}`} className="partner-card">
+                        <div className="partner-logo">
+                          <img src={partner.logo} alt={partner.name} />
+                        </div>
                       </div>
-                    </div>
+                    )
                   ))}
                   {/* Segunda passagem dos parceiros para loop infinito */}
                   {partners.map((partner, index) => (
-                    <div key={`second-${index}`} className="partner-card">
-                      <div className="partner-logo">
-                        <img src={partner.logo} alt={partner.name} />
+                    partner.link ? (
+                      <a 
+                        key={`second-${index}`} 
+                        href={partner.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="partner-card"
+                      >
+                        <div className="partner-logo">
+                          <img src={partner.logo} alt={partner.name} />
+                        </div>
+                      </a>
+                    ) : (
+                      <div key={`second-${index}`} className="partner-card">
+                        <div className="partner-logo">
+                          <img src={partner.logo} alt={partner.name} />
+                        </div>
                       </div>
-                    </div>
+                    )
                   ))}
                 </div>
               </div>
