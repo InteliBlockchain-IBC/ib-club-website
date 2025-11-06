@@ -1,8 +1,10 @@
 import React from 'react';
 import inteliLogo from './imgs/inteliblcok.jpg';
 import francisco from './imgs/franciscofilho.jpg';
+import { useTranslation } from '../i18n';
 
 const QuemSomos = () => {
+  const { t } = useTranslation();
   const membrosAtivos = [
     {
       nome: "Vinicius Testa",
@@ -260,16 +262,10 @@ const QuemSomos = () => {
       <section className="hero quem-somos-hero">
         <div className="hero-content">
           <h1 className="hero-title">
-            Quem <span>Somos</span>
+            {t('about.hero_title').split(' ')[0]} <span>{t('about.hero_title').split(' ')[1] || ''}</span>
           </h1>
-          <p className="hero-subtitle">
-            Conectando inovação, tecnologia e comunidade
-          </p>
-          <p className="hero-description">
-            O Inteli Blockchain é uma organização dedicada ao desenvolvimento e promoção 
-            da tecnologia blockchain no Brasil. Nossa missão é educar, conectar e 
-            capacitar a próxima geração de desenvolvedores e entusiastas blockchain no Inteli.
-          </p>
+          <p className="hero-subtitle">{t('about.hero_subtitle')}</p>
+          <p className="hero-description">{t('about.hero_description')}</p>
         </div>
       </section>
 
@@ -277,10 +273,8 @@ const QuemSomos = () => {
       <section className="membros-section">
         <div className="container">
           <div className="membros-content">
-            <h2 className="section-title">Membros Ativos</h2>
-            <p className="section-subtitle">
-              Nossa equipe atual que lidera os projetos e iniciativas
-            </p>
+            <h2 className="section-title">{t('about.members_title')}</h2>
+            <p className="section-subtitle">{t('about.members_subtitle')}</p>
             
             <div className="membros-grid">
               {membrosAtivos.map((membro, index) => (
@@ -320,10 +314,8 @@ const QuemSomos = () => {
       <section className="membros-section ex-membros">
         <div className="container">
           <div className="membros-content">
-            <h2 className="section-title">Ex-Membros</h2>
-            <p className="section-subtitle">
-              Membros que contribuíram para o crescimento da organização
-            </p>
+            <h2 className="section-title">{t('about.ex_members_title')}</h2>
+            <p className="section-subtitle">{t('about.ex_members_subtitle')}</p>
             
             <div className="membros-grid">
               {exMembros.map((membro, index) => (
@@ -365,10 +357,7 @@ const QuemSomos = () => {
             <div className="footer-logo">
               <img src={inteliLogo} alt="Inteli Blockchain" className="footer-logo-img" />
             </div>
-            <p className="footer-text">
-              Conectando o futuro da tecnologia blockchain através de inovação, 
-              educação e colaboração.
-            </p>
+            <p className="footer-text">{t('footer.text')}</p>
                      <div className="footer-social">
            <a href="https://github.com/InteliBlockchain-IBC" target="_blank" rel="noopener noreferrer" className="social-icon github">
              <i className="fab fa-github"></i>
@@ -380,9 +369,7 @@ const QuemSomos = () => {
                 <i className="fab fa-instagram"></i>
               </a>
             </div>
-            <p className="footer-copyright">
-              © 2025 Inteli Blockchain. Todos os direitos reservados.
-            </p>
+            <p className="footer-copyright">{t('footer.copyright')}</p>
           </div>
         </footer>
     </>

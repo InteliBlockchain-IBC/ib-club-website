@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from '../i18n';
 import inteliLogo from './imgs/inteliblcok.jpg';
 
 const Calendario = () => {
+  const { t, lang } = useTranslation();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
@@ -35,13 +37,13 @@ const Calendario = () => {
 
   const getCategoryName = (category) => {
     switch (category) {
-      case 'bootcamp': return 'Bootcamp';
-      case 'hackathon': return 'Hackathon';
-      case 'palestra': return 'Palestra';
-      case 'meetup': return 'Meetup';
+      case 'bootcamp': return t('calendar_page.filters.bootcamp') || 'Bootcamp';
+      case 'hackathon': return t('calendar_page.filters.hackathon') || 'Hackathon';
+      case 'palestra': return t('calendar_page.filters.palestra') || 'Palestra';
+      case 'meetup': return t('calendar_page.filters.meetup') || 'Meetup';
       case 'curso': return 'Curso';
       case 'conferencia': return 'Conferência';
-      default: return 'Evento';
+      default: return t('calendar_page.event') || 'Evento';
     }
   };
 
@@ -59,7 +61,7 @@ const Calendario = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('pt-BR', {
+    return date.toLocaleDateString(lang === 'pt' ? 'pt-BR' : 'en-US', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
@@ -86,16 +88,14 @@ const Calendario = () => {
       if (navigator.share) {
         await navigator.share(shareData);
       } else {
-        // Fallback for browsers that don't support Web Share API
         await navigator.clipboard.writeText(`${event.title}\n${event.description}\n${window.location.href}`);
-        alert('Link do evento copiado para a área de transferência!');
+        alert(t('calendar_page.share_copied'));
       }
     } catch (error) {
       console.error('Erro ao compartilhar:', error);
-      // Fallback to clipboard
       try {
         await navigator.clipboard.writeText(`${event.title}\n${event.description}\n${window.location.href}`);
-        alert('Link do evento copiado para a área de transferência!');
+        alert(t('calendar_page.share_copied'));
       } catch (clipboardError) {
         console.error('Erro ao copiar para área de transferência:', clipboardError);
         alert('Erro ao compartilhar o evento');
@@ -108,7 +108,7 @@ const Calendario = () => {
       <div className="calendario-page">
         <div className="calendario-loading">
           <i className="fas fa-spinner fa-spin"></i>
-          <p>Carregando eventos...</p>
+          <p>{t('calendar_page.loading')}</p>
         </div>
       </div>
     );
@@ -120,9 +120,9 @@ const Calendario = () => {
         <div className="calendario-header-content">
           <div className="calendario-title">
             <i className="fas fa-calendar-alt"></i>
-            <h1>Calendário de Eventos</h1>
+            <h1>{t('calendar_page.title')}</h1>
           </div>
-          <p>Confira os próximos eventos da comunidade blockchain</p>
+          <p>{t('calendar_page.subtitle')}</p>
         </div>
         <div className="calendario-logo">
           <img src={inteliLogo} alt="Inteli Logo" />
@@ -130,40 +130,25 @@ const Calendario = () => {
       </div>
 
       <div className="calendario-filters">
-        <button
-          className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
-          onClick={() => setFilter('all')}
-        >
+        <button className={`filter-btn ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>
           <i className="fas fa-list"></i>
-          Todos
+          {t('calendar_page.filters.all')}
         </button>
-        <button
-          className={`filter-btn ${filter === 'bootcamp' ? 'active' : ''}`}
-          onClick={() => setFilter('bootcamp')}
-        >
+        <button className={`filter-btn ${filter === 'bootcamp' ? 'active' : ''}`} onClick={() => setFilter('bootcamp')}>
           <i className="fas fa-tools"></i>
-          Bootcamps
+          {t('calendar_page.filters.bootcamp')}
         </button>
-        <button
-          className={`filter-btn ${filter === 'hackathon' ? 'active' : ''}`}
-          onClick={() => setFilter('hackathon')}
-        >
+        <button className={`filter-btn ${filter === 'hackathon' ? 'active' : ''}`} onClick={() => setFilter('hackathon')}>
           <i className="fas fa-code"></i>
-          Hackathons
+          {t('calendar_page.filters.hackathon')}
         </button>
-        <button
-          className={`filter-btn ${filter === 'palestra' ? 'active' : ''}`}
-          onClick={() => setFilter('palestra')}
-        >
+        <button className={`filter-btn ${filter === 'palestra' ? 'active' : ''}`} onClick={() => setFilter('palestra')}>
           <i className="fas fa-microphone"></i>
-          Palestras
+          {t('calendar_page.filters.palestra')}
         </button>
-        <button
-          className={`filter-btn ${filter === 'meetup' ? 'active' : ''}`}
-          onClick={() => setFilter('meetup')}
-        >
+        <button className={`filter-btn ${filter === 'meetup' ? 'active' : ''}`} onClick={() => setFilter('meetup')}>
           <i className="fas fa-users"></i>
-          Meetups
+          {t('calendar_page.filters.meetup')}
         </button>
       </div>
 
@@ -232,10 +217,7 @@ const Calendario = () => {
             <div className="footer-logo">
               <img src={inteliLogo} alt="Inteli Blockchain" className="footer-logo-img" />
             </div>
-            <p className="footer-text">
-              Conectando o futuro da tecnologia blockchain através de inovação, 
-              educação e colaboração.
-            </p>
+            <p className="footer-text">{t('footer.text')}</p>
                      <div className="footer-social">
            <a href="https://github.com/InteliBlockchain-IBC" target="_blank" rel="noopener noreferrer" className="social-icon github">
              <i className="fab fa-github"></i>
@@ -247,9 +229,7 @@ const Calendario = () => {
                 <i className="fab fa-instagram"></i>
               </a>
             </div>
-            <p className="footer-copyright">
-              © 2025 Inteli Blockchain. Todos os direitos reservados.
-            </p>
+            <p className="footer-copyright">{t('footer.copyright')}</p>
           </div>
         </footer>
     </div>

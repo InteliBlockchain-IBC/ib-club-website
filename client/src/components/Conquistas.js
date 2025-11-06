@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from '../i18n';
 import inteliLogo from './imgs/inteliblcok.jpg';
 
 const Conquistas = ({ walletAddress }) => {
+  const { t, lang } = useTranslation();
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
@@ -57,17 +59,17 @@ const Conquistas = ({ walletAddress }) => {
   const getCategoryName = (category) => {
     switch (category) {
       case 'achievement':
-        return 'Conquistas';
+        return t('achievements.achievement');
       case 'community':
-        return 'Comunidade';
+        return t('achievements.community');
       case 'education':
-        return 'Educação';
+        return t('achievements.education');
       case 'defi':
-        return 'DeFi';
+        return t('achievements.defi');
       case 'development':
-        return 'Desenvolvimento';
+        return t('achievements.development');
       default:
-        return 'Geral';
+        return 'General';
     }
   };
 
@@ -77,7 +79,7 @@ const Conquistas = ({ walletAddress }) => {
         <div className="loading-spinner">
           <i className="fas fa-spinner fa-spin"></i>
         </div>
-        <p>Carregando suas conquistas...</p>
+        <p>{t('conquistas_page.loading')}</p>
       </div>
     );
   }
@@ -91,14 +93,12 @@ const Conquistas = ({ walletAddress }) => {
             <div className="conquistas-title-section">
               <h1 className="conquistas-title">
                 <i className="fas fa-trophy"></i>
-                Minhas Conquistas
+                {t('conquistas_page.title')}
               </h1>
-              <p className="conquistas-subtitle">
-                Sua coleção de NFTs e conquistas na comunidade blockchain
-              </p>
+              <p className="conquistas-subtitle">{t('conquistas_page.subtitle')}</p>
               <div className="wallet-info-display">
                 <span className="wallet-address-display">
-                  {walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Carteira não conectada'}
+                  {walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : t('wallet.not_connected')}
                 </span>
               </div>
             </div>
@@ -110,47 +110,29 @@ const Conquistas = ({ walletAddress }) => {
       <div className="conquistas-filters">
         <div className="container">
           <div className="filters-content">
-            <button 
-              className={`filter-button ${filter === 'all' ? 'active' : ''}`}
-              onClick={() => setFilter('all')}
-            >
+            <button className={`filter-button ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>
               <i className="fas fa-th"></i>
-              Todas
+              {t('conquistas_page.filters.all')}
             </button>
-            <button 
-              className={`filter-button ${filter === 'achievement' ? 'active' : ''}`}
-              onClick={() => setFilter('achievement')}
-            >
+            <button className={`filter-button ${filter === 'achievement' ? 'active' : ''}`} onClick={() => setFilter('achievement')}>
               <i className="fas fa-trophy"></i>
-              Conquistas
+              {t('conquistas_page.filters.achievement')}
             </button>
-            <button 
-              className={`filter-button ${filter === 'community' ? 'active' : ''}`}
-              onClick={() => setFilter('community')}
-            >
+            <button className={`filter-button ${filter === 'community' ? 'active' : ''}`} onClick={() => setFilter('community')}>
               <i className="fas fa-users"></i>
-              Comunidade
+              {t('conquistas_page.filters.community')}
             </button>
-            <button 
-              className={`filter-button ${filter === 'education' ? 'active' : ''}`}
-              onClick={() => setFilter('education')}
-            >
+            <button className={`filter-button ${filter === 'education' ? 'active' : ''}`} onClick={() => setFilter('education')}>
               <i className="fas fa-graduation-cap"></i>
-              Educação
+              {t('conquistas_page.filters.education')}
             </button>
-            <button 
-              className={`filter-button ${filter === 'defi' ? 'active' : ''}`}
-              onClick={() => setFilter('defi')}
-            >
+            <button className={`filter-button ${filter === 'defi' ? 'active' : ''}`} onClick={() => setFilter('defi')}>
               <i className="fas fa-chart-line"></i>
-              DeFi
+              {t('conquistas_page.filters.defi')}
             </button>
-            <button 
-              className={`filter-button ${filter === 'development' ? 'active' : ''}`}
-              onClick={() => setFilter('development')}
-            >
+            <button className={`filter-button ${filter === 'development' ? 'active' : ''}`} onClick={() => setFilter('development')}>
               <i className="fas fa-code"></i>
-              Desenvolvimento
+              {t('conquistas_page.filters.development')}
             </button>
           </div>
         </div>
@@ -162,8 +144,8 @@ const Conquistas = ({ walletAddress }) => {
           {getFilteredNfts().length === 0 ? (
             <div className="no-nfts">
               <i className="fas fa-search"></i>
-              <h3>Nenhuma NFT encontrada</h3>
-              <p>Não há NFTs nesta categoria ainda.</p>
+              <h3>{t('conquistas_page.no_nfts_title')}</h3>
+              <p>{t('conquistas_page.no_nfts_text')}</p>
             </div>
           ) : (
             <div className="nfts-grid">
@@ -186,16 +168,16 @@ const Conquistas = ({ walletAddress }) => {
                     
                     <div className="nft-details">
                       <div className="nft-detail-item">
-                        <span className="detail-label">Coleção:</span>
+                        <span className="detail-label">{t('common.collection')}</span>
                         <span className="detail-value">{nft.collection}</span>
                       </div>
                       <div className="nft-detail-item">
-                        <span className="detail-label">Token ID:</span>
+                        <span className="detail-label">{t('common.token_id')}</span>
                         <span className="detail-value">{nft.tokenId}</span>
                       </div>
                       <div className="nft-detail-item">
-                        <span className="detail-label">Data:</span>
-                        <span className="detail-value">{new Date(nft.date).toLocaleDateString('pt-BR')}</span>
+                        <span className="detail-label">{t('common.date')}</span>
+                        <span className="detail-value">{new Date(nft.date).toLocaleDateString(lang === 'pt' ? 'pt-BR' : 'en-US')}</span>
                       </div>
                     </div>
                   </div>
@@ -212,10 +194,7 @@ const Conquistas = ({ walletAddress }) => {
             <div className="footer-logo">
               <img src={inteliLogo} alt="Inteli Blockchain" className="footer-logo-img" />
             </div>
-            <p className="footer-text">
-              Conectando o futuro da tecnologia blockchain através de inovação, 
-              educação e colaboração.
-            </p>
+            <p className="footer-text">{t('footer.text')}</p>
                      <div className="footer-social">
            <a href="https://github.com/InteliBlockchain-IBC" target="_blank" rel="noopener noreferrer" className="social-icon github">
              <i className="fab fa-github"></i>
@@ -227,9 +206,7 @@ const Conquistas = ({ walletAddress }) => {
                 <i className="fab fa-instagram"></i>
               </a>
             </div>
-            <p className="footer-copyright">
-              © 2025 Inteli Blockchain. Todos os direitos reservados.
-            </p>
+            <p className="footer-copyright">{t('footer.copyright')}</p>
           </div>
         </footer>
     </div>
