@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from '../i18n';
 import inteliLogo from './imgs/inteliblcok.jpg';
 import ethereumsp from './imgs/ethereumsp.jpg';
 import devcon from './imgs/devcon.jpg';
@@ -16,6 +17,7 @@ import workshopzkdois from './imgs/workshopzkdois.jpg';
 import ethcannes from './imgs/ethcannes.jpg';
 
 const Memorias = () => {
+  const { t } = useTranslation();
   const memories = [
     {
       id: 1,
@@ -130,7 +132,7 @@ const Memorias = () => {
       <section className="memorias-hero">
         <div className="memorias-hero-content">
           <h1 className="memorias-hero-title">
-            Linha do Tempo
+            {t('memories.timeline') || t('memories.timeline')}
           </h1>
         </div>
       </section>
@@ -166,10 +168,7 @@ const Memorias = () => {
             <div className="footer-logo">
               <img src={inteliLogo} alt="Inteli Blockchain" className="footer-logo-img" />
             </div>
-            <p className="footer-text">
-              Conectando o futuro da tecnologia blockchain através de inovação, 
-              educação e colaboração.
-            </p>
+            <p className="footer-text">{t('footer.text')}</p>
                      <div className="footer-social">
            <a href="https://github.com/InteliBlockchain-IBC" target="_blank" rel="noopener noreferrer" className="social-icon github">
              <i className="fab fa-github"></i>
@@ -181,9 +180,7 @@ const Memorias = () => {
                 <i className="fab fa-instagram"></i>
               </a>
             </div>
-            <p className="footer-copyright">
-              © 2025 Inteli Blockchain. Todos os direitos reservados.
-            </p>
+            <p className="footer-copyright">{t('footer.copyright')}</p>
           </div>
         </footer>
     </div>
