@@ -3625,6 +3625,7 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: var(--transition);
 }
 
@@ -3678,6 +3679,24 @@ p {
 
 .dark-mode .projeto-descricao {
   color: var(--text-secondary-dark);
+}
+
+.projeto-participantes {
+  color: var(--text-secondary-light);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.projeto-participantes strong {
+  color: var(--text-primary-light);
+}
+
+.dark-mode .projeto-participantes {
+  color: var(--text-secondary-dark);
+}
+
+.dark-mode .projeto-participantes strong {
+  color: var(--text-primary-dark);
 }
 
 .projeto-status {

@@ -108,6 +108,7 @@ const translations = {
       hero_description: 'Conheça os projetos desenvolvidos pelo Inteli Blockchain. Nossa equipe trabalha constantemente para criar soluções inovadoras e educar a comunidade sobre as possibilidades da tecnologia blockchain.',
       section_title: 'Projetos Ativos',
       section_subtitle: 'Conheça nossas iniciativas e contribuições para o ecossistema blockchain',
+      participants_label: 'Participantes',
       status_active: 'Ativo',
       status_dev: 'Em Desenvolvimento'
     },
@@ -224,6 +225,7 @@ const translations = {
       hero_description: 'Discover the projects developed by Inteli Blockchain. Our team works constantly to create innovative solutions and educate the community about the possibilities of blockchain technology.',
       section_title: 'Active Projects',
       section_subtitle: 'Meet our initiatives and contributions to the blockchain ecosystem',
+      participants_label: 'Participants',
       status_active: 'Active',
       status_dev: 'In Development'
     }
