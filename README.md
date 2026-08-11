@@ -20,16 +20,43 @@ client/src/
 └── landing/
     ├── Landing.js           compõe as seções, na ordem da evidência
     ├── landing.css          a folha inteira — ver aviso abaixo
-    ├── dados.js             projetos, parceiros, fotos, marcos, números
+    ├── dados.js             links, imagens, dimensões e ordem (sem idioma)
+    ├── textos/pt.js         todo o texto em português
+    ├── textos/en.js         todo o texto em inglês
+    ├── textos/index.js      contexto de idioma, detecção e persistência
     ├── no3d.js              a marca em 3D (Three.js sob demanda)
     ├── Cabeca.js            cabeçalho de seção, usado sete vezes
     ├── Paineis.js           a grade de dois painéis, usada duas vezes
+    ├── Realce.js            o negrito dentro de um texto traduzido
     ├── assets/
     └── secoes/              uma seção por arquivo
 ```
 
-Para trocar um projeto, um parceiro, uma legenda ou um número: **`dados.js`**.
-Nenhuma seção precisa ser aberta.
+Para trocar **um link, uma imagem ou a ordem**: `dados.js`.
+Para trocar **qualquer texto**: `textos/pt.js` e `textos/en.js`, sempre os dois.
+Nenhuma seção precisa ser aberta em nenhum dos dois casos.
+
+## Os dois idiomas
+
+A página existe inteira em português e inglês, sem biblioteca de i18n — são
+dois objetos e um contexto. O idioma é decidido nesta ordem: **`?lang=en` na
+URL**, depois a escolha salva no navegador, depois o idioma do sistema.
+
+O parâmetro na URL existe para a página ser compartilhável em inglês: o
+público que mais importa é o parceiro em potencial, e boa parte dele não lê
+português.
+
+Uma chave presente num idioma e ausente no outro **estoura em
+desenvolvimento**, com o caminho da chave no erro. Em produção não estoura —
+texto faltando não vale uma tela branca para quem está visitando.
+
+## Deploy
+
+Ver **[DEPLOY.md](DEPLOY.md)**. Resumo: é um contêiner com Express servindo
+estático em `PORT`, sem banco e sem segredo. O push em `main` publica a
+imagem no GHCR pelo GitHub Actions; o `DEPLOY.md` também descreve o caminho
+mais curto, em que o Easypanel constrói direto do repositório e dispensa
+registry e workflow.
 
 ## Três coisas que quebram se você não souber
 

@@ -1,0 +1,10 @@
+node_modules
+client/dist
+.cache
+.git
+.github
+ai
+design-concepts
+*.md
+Dockerfile
+.dockerignore
