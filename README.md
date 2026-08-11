@@ -20,21 +20,25 @@ client/src/
 └── landing/
     ├── Landing.js           compõe as seções, na ordem da evidência
     ├── landing.css          a folha inteira — ver aviso abaixo
-    ├── dados.js             links, imagens, dimensões e ordem (sem idioma)
-    ├── textos/pt.js         todo o texto em português
-    ├── textos/en.js         todo o texto em inglês
-    ├── textos/index.js      contexto de idioma, detecção e persistência
-    ├── no3d.js              a marca em 3D (Three.js sob demanda)
-    ├── Cabeca.js            cabeçalho de seção, usado sete vezes
-    ├── Paineis.js           a grade de dois painéis, usada duas vezes
-    ├── Realce.js            o negrito dentro de um texto traduzido
+    ├── data.js              links, imagens, dimensões e ordem (sem idioma)
+    ├── i18n/pt.js           todo o texto em português
+    ├── i18n/en.js           todo o texto em inglês
+    ├── i18n/index.js        contexto de idioma, detecção e persistência
+    ├── knot3d.js            a marca em 3D (Three.js sob demanda)
+    ├── SectionHeader.js     cabeçalho de seção, usado sete vezes
+    ├── PanelPair.js         a grade de dois painéis, usada duas vezes
+    ├── Emphasis.js          o negrito dentro de um texto traduzido
     ├── assets/
-    └── secoes/              uma seção por arquivo
+    └── sections/            uma seção por arquivo
 ```
 
-Para trocar **um link, uma imagem ou a ordem**: `dados.js`.
-Para trocar **qualquer texto**: `textos/pt.js` e `textos/en.js`, sempre os dois.
+Para trocar **um link, uma imagem ou a ordem**: `data.js`.
+Para trocar **qualquer texto**: `i18n/pt.js` e `i18n/en.js`, sempre os dois.
 Nenhuma seção precisa ser aberta em nenhum dos dois casos.
+
+Código, nomes de arquivo, classes CSS e chaves são em **inglês**; comentários e
+documentação em **português**, como manda a convenção do workspace. O texto que
+o visitante lê não é código: mora em `i18n/`, nos dois idiomas.
 
 ## Os dois idiomas
 
@@ -92,9 +96,9 @@ Não reordene a folha, e não a divida em arquivos por componente.
 
 **2 · `three` está pregado em `0.140.0`.** O código usa `outputEncoding` e
 `sRGBEncoding`, removidos em versões posteriores. Subir a versão exige
-reescrever `no3d.js`, não só trocar o número.
+reescrever `knot3d.js`, não só trocar o número.
 
-**3 · O `import('three')` em `no3d.js` é dinâmico de propósito.** É ele que
+**3 · O `import('three')` em `knot3d.js` é dinâmico de propósito.** É ele que
 faz o Parcel gerar um bundle separado, baixado só quando o 3D vai mesmo
 renderizar — com ponteiro, com WebGL e sem `prefers-reduced-motion`. Trocar
 por um import estático no topo manda 680 KB para todo celular que nunca vai
@@ -122,7 +126,7 @@ encontra no histórico, no commit `11b5b48`.
 
 As fotos originais em alta resolução também **não estão no git** (8,4 MB).
 Ficam no Canva do clube. As derivadas web em
-`client/src/landing/assets/fotos/` são 1x — gerar 2x e `srcset` continua
+`client/src/landing/assets/photos/` são 1x — gerar 2x e `srcset` continua
 pendente.
 
 ## Licença
