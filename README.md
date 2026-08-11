@@ -57,8 +57,11 @@ texto faltando não vale uma tela branca para quem está visitando.
 ## Deploy
 
 O Easypanel constrói o `Dockerfile` deste repositório e serve o contêiner.
-Sem registry, sem GitHub Actions, sem token: o repositório é público e o
-Easypanel clona direto.
+Sem registry e sem GitHub Actions.
+
+**O repositório é privado**, então o Easypanel precisa de acesso ao GitHub
+para clonar — conectando a conta pela integração do painel, ou com um token
+de leitura. Isso é o único segredo envolvido no deploy.
 
 **Create Service → App**, e então:
 
@@ -72,12 +75,25 @@ Easypanel clona direto.
 Na tela do serviço aparece um **Deploy Webhook**. Cadastrando essa URL em
 GitHub → Settings → Webhooks, todo push em `main` reconstrói o site.
 
-**O build precisa de ~1 GB de RAM livre.** Medido: pico de **849 MiB**, quase
-tudo do Parcel empacotando o React. Numa VPS de 1 GB isso divide espaço com o
-sistema e com o próprio Easypanel, e o build morre por OOM sem dizer o
-motivo. Se for o caso, a saída é construir a imagem fora e só puxar pronta —
-tinha um workflow para isso em `c517e76`, removido quando escolhemos deixar o
-Easypanel construir.
+**O build precisa de 1 GB de RAM; o site rodando precisa de 18 MB.**
+Os dois números foram medidos, e a distância entre eles é o Parcel
+empacotando o React — não o site.
+
+| | Medido |
+| --- | --- |
+| Build (pico) | 849 MiB — falha abaixo de 1 GB |
+| Contêiner rodando | **17,5 MiB** |
+| Imagem no disco / na rede | 173 MB / 56 MB comprimida |
+
+Uma VPS pequena **roda** o site folgado e pode não conseguir **construí-lo**.
+Se o build morrer com `Aborted (core dumped)`, é isto. Duas saídas: subir a
+máquina para o build, ou construir a imagem fora e só puxar pronta — havia um
+workflow para isso em `c517e76`.
+
+O `ENV NODE_OPTIONS=--max-old-space-size=768` no Dockerfile existe por causa
+disso: dentro de um contêiner o V8 dimensiona o heap pela RAM do **host**, não
+pelo limite do contêiner, e sem esse teto ele nem tenta coletar lixo antes de
+estourar. Com o teto, o build passa em 1 GB; sem ele, aborta até com 1 GB.
 
 Sobre variáveis: existe **uma**, `PORT`, e o Easypanel injeta sozinha. Sem
 ela o Express usa 3000. Não há banco, segredo nem chamada de API. Se aparecer

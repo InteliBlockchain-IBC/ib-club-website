@@ -3,6 +3,10 @@
 # código de front — entram no bundle e não são requeridos em tempo de execução.
 FROM node:22-alpine AS build
 WORKDIR /app
+# Dentro de um contêiner o V8 dimensiona o heap pela RAM do HOST, não pelo
+# limite do contêiner — então sem este teto ele não coleta lixo a tempo e
+# aborta mesmo com 1 GB disponível. Medido: com o teto passa em 1 GB.
+ENV NODE_OPTIONS=--max-old-space-size=768
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY client ./client
