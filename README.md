@@ -57,11 +57,8 @@ texto faltando não vale uma tela branca para quem está visitando.
 ## Deploy
 
 O Easypanel constrói o `Dockerfile` deste repositório e serve o contêiner.
-Sem registry e sem GitHub Actions.
-
-**O repositório é privado**, então o Easypanel precisa de acesso ao GitHub
-para clonar — conectando a conta pela integração do painel, ou com um token
-de leitura. Isso é o único segredo envolvido no deploy.
+Sem registry, sem GitHub Actions e **sem token**: o repositório é público, e o
+Easypanel clona direto. Não há segredo nenhum envolvido no deploy.
 
 **Create Service → App**, e então:
 
@@ -144,6 +141,24 @@ As fotos originais em alta resolução também **não estão no git** (8,4 MB).
 Ficam no Canva do clube. As derivadas web em
 `client/src/landing/assets/photos/` são 1x — gerar 2x e `srcset` continua
 pendente.
+
+## Contribuir
+
+A `main` é protegida por ruleset: **não aceita push direto**. Toda mudança
+entra por pull request, com uma aprovação — e o GitHub não deixa o autor
+aprovar o próprio PR. Force push e exclusão da branch estão bloqueados.
+
+O ruleset **não tem lista de bypass**, de propósito: com bypass de admin ele
+não protegeria nada, porque quase todo mundo com escrita aqui é admin.
+
+```bash
+git switch -c feat/minha-mudanca
+# ... commits ...
+git push -u origin feat/minha-mudanca
+gh pr create --base main
+```
+
+Conventional commits, com a descrição em português.
 
 ## Licença
 
