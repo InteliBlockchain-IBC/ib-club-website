@@ -10,6 +10,7 @@ ENV NODE_OPTIONS=--max-old-space-size=768
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY client ./client
+COPY scripts ./scripts
 RUN npm run build-client
 
 # ─────────── runtime ───────────

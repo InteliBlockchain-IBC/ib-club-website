@@ -1,30 +1,36 @@
 import React from 'react';
 import { useTranslation } from '../i18n';
-import marca from '../assets/logo-horizontal.png';
+import brand from '../assets/logo-horizontal.png';
 
 export default function Navbar() {
-  const { t, other, toggle } = useTranslation();
+  const { t, other, otherPath } = useTranslation();
 
   return (
-    <nav className="nav">
+    <header className="nav">
       <div className="nav__box">
-        <a className="nav__brand" href="#top" aria-label={t.hero.home}>
-          <img src={marca} alt="Inteli Blockchain" />
+        <a className="nav__brand" href={t.nav.homePath} aria-label={t.hero.home}>
+          <img src={brand} alt="Inteli Blockchain" width="150" height="38" />
         </a>
-        <div className="nav__links">
+        <nav className="nav__links" aria-label={t.nav.label}>
           <a href="#projects">{t.nav.projects}</a>
           <a href="#departments">{t.nav.departments}</a>
           <a href="#history">{t.nav.history}</a>
-        </div>
-        {/* Fica FORA de .nav__itens de propósito: aquele bloco some abaixo de
-            900px, e esconder o seletor no celular deixaria o inglês
-            inalcançável em metade dos acessos. O rótulo é o idioma para o
-            qual se vai, não o atual. */}
-        <button className="nav__lang" type="button" onClick={toggle} lang={other}>
+        </nav>
+        {/* Link de verdade, não botão: é assim que o rastreador encontra a
+            outra versão do site, e é o que o `hreflang` do cabeçalho confirma.
+            Fica FORA de .nav__links porque aquele bloco some abaixo de 900px,
+            e esconder o seletor deixaria o outro idioma inalcançável no
+            celular. `hreflang` e `lang` descrevem o DESTINO, não esta página. */}
+        <a
+          className="nav__lang"
+          href={otherPath}
+          hrefLang={other === 'pt' ? 'pt-BR' : 'en'}
+          lang={other === 'pt' ? 'pt-BR' : 'en'}
+        >
           <span className="visually-hidden">{t.switchTo}</span>
           <span aria-hidden="true">{other.toUpperCase()}</span>
-        </button>
+        </a>
       </div>
-    </nav>
+    </header>
   );
 }

@@ -9,7 +9,22 @@ export default {
   language: 'pt-BR',
   switchTo: 'Ver em inglês',
 
-  nav: { projects: 'Projetos', departments: 'Áreas', history: 'História' },
+  /* O que aparece na aba do navegador, no resultado de busca e no card de
+     link compartilhado. É a única cópia que muita gente vai ler do clube,
+     então diz o que ele é e o que ele entregou — não um slogan. */
+  seo: {
+    title: 'Inteli Blockchain — clube universitário de blockchain, hackathons e projetos web3',
+    description: 'Liga estudantil de blockchain do Inteli, em São Paulo. 25 projetos entregues desde 2022 em Stellar, Solana, Bitcoin, Celo e Chiliz, com hackathons, aulas semanais e parcerias no ecossistema web3.',
+    imageAlt: 'Membros do Inteli Blockchain reunidos em um auditório do Inteli',
+  },
+
+  nav: {
+    label: 'Seções da página',
+    homePath: '/',
+    projects: 'Projetos',
+    departments: 'Áreas',
+    history: 'História',
+  },
 
   hero: {
     kicker: 'Liga estudantil de blockchain · Inteli · São Paulo · desde 2022',

@@ -34,8 +34,8 @@ export default function Partners() {
   const { t } = useTranslation();
   const s = t.partners;
   return (
-    <section className="section rise">
-      <SectionHeader label={s.label} title={s.title} />
+    <section className="section rise" aria-labelledby="h-partners">
+      <SectionHeader id="h-partners" label={s.label} title={s.title} />
       <div className="carousel">
         <div className="carousel__track">
           {PARTNERS.map((p) => <Parceiro partner={p} key={p.name} />)}

@@ -11,22 +11,24 @@ export default function Hackathon() {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <section className="section rise">
-      <SectionHeader label={s.label} title={s.title} prose={s.prose} />
+    <section className="section rise" aria-labelledby="h-hackathon">
+      <SectionHeader id="h-hackathon" label={s.label} title={s.title} prose={s.prose} />
 
-      <div className={`grid${expanded ? ' grid--all' : ''}`} id="projectGrid">
+      <ul className={`grid${expanded ? ' grid--all' : ''}`} id="projectGrid">
         {PROJECTS.map((p) => {
           const text = t.projects[p.id];
           return (
-            <a className="project" key={p.id} href={p.href} target="_blank" rel="noopener">
-              <p className="label">{text.label}</p>
-              <h3>{p.name}</h3>
-              <p>{text.description}</p>
-              <span className="project__cta">{text.cta || s.cta}</span>
-            </a>
+            <li key={p.id}>
+              <a className="project" href={p.href} target="_blank" rel="noopener">
+                <p className="label">{text.label}</p>
+                <h3>{p.name}</h3>
+                <p>{text.description}</p>
+                <span className="project__cta">{text.cta || s.cta}</span>
+              </a>
+            </li>
           );
         })}
-      </div>
+      </ul>
 
       <button
         className="project-more"

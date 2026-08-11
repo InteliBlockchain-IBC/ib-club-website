@@ -38,7 +38,7 @@ export default function Footer() {
       </div>
       <div className="footer__base">
         <span>{s.rights}</span>
-        <span>{s.contact} <a href={`mailto:${CONTACT}`}>{CONTACT}</a></span>
+        <address>{s.contact} <a href={`mailto:${CONTACT}`}>{CONTACT}</a></address>
         <span>{s.domain}</span>
       </div>
     </footer>

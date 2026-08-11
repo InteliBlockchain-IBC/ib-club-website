@@ -9,7 +9,7 @@ export default function WhoBuilds() {
   const s = t.whoBuilds;
 
   return (
-    <section className="section rise">
+    <section className="section rise" aria-labelledby="h-who">
       {/* A FOTO DE DESTAQUE DA PÁGINA. É a primeira imagem depois da dobra, e é
           ela que sustenta a afirmação do hero: dizer "grande clube universitário"
           custa nada; mostrar o time inteiro custa uma foto. Vem antes do título
@@ -24,7 +24,7 @@ export default function WhoBuilds() {
         <figcaption>{t.photos.featured.caption}</figcaption>
       </figure>
 
-      <SectionHeader label={s.label} title={s.title} prose={s.prose} />
+      <SectionHeader id="h-who" label={s.label} title={s.title} prose={s.prose} />
       <PanelPair panels={s.panels} />
     </section>
   );

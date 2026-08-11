@@ -56,49 +56,85 @@ texto faltando não vale uma tela branca para quem está visitando.
 
 ## Deploy
 
-O Easypanel constrói o `Dockerfile` deste repositório e serve o contêiner.
-Sem registry, sem GitHub Actions e **sem token**: o repositório é público, e o
-Easypanel clona direto. Não há segredo nenhum envolvido no deploy.
+**A imagem é construída no GitHub Actions e publicada no GHCR; o Easypanel só
+puxa a imagem pronta.** A VPS não compila nada.
 
-**Create Service → App**, e então:
-
-| Campo | Valor |
-| --- | --- |
-| Source | GitHub → `InteliBlockchain-IBC/ib-club-website`, branch `main` |
-| Build method | Dockerfile |
-| Port | `3000` (container), exposta |
-| Domains | `inteliblockchain.org` e `www.`, com HTTPS |
-
-Na tela do serviço aparece um **Deploy Webhook**. Cadastrando essa URL em
-GitHub → Settings → Webhooks, todo push em `main` reconstrói o site.
-
-**O build precisa de 1 GB de RAM; o site rodando precisa de 18 MB.**
-Os dois números foram medidos, e a distância entre eles é o Parcel
-empacotando o React — não o site.
+Isso não foi a primeira escolha: começamos deixando o Easypanel construir a
+partir do repositório, que tem menos peças. Mas o build é pesado para uma
+máquina pequena — 849 MiB de pico e CPU no talo por quase um minuto — e
+derrubava o resto. Os números explicam a troca:
 
 | | Medido |
 | --- | --- |
-| Build (pico) | 849 MiB — falha abaixo de 1 GB |
+| Build (pico de memória) | 849 MiB — falha abaixo de 1 GB |
 | Contêiner rodando | **17,5 MiB** |
-| Imagem no disco / na rede | 173 MB / 56 MB comprimida |
+| Imagem | 173 MB no disco, **56 MB** na rede |
 
-Uma VPS pequena **roda** o site folgado e pode não conseguir **construí-lo**.
-Se o build morrer com `Aborted (core dumped)`, é isto. Duas saídas: subir a
-máquina para o build, ou construir a imagem fora e só puxar pronta — havia um
-workflow para isso em `c517e76`.
+Construir custa 50× mais que servir. Faz sentido pagar isso no runner do
+GitHub, que é grátis para repositório público, e não na VPS que atende as
+visitas.
 
-O `ENV NODE_OPTIONS=--max-old-space-size=768` no Dockerfile existe por causa
-disso: dentro de um contêiner o V8 dimensiona o heap pela RAM do **host**, não
-pelo limite do contêiner, e sem esse teto ele nem tenta coletar lixo antes de
-estourar. Com o teto, o build passa em 1 GB; sem ele, aborta até com 1 GB.
+### O que o workflow faz
+
+A cada push em `main` (ignorando mudanças só de documentação): constrói a
+imagem, **sobe o contêiner e confere que ele responde** — que o HTML tem
+`#root` e que o bundle referenciado nele é servido de verdade —, e só então
+publica em `ghcr.io/inteliblockchain-ibc/ib-club-website`, com as tags
+`latest` e o SHA do commit. Por fim chama o webhook do Easypanel, se houver.
+
+Nenhum segredo precisa ser criado à mão para publicar: o `GITHUB_TOKEN` que o
+Actions injeta já tem escrita em pacotes.
+
+### Configurar
+
+1. **Deixe o pacote público.** Ele nasce privado. Em Packages →
+   `ib-club-website` → Package settings → Change visibility → Public. Com o
+   repositório já público não há o que proteger, e evita gastar a cota de
+   pacote privado do plano Free da organização (500 MB de armazenamento e
+   1 GB/mês de tráfego — a 56 MB por pull, isso acaba em ~18 deploys).
+2. **No Easypanel:** Create Service → App → **Source: Docker Image** →
+   `ghcr.io/inteliblockchain-ibc/ib-club-website:latest`. Port `3000`
+   exposta, domínios com HTTPS.
+3. **Redeploy automático:** copie o Deploy Webhook da tela do serviço e
+   cadastre em GitHub → Settings → Secrets → Actions como
+   `EASYPANEL_WEBHOOK`. Sem ele o workflow não falha — publica a imagem e
+   avisa no log que o redeploy automático está desligado.
+
+Para poder voltar atrás num deploy, aponte o serviço para a tag
+`sha-<commit>` em vez de `latest`: o workflow publica as duas.
 
 Sobre variáveis: existe **uma**, `PORT`, e o Easypanel injeta sozinha. Sem
-ela o Express usa 3000. Não há banco, segredo nem chamada de API. Se aparecer
-uma segunda variável, ela é a primeira coisa a desconfiar.
+ela o Express usa 3000. Não há banco, segredo nem chamada de API.
 
 ⚠️ O DNS é o trabalho que sobra: enquanto `inteliblockchain.org` estiver
 estacionado na Hostinger, nada disso aparece no domínio. Os registros `A` de
 `@` e `www` precisam apontar para o IP da VPS.
+
+## SEO
+
+A página é montada por React, e isso é um problema de indexação que meta tag
+nenhuma resolve: rastreadores de rede social, de mensageiro e de buscador de
+IA **não executam JavaScript**, e a passada de renderização do Googlebot é
+atrasada e limitada. Para todos eles, uma SPA sem tratamento é uma página em
+branco com um `<script>` dentro.
+
+Por isso o build termina em `scripts/prerender.js`, que renderiza a página
+com `react-dom/server` e grava o HTML pronto. O shell de 824 B virou **27 KB
+com 905 palavras**, e o React apenas hidrata o que já está lá.
+
+**Cada idioma tem URL própria** — `/` e `/en/` —, cada uma canônica de si
+mesma, amarradas por `hreflang` (incluindo `x-default`) no cabeçalho e no
+sitemap. Sem isso a versão em inglês não existe para um buscador. **Não há
+redirecionamento automático** por idioma do navegador: ele atrapalha o
+rastreamento e tira a escolha do visitante. Quem decide é a URL, e o seletor
+da navbar é um link de verdade — é assim que o robô descobre a outra versão.
+
+O `prerender.js` também gera `robots.txt`, `sitemap.xml` com os alternates, e
+os dados estruturados (`Organization` + `WebSite` em JSON-LD) que descrevem o
+clube para o buscador: fundação em 2022, vínculo com o Inteli, redes, contato
+e os temas que ele domina.
+
+O texto de título e descrição de cada idioma fica em `i18n/*.js`, em `seo`.
 
 ## Três coisas que quebram se você não souber
 

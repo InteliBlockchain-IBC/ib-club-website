@@ -80,14 +80,14 @@ export default function Hero() {
   useEffect(() => mountKnot3d(slotRef.current, canvasRef.current), []);
 
   return (
-    <header className="hero" id="top" ref={heroRef}>
+    <section className="hero" id="top" ref={heroRef} aria-labelledby="h-brand">
       <div className="hero__text">
         <p className="hero__kicker">
           <i aria-hidden="true" />
           <span className="label">{t.hero.kicker}</span>
         </p>
 
-        <h1 className="lockup">
+        <h1 className="lockup" id="h-brand">
           <span className="knot" data-slot="marca" aria-hidden="true" ref={slotRef}>
             <canvas className="knot__gl" aria-hidden="true" ref={canvasRef} />
             <span className="knot__stage" ref={stageRef}>
@@ -110,6 +110,6 @@ export default function Hero() {
           </svg>
         </a>
       </div>
-    </header>
+    </section>
   );
 }

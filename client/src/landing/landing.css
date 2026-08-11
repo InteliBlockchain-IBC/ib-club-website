@@ -52,7 +52,8 @@ img{max-width:100%;display:block}
 a{color:inherit}
 h1,h2,h3{margin:0;font-weight:400;text-wrap:balance}
 p{margin:0}
-ul{list-style:none}
+ul,ol{list-style:none}
+address{font-style:normal}
 :focus-visible{outline:2px solid var(--signal);outline-offset:4px}   /* CIANO 4 */
 
 /* ─────────── a malha, desenhada em SVG ─────────── */
@@ -95,6 +96,7 @@ ul{list-style:none}
 .nav__brand{margin-right:auto;display:flex;align-items:center}
 .nav__brand img{height:38px;width:auto}
 .nav__links{display:flex;gap:2.25rem}
+.nav__links a{display:inline-block}
 .nav__links a{
   font-family:var(--display);font-weight:400;font-size:.75rem;
   letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
@@ -208,11 +210,25 @@ ul{list-style:none}
   perspective:900px;
   animation:emerge 1.4s .35s cubic-bezier(.2,.7,.3,1) backwards;
 }
-/* o canvas começa escondido: só aparece depois do primeiro quadro
-   confirmado (gl.getError()===0), nunca antes — ver script no fim do body */
-.knot__gl{display:none;position:absolute;inset:0;width:100%;height:100%}
-.knot--gl .knot__stage{display:none}
-.knot--gl .knot__gl{display:block}
+/* O canvas só aparece depois do primeiro quadro confirmado
+   (gl.getError()===0), nunca antes. A troca é um CRUZAMENTO, não um corte:
+   com `display` não existe meio-termo, e a peça pulava de uma hora para
+   outra quando o Three.js terminava de baixar — que num acesso real é
+   segundos depois do PNG já estar na tela.
+
+   O empilhamento em CSS sai por `visibility` com atraso igual ao da
+   transição: continua visível enquanto cruza e para de compor as 14 camadas
+   depois. Sob prefers-reduced-motion a regra global zera as transições e a
+   troca volta a ser instantânea, que é o certo — ninguém pediu movimento. */
+.knot__gl{
+  position:absolute;inset:0;width:100%;height:100%;
+  opacity:0;transition:opacity .6s ease;
+}
+.knot--gl .knot__gl{opacity:1}
+.knot--gl .knot__stage{
+  opacity:0;visibility:hidden;
+  transition:opacity .6s ease, visibility 0s linear .6s;
+}
 /* extrusão por empilhamento: cópias do PNG oficial deslocadas em Z.
    Sem dependência e sem perder um pixel da arte original — o nó é uma
    forma chapada de espessura constante, que é o caso ideral para isso. */
@@ -221,7 +237,7 @@ ul{list-style:none}
   position:relative;width:100%;height:100%;
   transform-style:preserve-3d;
   transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
-  transition:transform .5s cubic-bezier(.2,.7,.3,1);
+  transition:transform .5s cubic-bezier(.2,.7,.3,1), opacity .6s ease;
 }
 .knot--live .knot__stage{transition:transform .12s linear}
 .knot__stage span{
@@ -370,12 +386,12 @@ ul{list-style:none}
   /* entrada própria — mais lenta e com brilho subindo, diferente do fade
      genérico de 0.6s do resto das seções: esta é a primeira prova visual
      depois da dobra, merece mais peso que um fade padrão */
-  opacity:0;filter:brightness(.4);transform:scale(1.035);
   transition:opacity 1.7s cubic-bezier(.16,.8,.24,1),
              filter 1.7s cubic-bezier(.16,.8,.24,1),
              transform 1.7s cubic-bezier(.16,.8,.24,1);
 }
-.rise.visible .featured{opacity:1;filter:brightness(1);transform:scale(1)}
+.js .featured{opacity:0;filter:brightness(.4);transform:scale(1.035)}
+.js .rise.visible .featured{opacity:1;filter:brightness(1);transform:scale(1)}
 .featured img{display:block;width:100%;height:auto}
 /* de volta ao formato de linha na própria borda — as variações em bolha/
    elipse/cometa soltas dentro do card não funcionaram. Isto é o anel
@@ -506,9 +522,10 @@ ul{list-style:none}
 
 /* ══════════ 3b · FEITO EM HACKATHON — retículo de 1px ══════════ */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hairline)}
+.grid > li{display:flex}
 .project{
   background:var(--ink);padding:clamp(1.4rem,2.4vw,1.9rem);
-  display:flex;flex-direction:column;min-height:12.5rem;
+  display:flex;flex-direction:column;min-height:12.5rem;flex:1;
   text-decoration:none;transition:background .25s;
 }
 .project:hover,.project:focus-visible{background:var(--night)}
@@ -528,7 +545,9 @@ ul{list-style:none}
 @media (max-width:560px){
   .grid{grid-template-columns:1fr}
   /* seis primeiros ficam, o resto só aparece depois do clique */
-  .grid:not(.grid--all) .project:nth-child(n+7){display:none}
+  /* o item da grade agora é o <li>, não o <a> — mirar em .project aqui
+     deixaria de casar, porque ele é sempre o primeiro filho do próprio li */
+  .grid:not(.grid--all) > li:nth-child(n+7){display:none}
   .project-more{
     display:inline-flex;align-items:center;gap:.6rem;margin-top:1.5rem;
     font-family:var(--display);font-weight:700;font-size:.75rem;
@@ -575,13 +594,17 @@ ul{list-style:none}
 
 /* ══════════ 6 · OS NÚMEROS ══════════ */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hairline)}
-.stat{background:var(--ink);padding:clamp(1.75rem,3vw,2.5rem) 1.25rem}
-.stat b{
+.stat{
+  background:var(--ink);padding:clamp(1.75rem,3vw,2.5rem) 1.25rem;
+  /* o HTML exige <dt> antes de <dd>; aqui o valor sobe para cima */
+  display:flex;flex-direction:column-reverse;align-items:flex-start;
+}
+.stat dd{
   display:block;font-family:var(--display);font-weight:300;
   font-size:clamp(2.4rem,5.4vw,4rem);line-height:1;
   letter-spacing:.01em;margin-bottom:.85rem;font-variant-numeric:tabular-nums;
 }
-.stat span{
+.stat dt{
   font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);
 }
 @media (max-width:820px){.stats{grid-template-columns:1fr 1fr}}
@@ -593,7 +616,7 @@ ul{list-style:none}
   padding:1.9rem 0;border-top:1px solid var(--hairline);
 }
 .milestone:last-of-type{border-bottom:1px solid var(--hairline)}
-.milestone b{
+.milestone time{
   font-family:var(--display);font-weight:300;font-size:1.75rem;
   letter-spacing:.06em;color:var(--text-3);line-height:1.2;
   font-variant-numeric:tabular-nums;
@@ -676,13 +699,18 @@ ul{list-style:none}
 @media (max-width:780px){.footer__top{grid-template-columns:1fr}}
 
 /* ─────────── entrada das seções ─────────── */
-.rise{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
-.rise.visible{opacity:1;transform:none}
+/* Presas ao `.js` da raiz de propósito. O HTML é pré-renderizado, então sem
+   JavaScript ninguém adiciona `.visible` — e uma página que começa
+   `opacity:0` ficaria em branco justamente para quem não executa script,
+   que é quem mais depende do HTML estático. Com a guarda, a ausência de JS
+   entrega a página inteira, só sem a animação. */
+.js .rise{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.js .rise.visible{opacity:1;transform:none}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none !important;transition:none !important}
   #mesh line{stroke-dashoffset:0}
-  .rise{opacity:1;transform:none}
+  .js .rise,.js .featured{opacity:1;transform:none;filter:none}
   html{scroll-behavior:auto}
   /* a animação para (regra acima), mas sem ela o trilho ficaria parado no
      translateX(0) com as últimas fotos fora da vista e sem jeito de

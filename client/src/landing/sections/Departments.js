@@ -10,8 +10,8 @@ export default function Departments() {
   const { t } = useTranslation();
   const s = t.departments;
   return (
-    <section className="section rise" id="departments">
-      <SectionHeader label={s.label} title={s.title} prose={s.prose} />
+    <section className="section rise" id="departments" aria-labelledby="h-departments">
+      <SectionHeader id="h-departments" label={s.label} title={s.title} prose={s.prose} />
       <div className="departments">
         {DEPARTMENTS.map((a) => (
           <div className={`frame ${a.frame} department`} key={a.id}>

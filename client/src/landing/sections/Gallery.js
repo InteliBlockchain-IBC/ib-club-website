@@ -30,8 +30,8 @@ export default function Gallery() {
   const { t } = useTranslation();
   const s = t.photos;
   return (
-    <section className="section rise" id="photos">
-      <SectionHeader label={s.label} title={s.title} />
+    <section className="section rise" id="photos" aria-labelledby="h-photos">
+      <SectionHeader id="h-photos" label={s.label} title={s.title} />
       <div className="gallery">
         <div className="gallery__track">
           {PHOTOS.map((f) => <Foto photo={f} text={s.items[f.id]} key={f.id} />)}

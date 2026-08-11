@@ -38,8 +38,8 @@ export default function Partnership() {
   const { t } = useTranslation();
   const s = t.partnership;
   return (
-    <section className="section rise" id="projects">
-      <SectionHeader label={s.label} title={s.title} prose={s.prose} />
+    <section className="section rise" id="projects" aria-labelledby="h-partnership">
+      <SectionHeader id="h-partnership" label={s.label} title={s.title} prose={s.prose} />
 
       {/* MOLDURA 6 de 7. Preenchimento gelo obrigatório: a marca da Alphractal
           é um monograma azul-escuro que some sobre a tinta da página. */}

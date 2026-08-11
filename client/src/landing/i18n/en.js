@@ -12,7 +12,19 @@ export default {
   language: 'en',
   switchTo: 'Ver em português',
 
-  nav: { projects: 'Projects', departments: 'Teams', history: 'History' },
+  seo: {
+    title: 'Inteli Blockchain — university blockchain club, hackathons and web3 projects',
+    description: 'Student blockchain club at Inteli, São Paulo, Brazil. 25 projects delivered since 2022 across Stellar, Solana, Bitcoin, Celo and Chiliz, with hackathons, weekly classes and web3 ecosystem partnerships.',
+    imageAlt: 'Inteli Blockchain members gathered in an auditorium at Inteli',
+  },
+
+  nav: {
+    label: 'Page sections',
+    homePath: '/en/',
+    projects: 'Projects',
+    departments: 'Teams',
+    history: 'History',
+  },
 
   hero: {
     kicker: 'Student blockchain club · Inteli · São Paulo · since 2022',
