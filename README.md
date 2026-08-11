@@ -144,21 +144,25 @@ pendente.
 
 ## Contribuir
 
-A `main` é protegida por ruleset: **não aceita push direto**. Toda mudança
-entra por pull request, com uma aprovação — e o GitHub não deixa o autor
-aprovar o próprio PR. Force push e exclusão da branch estão bloqueados.
-
-O ruleset **não tem lista de bypass**, de propósito: com bypass de admin ele
-não protegeria nada, porque quase todo mundo com escrita aqui é admin.
+Branch a partir da `main`, PR para a `main`. Conventional commits, com a
+descrição em português.
 
 ```bash
 git switch -c feat/minha-mudanca
-# ... commits ...
 git push -u origin feat/minha-mudanca
 gh pr create --base main
 ```
 
-Conventional commits, com a descrição em português.
+**A `main` não está protegida hoje** — aceita push direto, e quem abre um PR
+consegue mergear sozinho. É convenção, não regra imposta.
+
+Se um dia quiser que seja regra, agora dá: ruleset e branch protection não
+funcionavam enquanto o repositório era privado no plano Free da organização.
+Ficaria em Settings → Rules, exigindo PR com uma aprovação (o GitHub já
+impede o autor de aprovar o próprio) e bloqueando force push. Uma ressalva:
+admin de repositório passa por cima de ruleset por padrão, e quase todo mundo
+com escrita aqui é admin — então também precisaria mexer na lista de bypass
+ou na quantidade de admins.
 
 ## Licença
 
