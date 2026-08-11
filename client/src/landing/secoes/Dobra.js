@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import montarNo3d from '../no3d';
+import Realce from '../Realce';
+import { useTextos } from '../textos';
 
 /* A dobra. O nó é um SLOT (SPEC §7): o <canvas> e a extrusão por
    empilhamento em CSS ocupam o mesmo espaço, e o canvas só assume depois
@@ -9,6 +11,7 @@ import montarNo3d from '../no3d';
 const CAMADAS = Array.from({ length: 14 }, (_, i) => i);
 
 export default function Dobra() {
+  const { t } = useTextos();
   const dobraRef = useRef(null);
   const slotRef = useRef(null);
   const palcoRef = useRef(null);
@@ -81,9 +84,7 @@ export default function Dobra() {
       <div className="dobra__texto">
         <p className="dobra__kicker">
           <i aria-hidden="true" />
-          <span className="rotulo">
-            Liga estudantil de blockchain · Inteli · São Paulo · desde 2022
-          </span>
+          <span className="rotulo">{t.dobra.kicker}</span>
         </p>
 
         <h1 className="lockup">
@@ -99,13 +100,11 @@ export default function Dobra() {
           </span>
         </h1>
 
-        <p className="dobra__tese">
-          O clube universitário que o <b>ecossistema web3</b> chama.
-        </p>
+        <p className="dobra__tese"><Realce partes={t.dobra.tese} /></p>
 
         {/* MOLDURA 1 de 5 — a ação principal leva para dentro da prova */}
         <a className="mold mold--gelo acao" href="#projetos">
-          Ver os 25 projetos
+          {t.dobra.acao}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
             <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>

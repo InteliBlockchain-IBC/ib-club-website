@@ -1,6 +1,7 @@
 import React from 'react';
 import Cabeca from '../Cabeca';
 import { PARCERIA, CONTATO } from '../dados';
+import { useTextos } from '../textos';
 import no from '../assets/marca-gradiente.png';
 
 /* A marca da Alphractal fica inline e não como <img>: o viewBox abaixo é
@@ -34,12 +35,11 @@ function MarcaAlphractal() {
 }
 
 export default function Parceria() {
+  const { t } = useTextos();
+  const s = t.parceria;
   return (
     <section className="secao sobe" id="projetos">
-      <Cabeca rotulo="Com parceiro" titulo={<>Onde o clube tem <b>parceria</b></>}>
-        Hoje é um projeto — o resto do que o clube constrói nasce em hackathon
-        ou dentro de casa.
-      </Cabeca>
+      <Cabeca rotulo={s.rotulo} titulo={s.titulo} corpo={s.corpo} />
 
       {/* MOLDURA 6 de 7. Preenchimento gelo obrigatório: a marca da Alphractal
           é um monograma azul-escuro que some sobre a tinta da página. */}
@@ -54,15 +54,15 @@ export default function Parceria() {
           <span className="card-parceria__x">×</span>
           <MarcaAlphractal />
         </div>
-        <h3>{PARCERIA.nome}</h3>
-        <p>{PARCERIA.descricao}</p>
-        <span className="card-parceria__ir">Ver no GitHub →</span>
+        <h3>{s.projeto.nome}</h3>
+        <p>{s.projeto.descricao}</p>
+        <span className="card-parceria__ir">{s.ir}</span>
       </a>
 
       {/* CTA de contato: só aqui na página, consequência do que acabou de ser
           mostrado — não uma captação. Padrão .secundario, não uma 2ª moldura. */}
       <p className="parceria__contato">
-        Quer construir com o clube?
+        {s.contato}
         <a className="secundario" href={`mailto:${CONTATO}`}>{CONTATO}</a>
       </p>
     </section>

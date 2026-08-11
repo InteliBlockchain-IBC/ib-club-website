@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './landing.css';
+import { ProvedorDeIdioma } from './textos';
 
 import Malha from './secoes/Malha';
 import Navbar from './secoes/Navbar';
@@ -37,7 +38,7 @@ export default function Landing() {
   }, []);
 
   return (
-    <>
+    <ProvedorDeIdioma>
       <Malha />
       <div className="pagina">
         <Navbar />
@@ -53,6 +54,6 @@ export default function Landing() {
         <Parceiros />
         <Rodape />
       </div>
-    </>
+    </ProvedorDeIdioma>
   );
 }
