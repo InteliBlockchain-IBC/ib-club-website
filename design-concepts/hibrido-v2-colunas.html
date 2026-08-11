@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inteli Blockchain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   INTELI BLOCKCHAIN — landing híbrida
+   Implementa SPEC-landing-hibrida.md. Regras que a folha obedece:
+
+   · A malha governa. Montserrat 300, retículo de 1px, hairline.
+   · A moldura é componente, não sistema: 5 lugares e mais nenhum.
+   · Canto: 0 no painel da malha, 20 no card de moldura. Nada entre.
+   · Montserrat 900 existe só no nome das áreas.
+   · Ciano tem 5 usos contáveis. Estão marcados no código: CIANO 1..5
+   · Preenchimento chapado só nos 4 cards de área — a cor é a taxonomia.
+   ══════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* as oito do Guia de Estilos 2026, sem invenção */
+  --tinta:    #081119;
+  --noite:    #13293d;
+  --aco:      #247ba0;
+  --profundo: #006494;   /* não usado na v1 — consta para a paleta ficar inteira */
+  --sinal:    #1b98e0;
+  --gelo:     #e8f1f2;
+  --magenta:  #9f0e5d;
+  --vinho:    #380f2e;   /* paleta Educacional — fora desta página */
+
+  /* neutros = gelo em alfa sobre a tinta, nunca cinza puro.
+     .55 é o piso: .40 dá 3,49:1 e reprova em AA. */
+  --texto:    var(--gelo);
+  --texto-2:  rgba(232,241,242,.72);
+  --texto-3:  rgba(232,241,242,.58);
+  --fio:      rgba(232,241,242,.11);
+  --fio-2:    rgba(232,241,242,.22);
+
+  --display:'Montserrat', system-ui, sans-serif;
+  --corpo:'Open Sans', system-ui, sans-serif;
+
+  --borda-mold: 3px;
+  --canto-mold: 20px;
+  --desloc: 14px;                  /* o mesmo nos 5, para o encaixe ler como regra */
+
+  --margem: clamp(1.25rem, 5vw, 6rem);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--tinta);color:var(--texto);
+  font-family:var(--corpo);
+  font-size:clamp(.9375rem,.32vw + .87rem,1.0625rem);
+  line-height:1.75;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:400;text-wrap:balance}
+p{margin:0}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--sinal);outline-offset:4px}   /* CIANO 4 */
+
+/* ─────────── a malha, desenhada em SVG ─────────── */
+#malha{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#malha line{
+  stroke:var(--gelo);stroke-width:1;
+  stroke-dasharray:var(--c);stroke-dashoffset:var(--c);
+  animation:tracar 1.1s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes tracar{to{stroke-dashoffset:0}}
+.pagina{position:relative;z-index:1}
+
+/* ─────────── tipografia ─────────── */
+.rotulo{
+  font-family:var(--display);font-weight:700;
+  font-size:.6875rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--texto-3);
+}
+.titulo{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(1.5rem,3.4vw,2.5rem);line-height:1.2;
+  letter-spacing:.035em;text-transform:uppercase;max-width:22ch;
+}
+.titulo b{font-weight:700}
+.corpo{color:var(--texto-2);max-width:60ch}
+
+/* ─────────── navegação ─────────── */
+.nav{
+  position:sticky;top:0;z-index:40;
+  background:rgba(8,17,25,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--fio);
+}
+.nav__cx{
+  max-width:90rem;margin:0 auto;padding:1rem var(--margem);
+  display:flex;align-items:center;gap:2.5rem;
+}
+.nav__marca{margin-right:auto;display:flex;align-items:center}
+.nav__marca img{height:38px;width:auto}
+.nav__itens{display:flex;gap:2.25rem}
+.nav__itens a{
+  font-family:var(--display);font-weight:400;font-size:.75rem;
+  letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
+  color:var(--texto-2);transition:color .2s;
+}
+.nav__itens a:hover{color:var(--texto)}
+@media (max-width:900px){.nav__itens{display:none}}
+
+/* ══════════ A MOLDURA — componente, 5 usos ══════════ */
+.mold{
+  border:var(--borda-mold) solid var(--gelo);
+  border-radius:var(--canto-mold);
+  box-shadow:var(--desloc) var(--desloc) 0 0 var(--magenta);
+  transition:transform .24s cubic-bezier(.2,.7,.3,1),
+             box-shadow .24s cubic-bezier(.2,.7,.3,1);
+}
+.mold--ciano{box-shadow:var(--desloc) var(--desloc) 0 0 var(--sinal)}
+/* preenchimento chapado: só aqui na página inteira */
+.mold--aco  {background:var(--aco)}
+.mold--noite{background:var(--noite)}
+.mold--vinho{background:var(--magenta)}
+.mold--gelo {background:var(--gelo);border-color:var(--tinta);color:var(--tinta)}
+/* a assinatura: encaixa na própria sombra */
+.mold:is(:hover,:focus-visible){
+  transform:translate(var(--desloc),var(--desloc));
+  box-shadow:0 0 0 0 var(--magenta);
+}
+.mold--ciano:is(:hover,:focus-visible){box-shadow:0 0 0 0 var(--sinal)}
+
+/* ─────────── o painel da malha — canto 0 ─────────── */
+.painel{
+  background:var(--noite);border-radius:0;
+  box-shadow:inset 0 0 0 1px var(--fio-2);
+  padding:clamp(1.6rem,3vw,2.4rem);
+}
+
+/* ─────────── seção ─────────── */
+.secao{
+  max-width:90rem;margin:0 auto;
+  padding:clamp(4rem,9vh,7rem) var(--margem);
+}
+.secao + .secao{border-top:1px solid var(--fio)}
+.cabeca{display:grid;gap:1.1rem;margin-bottom:clamp(2.5rem,6vh,4rem)}
+.cabeca > .corpo{margin-top:.4rem}
+
+/* ══════════ 1 · DOBRA ══════════ */
+.dobra{
+  position:relative;max-width:90rem;margin:0 auto;
+  padding:clamp(4rem,12vh,8rem) var(--margem) clamp(4rem,10vh,7rem);
+  min-height:min(88vh,52rem);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.dobra__texto{display:flex;flex-direction:column;min-width:0}
+/* duas colunas: identidade à esquerda, mensagem e ação à direita */
+.dobra__duas{
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:clamp(2rem,5vw,5rem);align-items:start;
+  padding-top:clamp(1rem,3vh,2rem);
+}
+.dobra__duas > div{display:flex;flex-direction:column;min-width:0}
+.dobra__duas .dobra__tese{margin-bottom:0}
+.dobra__duas .dobra__lead{margin-bottom:clamp(2rem,4vh,2.5rem);padding-top:.4em}
+@media (max-width:900px){
+  .dobra__duas{grid-template-columns:1fr;gap:clamp(1.5rem,4vh,2.5rem)}
+}
+/* SLOT DA MARCA — hoje segura o PNG do nó; amanhã recebe a versão
+   interativa em 3D sem que a dobra precise ser refeita (spec §7). */
+.no-slot{
+  display:block;flex:none;width:clamp(4.5rem,11vw,9rem);aspect-ratio:1/1;
+  perspective:900px;
+  animation:surgir 1.4s .35s cubic-bezier(.2,.7,.3,1) backwards;
+}
+/* extrusão por empilhamento: cópias do PNG oficial deslocadas em Z.
+   Sem dependência e sem perder um pixel da arte original — o nó é uma
+   forma chapada de espessura constante, que é o caso ideral para isso. */
+.no-slot__palco{
+  display:block;                 /* span inline ignora width/height */
+  position:relative;width:100%;height:100%;
+  transform-style:preserve-3d;
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  transition:transform .5s cubic-bezier(.2,.7,.3,1);
+}
+.no-slot--vivo .no-slot__palco{transition:transform .12s linear}
+.no-slot__palco span{
+  position:absolute;inset:0;
+  background:url(assets/marca-gradiente.png) center/contain no-repeat;
+  transform:translateZ(calc(var(--i) * -1.1px));
+  filter:brightness(calc(1 - var(--i) * .052));
+}
+.no-slot__palco span:first-child{filter:none}
+@keyframes surgir{from{opacity:0;transform:scale(.85) rotate(-10deg)}}
+
+/* o lockup: nó + nome, como no logotipo */
+.lockup{display:flex;align-items:center;gap:clamp(.9rem,2vw,1.6rem)}
+
+.dobra__kicker{display:flex;align-items:center;gap:1rem;margin-bottom:clamp(2.5rem,6vh,4rem)}
+.dobra__kicker i{width:9px;height:9px;background:var(--sinal);flex:none}  /* CIANO 1 */
+/* ── O WORDMARK: nó + nome como um lockup só, para o nome do clube não
+      aparecer três vezes na mesma tela (navbar, nó e texto).
+      O glitch usa o ciano e o magenta do guia como canais de deslocamento,
+      em vez do vermelho/ciano de monitor que é o clichê da categoria. ── */
+.dobra h1{
+  font-family:var(--display);text-transform:uppercase;
+  margin-bottom:clamp(1.5rem,4vh,2.25rem);line-height:.92;
+}
+.marca-nome{
+  position:relative;display:inline-block;
+  color:var(--gelo);
+  text-shadow:0 0 26px rgba(27,152,224,.28), 0 0 2px rgba(232,241,242,.5);
+}
+.marca-nome .leve{
+  display:block;font-weight:300;letter-spacing:.34em;
+  font-size:clamp(.85rem,2.1vw,1.7rem);margin-bottom:.1em;
+  padding-left:.2em;
+}
+.marca-nome .forte{
+  display:block;font-weight:700;letter-spacing:-.005em;
+  font-size:clamp(2.2rem,7.4vw,6rem);
+}
+
+/* as duas cópias deslocadas — só existem durante o glitch */
+.marca-nome::before,.marca-nome::after{
+  content:attr(data-nome);position:absolute;inset:0;
+  font-weight:700;letter-spacing:-.005em;
+  font-size:clamp(2.2rem,7.4vw,6rem);line-height:.92;
+  top:auto;bottom:0;left:0;
+  opacity:0;pointer-events:none;text-shadow:none;
+}
+.marca-nome::before{color:var(--sinal)}
+.marca-nome::after{color:var(--magenta)}
+
+/* entrada: um glitch mais forte, uma vez */
+.marca-nome{animation:entra-nome .5s .15s cubic-bezier(.2,.7,.3,1) backwards}
+@keyframes entra-nome{from{opacity:0;transform:translateY(10px)}}
+
+/* periódico: o ruído ocupa só os primeiros 4% de um ciclo de 11s,
+   então dispara uma vez a cada onze segundos e some */
+.dobra--visivel .marca-nome::before{animation:fx-ciano 11s 1.2s infinite steps(1,end)}
+.dobra--visivel .marca-nome::after{animation:fx-magenta 11s 1.2s infinite steps(1,end)}
+.dobra--visivel .marca-nome .forte{animation:fx-corpo 11s 1.2s infinite steps(1,end)}
+
+@keyframes fx-ciano{
+  0%,100%{opacity:0;transform:none;clip-path:inset(0 0 100% 0)}
+  1%  {opacity:.9;transform:translate(-6px,-2px);clip-path:inset(12% 0 62% 0)}
+  2%  {opacity:.9;transform:translate(5px,1px);clip-path:inset(58% 0 22% 0)}
+  3%  {opacity:.9;transform:translate(-3px,2px);clip-path:inset(34% 0 44% 0)}
+  4%  {opacity:0}
+}
+@keyframes fx-magenta{
+  0%,100%{opacity:0;transform:none;clip-path:inset(0 0 100% 0)}
+  1%  {opacity:.85;transform:translate(6px,2px);clip-path:inset(66% 0 8% 0)}
+  2%  {opacity:.85;transform:translate(-5px,-1px);clip-path:inset(20% 0 56% 0)}
+  3%  {opacity:.85;transform:translate(4px,-2px);clip-path:inset(46% 0 30% 0)}
+  4%  {opacity:0}
+}
+@keyframes fx-corpo{
+  0%,100%{transform:none}
+  1%{transform:translateX(-2px)}
+  2%{transform:translateX(3px)}
+  3%{transform:translateX(-1px)}
+  4%{transform:none}
+}
+
+/* a tese, logo abaixo do nome */
+.dobra__tese{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(1rem,2.2vw,1.5rem);line-height:1.45;
+  letter-spacing:.05em;text-transform:uppercase;text-wrap:balance;
+  color:var(--texto-2);max-width:34ch;
+  margin-bottom:clamp(2rem,5vh,2.75rem);
+}
+.dobra__tese b{font-weight:700;color:var(--texto)}
+.dobra__lead{
+  color:var(--texto-2);max-width:56ch;
+  padding-left:clamp(0rem,2vw,2rem);border-left:1px solid var(--fio-2);
+  margin-bottom:clamp(2.5rem,6vh,3.5rem);
+}
+.dobra__lead strong{color:var(--texto);font-weight:600}
+
+/* MOLDURA 1 · a ação principal — leva para dentro da prova */
+.acao{
+  align-self:flex-start;display:inline-flex;align-items:center;gap:.9rem;
+  font-family:var(--display);font-weight:700;
+  font-size:.8125rem;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;padding:1rem 1.6rem;
+}
+.acao svg{width:1.1em;height:1.1em;flex:none}
+@media (max-width:900px){
+  .dobra{min-height:0;padding-top:3.5rem}
+  /* no celular não sobra coluna para o nó ser elemento próprio: ele volta a
+     marca d'água, senão atravessa o parágrafo e come a legibilidade */
+  .no-slot{width:clamp(3.4rem,13vw,5rem)}
+  /* o kicker é longo: com .28em de tracking ele encostava na margem direita */
+  .dobra__kicker .rotulo{letter-spacing:.16em}
+}
+
+/* ══════════ 2 · O RITMO ══════════ */
+.ritmo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,2.5rem)}
+.ritmo h3{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(1.3rem,2.6vw,1.9rem);letter-spacing:.04em;
+  text-transform:uppercase;margin:1.15rem 0 1rem;
+}
+.ritmo p{color:var(--texto-2)}
+@media (max-width:780px){.ritmo{grid-template-columns:1fr}}
+
+/* ══════════ 3 · OS PROJETOS — retículo de 1px ══════════ */
+.reticulo{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--fio)}
+.proj{
+  background:var(--tinta);padding:clamp(1.4rem,2.4vw,1.9rem);
+  display:flex;flex-direction:column;min-height:12.5rem;
+  text-decoration:none;transition:background .25s;
+}
+.proj:hover,.proj:focus-visible{background:var(--noite)}
+.proj h3{
+  font-family:var(--display);font-weight:700;font-size:1.1rem;
+  letter-spacing:.06em;text-transform:uppercase;margin:1rem 0 .7rem;
+  transition:color .2s;
+}
+.proj:hover h3{color:var(--sinal)}                                   /* CIANO 3 */
+.proj p{font-size:.875rem;line-height:1.65;color:var(--texto-2);margin-bottom:1.25rem}
+.proj__ir{
+  margin-top:auto;font-family:var(--display);font-weight:700;
+  font-size:.6875rem;letter-spacing:.2em;text-transform:uppercase;color:var(--texto-3);
+}
+@media (max-width:900px){.reticulo{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.reticulo{grid-template-columns:1fr}}
+
+.secundario{
+  display:inline-flex;align-items:center;gap:.8rem;margin-top:2.5rem;
+  font-family:var(--display);font-weight:700;
+  font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
+  text-decoration:none;color:var(--texto);
+  padding-bottom:.55rem;border-bottom:1px solid var(--sinal);        /* CIANO 2 */
+  transition:gap .22s;
+}
+.secundario:hover{gap:1.35rem}
+.secundario svg{width:1.1em;height:1.1em;flex:none}
+
+/* ══════════ 4 · AS QUATRO ÁREAS — MOLDURAS 2 a 5 ══════════ */
+.areas{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(1.5rem,3vw,2.25rem);
+  padding-right:var(--desloc);padding-bottom:var(--desloc);
+}
+.area{padding:1.7rem 1.5rem 1.8rem;display:flex;flex-direction:column;min-height:14rem}
+.area__ord{
+  font-family:var(--display);font-weight:300;font-size:2.2rem;
+  line-height:1;opacity:.5;
+}
+/* o único Montserrat 900 da página inteira */
+.area h3{
+  font-family:var(--display);font-weight:900;font-size:1.15rem;
+  letter-spacing:-.01em;text-transform:uppercase;margin:1.1rem 0 .6rem;
+}
+.area p{font-size:.875rem;line-height:1.6;margin-top:auto}
+.mold--aco   p,.mold--vinho p{color:rgba(232,241,242,.88)}
+.mold--gelo  p{color:rgba(8,17,25,.76)}
+.mold--noite p{color:var(--texto-2)}
+@media (max-width:960px){.areas{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.areas{grid-template-columns:1fr}}
+
+/* ══════════ 6 · OS NÚMEROS ══════════ */
+.numeros{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--fio)}
+.numero{background:var(--tinta);padding:clamp(1.75rem,3vw,2.5rem) 1.25rem}
+.numero b{
+  display:block;font-family:var(--display);font-weight:300;
+  font-size:clamp(2.4rem,5.4vw,4rem);line-height:1;
+  letter-spacing:.01em;margin-bottom:.85rem;font-variant-numeric:tabular-nums;
+}
+.numero span{
+  font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--texto-3);
+}
+@media (max-width:820px){.numeros{grid-template-columns:1fr 1fr}}
+
+/* ══════════ 7 · LINHA DO TEMPO ══════════ */
+.marco{
+  display:grid;grid-template-columns:7rem minmax(0,1fr);
+  gap:clamp(1rem,4vw,3rem);
+  padding:1.9rem 0;border-top:1px solid var(--fio);
+}
+.marco:last-of-type{border-bottom:1px solid var(--fio)}
+.marco b{
+  font-family:var(--display);font-weight:300;font-size:1.75rem;
+  letter-spacing:.06em;color:var(--texto-3);line-height:1.2;
+  font-variant-numeric:tabular-nums;
+}
+.marco--atual b{color:var(--sinal)}                                  /* CIANO 5 */
+.marco ul{display:flex;flex-wrap:wrap;gap:.4rem 1.75rem;align-self:center}
+.marco li{font-size:.9375rem;color:var(--texto-2)}
+@media (max-width:640px){.marco{grid-template-columns:1fr;gap:.75rem}}
+
+/* ══════════ 8 · PARCEIROS ══════════ */
+/* carrossel: trilho duplicado rodando em loop; os logos ficam em P&B e
+   apagados, e voltam à cor cheia sob o ponteiro. O nome aparece numa
+   moldura ao passar o mouse, e o tile inteiro é o link para o parceiro. */
+.carrossel{
+  position:relative;overflow:hidden;
+  padding-block:1.25rem 4.5rem;         /* espaço para a moldura do nome */
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.carrossel__trilho{
+  display:flex;width:max-content;gap:clamp(2rem,5vw,4rem);
+  animation:desfilar 42s linear infinite;
+}
+.carrossel:hover .carrossel__trilho,
+.carrossel:focus-within .carrossel__trilho{animation-play-state:paused}
+@keyframes desfilar{to{transform:translateX(-50%)}}
+
+/* os arquivos já vêm normalizados por peso óptico, em tiles de 2:1 —
+   aqui basta exibir o tile inteiro no tamanho certo */
+.parceiro{
+  position:relative;flex:none;display:grid;place-items:center;
+  width:clamp(7.5rem,11.5vw,10rem);aspect-ratio:2/1;
+  filter:grayscale(1);opacity:.72;text-decoration:none;
+  transition:filter .3s ease,opacity .3s ease,transform .3s ease;
+}
+.parceiro img{width:100%;height:100%;object-fit:contain}
+.parceiro:is(:hover,:focus-visible){filter:none;opacity:1;transform:scale(1.06)}
+
+/* a moldura do nome — mesmos ingredientes do componente: borda 3,
+   canto 20, sombra sólida deslocada */
+.parceiro__nome{
+  position:absolute;top:calc(100% + .5rem);left:50%;
+  transform:translateX(-50%) translateY(6px);
+  opacity:0;pointer-events:none;white-space:nowrap;
+  background:var(--gelo);color:var(--tinta);
+  border:3px solid var(--tinta);border-radius:20px;
+  box-shadow:8px 8px 0 0 var(--magenta);
+  font-family:var(--display);font-weight:700;font-size:.6875rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:.5rem .95rem;
+  filter:grayscale(0);
+  transition:opacity .22s ease,transform .22s cubic-bezier(.2,.7,.3,1);
+}
+.parceiro:is(:hover,:focus-visible) .parceiro__nome{
+  opacity:1;transform:translateX(-50%) translateY(0);
+}
+
+/* ══════════ 9 · RODAPÉ ══════════ */
+.rodape{
+  border-top:1px solid var(--fio-2);max-width:90rem;margin:0 auto;
+  padding:clamp(3.5rem,7vh,5.5rem) var(--margem) 3rem;
+}
+.rodape__topo{
+  display:grid;grid-template-columns:minmax(0,1.5fr) repeat(2,minmax(0,1fr));
+  gap:clamp(1.5rem,4vw,3.5rem);padding-bottom:3rem;
+}
+.rodape__missao{color:var(--texto-2);max-width:40ch;margin-top:1.35rem;font-size:.9375rem}
+.rodape h4{
+  font-family:var(--display);font-weight:700;font-size:.6875rem;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--texto-3);margin-bottom:1.15rem;
+}
+.rodape ul{display:grid;gap:.65rem}
+.rodape ul a{text-decoration:none;font-size:.9375rem;color:var(--texto-2);transition:color .2s}
+.rodape ul a:hover{color:var(--texto)}
+.rodape__base{
+  border-top:1px solid var(--fio);padding-top:1.75rem;
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
+  font-size:.8125rem;color:var(--texto-3);
+}
+@media (max-width:780px){.rodape__topo{grid-template-columns:1fr}}
+
+/* ─────────── entrada das seções ─────────── */
+.sobe{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.sobe.visivel{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  #malha line{stroke-dashoffset:0}
+  .sobe{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+/* sem ponteiro a moldura fica em repouso: colapsar a sombra esconderia
+   justamente o que define o componente */
+</style>
+</head>
+<body>
+
+<svg id="malha" aria-hidden="true"></svg>
+
+<div class="pagina">
+
+<nav class="nav">
+  <div class="nav__cx">
+    <a class="nav__marca" href="#topo" aria-label="Inteli Blockchain — início">
+      <img src="assets/logo-horizontal-marca.png" alt="Inteli Blockchain">
+    </a>
+    <div class="nav__itens">
+      <a href="#projetos">Projetos</a>
+      <a href="#areas">Áreas</a>
+      <a href="#historia">História</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ 1 · DOBRA ══════════ -->
+<header class="dobra" id="topo">
+  <div class="dobra__texto">
+  <p class="dobra__kicker">
+    <i aria-hidden="true"></i>
+    <span class="rotulo">Liga estudantil de blockchain · Inteli · São Paulo · desde 2022</span>
+  </p>
+
+  <h1 class="lockup">
+      <span class="no-slot" data-slot="marca" aria-hidden="true">
+        <span class="no-slot__palco">
+          <span style="--i:0"></span>
+          <span style="--i:1"></span>
+          <span style="--i:2"></span>
+          <span style="--i:3"></span>
+          <span style="--i:4"></span>
+          <span style="--i:5"></span>
+          <span style="--i:6"></span>
+          <span style="--i:7"></span>
+          <span style="--i:8"></span>
+          <span style="--i:9"></span>
+          <span style="--i:10"></span>
+          <span style="--i:11"></span>
+          <span style="--i:12"></span>
+          <span style="--i:13"></span>
+        </span>
+      </span>
+      <span class="marca-nome" data-nome="Blockchain">
+        <span class="leve">inteli</span>
+        <span class="forte">Blockchain</span>
+      </span>
+  </h1>
+
+  <div class="dobra__duas">
+    <div>
+  <p class="dobra__tese">
+    O clube universitário que o <b>ecossistema web3</b> chama.
+  </p>
+    </div>
+    <div>
+  <p class="dobra__lead">
+    A liga de blockchain do Inteli, em São Paulo. Desde 2022 são
+    <strong>25 projetos entregues</strong> — em hackathon pelo Brasil e pela
+    América Latina, e em ciclo interno — rodando em Stellar, Solana, Bitcoin,
+    Celo e Chiliz, ao lado de Ethereum Brasil, Chainlink Labs e Starknet
+    Foundation.
+  </p>
+  <!-- MOLDURA 1 de 5 -->
+  <a class="mold mold--gelo acao" href="#projetos">
+    Ver os 25 projetos
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+    </div>
+  </div>
+
+
+
+  </div>
+
+</header>
+
+<!-- ══════════ 2 · QUEM CONSTRÓI ══════════ -->
+<section class="secao sobe">
+  <div class="cabeca">
+    <p class="rotulo">Quem constrói</p>
+    <h2 class="titulo">Universitários que <b>entregam</b></h2>
+    <p class="corpo">
+      O clube é feito de alunos do Inteli que constroem de verdade — em
+      competição e em casa. As duas frentes se alimentam: o que a gente aprende
+      no hackathon volta para o ciclo interno, e o que amadurece internamente
+      chega mais pronto na próxima competição.
+    </p>
+  </div>
+
+  <div class="ritmo">
+    <div class="painel">
+      <p class="rotulo">Em competição</p>
+      <h3>Hackathons</h3>
+      <p>
+        Os membros competem em hackathons no Brasil e fora dele — ETHSamba,
+        Meridian da Stellar, ETH Belgrade, entre outros. O que nasce em três dias
+        de maratona fica aberto no GitHub depois, não morre com a premiação.
+      </p>
+    </div>
+    <div class="painel">
+      <p class="rotulo">Dentro do clube</p>
+      <h3>Projetos internos</h3>
+      <p>
+        Em paralelo rodam os projetos do próprio clube, com termo de abertura,
+        ciclo de um mês e acompanhamento semanal. É de onde saem o programa de
+        formação e o material aberto que a gente publica.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 3 · OS PROJETOS ══════════ -->
+<section class="secao sobe" id="projetos">
+  <div class="cabeca">
+    <p class="rotulo">Entregas</p>
+    <h2 class="titulo">O que os membros <b>construíram</b></h2>
+    <p class="corpo">
+      Doze dos vinte e cinco, em seis redes diferentes. Todos com código
+      aberto e link direto para o repositório.
+    </p>
+  </div>
+
+  <div class="reticulo">
+    <a class="proj" href="https://github.com/DeVolt-ETHSamba" target="_blank" rel="noopener">
+      <p class="rotulo">Energia · ETHSamba</p>
+      <h3>DeVolt</h3>
+      <p>Marketplace descentralizado que conecta produtores e consumidores de energia, com negociação direta e melhor aproveitamento de fontes renováveis.</p>
+      <span class="proj__ir">GitHub →</span>
+    </a>
+    <a class="proj" href="https://github.com/CarbonVerifier" target="_blank" rel="noopener">
+      <p class="rotulo">Sustentabilidade</p>
+      <h3>CarbonTracker</h3>
+      <p>IoT e blockchain para monitorar emissões de carbono e tornar a compensação transparente e auditável.</p>
+      <span class="proj__ir">GitHub →</span>
+    </a>
+    <a class="proj" href="https://github.com/m4rcusml/hackmeridian-2025" target="_blank" rel="noopener">
+      <p class="rotulo">Stellar</p>
+      <h3>4Bridge</h3>
+      <p>Une filantropia, DeFi e liquidez para apoiar causas com rendimento transparente, sem travar o capital de quem doa.</p>
+      <span class="proj__ir">GitHub →</span>
+    </a>
+    <a class="proj" href="https://github.com/Cr0nia/Cronia" target="_blank" rel="noopener">
+      <p class="rotulo">Solana</p>
+      <h3>Cronia</h3>
+      <p>Protocolo de crédito e pagamentos que converte cripto em linhas de crédito instantâneas para consumidores e lojistas.</p>
+      <span class="proj__ir">GitHub →</span>
+    </a>
+    <a class="proj" href="https://github.com/Inteli-Table5/BTContract" target="_blank" rel="noopener">
+      <p class="rotulo">Bitcoin · Lightning</p>
+      <h3>BTContract</h3>
+      <p>Simplifica contratos financeiros na rede Bitcoin, com interface direta e suporte à Lightning Network.</p>
+      <span class="proj__ir">GitHub →</span>
+    </a>
+    <a class="proj" href="https://github.com/SmartTrans-ETH/smart-trans" target="_blank" rel="noopener">
+      <p class="rotulo">Celo</p>
+      <h3>SmartTrans</h3>
+      <p>Bilhetagem digital para transporte público com blockchain, IoT e validação por NFC integrados à rede Celo.</p>
+      <span class="proj__ir">GitHub →</span>
+    </a>
+    <a class="proj" href="https://github.com/Inteli-Club5/trbe" target="_blank" rel="noopener">
+      <p class="rotulo">Chiliz</p>
+      <h3>trbe</h3>
+      <p>Transforma engajamento de torcida em reputação on-chain, com recompensas gamificadas para o torcedor.</p>
+      <span class="proj__ir">GitHub →</span>
+    </a>
+    <a class="proj" href="https://github.com/vict0rcarvalh0/skillpass" target="_blank" rel="noopener">
+      <p class="rotulo">Identidade</p>
+      <h3>SkillPass</h3>
+      <p>Valida habilidades profissionais com NFTs intransferíveis e staking de reputação feito pela própria comunidade.</p>
+      <span class="proj__ir">GitHub →</span>
+    </a>
+    <a class="proj" href="https://github.com/Web3Squad/SpyNet" target="_blank" rel="noopener">
+      <p class="rotulo">Agentes de IA</p>
+      <h3>SpyNet</h3>
+      <p>Infraestrutura de pagamentos para economias de agentes de IA, com micropagamentos cripto de alta frequência.</p>
+      <span class="proj__ir">GitHub →</span>
+    </a>
+    <a class="proj" href="https://github.com/Lumx-hackathon/Ada-Lovelace-Bounties" target="_blank" rel="noopener">
+      <p class="rotulo">Impacto social</p>
+      <h3>PólenChain</h3>
+      <p>Liga doadores, ONGs e empresas com transparência de ponta a ponta e recompensas em NFT resgatáveis em parceiros.</p>
+      <span class="proj__ir">GitHub →</span>
+    </a>
+    <a class="proj" href="https://inteliblockchain-ibc.github.io/docs3/docs/projeto/introducao" target="_blank" rel="noopener">
+      <p class="rotulo">Programa do clube</p>
+      <h3>High Block</h3>
+      <p>Programa de desenvolvimento Web3 com desafios práticos, voltado a formar builders dentro do Inteli.</p>
+      <span class="proj__ir">Ver o programa →</span>
+    </a>
+    <a class="proj" href="https://docs3.inteliblockchain.org" target="_blank" rel="noopener">
+      <p class="rotulo">Documentação</p>
+      <h3>Docs³</h3>
+      <p>Site público com documentação e tutoriais do clube: Foundry, carteira, faucet e o primeiro contrato.</p>
+      <span class="proj__ir">Abrir o Docs³ →</span>
+    </a>
+  </div>
+
+  <a class="secundario" href="https://github.com/InteliBlockchain-IBC" target="_blank" rel="noopener">
+    Os 25 no GitHub
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</section>
+
+<!-- ══════════ 4 · O RITMO ══════════ -->
+<section class="secao sobe">
+  <div class="cabeca">
+    <p class="rotulo">O ritmo</p>
+    <h2 class="titulo">A disciplina por <b>trás</b></h2>
+    <p class="corpo">
+      Nada disso sai de improviso. São duas cadências fixas, que rodam desde
+      2022 e não se atropelam.
+    </p>
+  </div>
+
+  <div class="ritmo">
+    <div class="painel">
+      <p class="rotulo">Toda semana</p>
+      <h3>Aula interna</h3>
+      <p>
+        Conduzida pela área Educacional e aberta a todos os membros. Tokenização,
+        DAO, redes blockchain e DeFi — cada tema com material e dicionário
+        próprios, publicados no repositório aberto do clube.
+      </p>
+    </div>
+    <div class="painel">
+      <p class="rotulo">Todo mês</p>
+      <h3>Ciclo de projeto</h3>
+      <p>
+        Cada projeto abre com um termo de abertura, roda em ciclo de um mês e tem
+        acompanhamento semanal. O que sai daí vai para o GitHub da organização,
+        não para a gaveta.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 5 · AS QUATRO ÁREAS — MOLDURAS 2 a 5 ══════════ -->
+<section class="secao sobe" id="areas">
+  <div class="cabeca">
+    <p class="rotulo">Estrutura</p>
+    <h2 class="titulo">Organizados para construir <b>comunidade</b></h2>
+    <p class="corpo">
+      Quatro áreas, e nenhuma delas entrega sozinha. Juntas cobrem os lados de
+      que uma comunidade web3 precisa para se sustentar: quem ensina, quem
+      constrói, quem comunica e quem cuida das pessoas.
+    </p>
+  </div>
+
+  <div class="areas">
+    <div class="mold mold--aco area">
+      <span class="area__ord">01</span>
+      <h3>Educacional</h3>
+      <p>Aulas internas, dicionário, trilhas e todo o material de estudo do clube.</p>
+    </div>
+    <div class="mold mold--gelo area">
+      <span class="area__ord">02</span>
+      <h3>Projetos</h3>
+      <p>Os projetos técnicos, do MVP à entrega, com acompanhamento semanal.</p>
+    </div>
+    <div class="mold mold--noite mold--ciano area">
+      <span class="area__ord">03</span>
+      <h3>Marketing</h3>
+      <p>Presença pública, conteúdo e as redes sociais do Inteli Blockchain.</p>
+    </div>
+    <div class="mold mold--vinho mold--ciano area">
+      <span class="area__ord">04</span>
+      <h3>Pessoas</h3>
+      <p>Processo seletivo, PDI, acompanhamento e cultura dos membros.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 6 · OS NÚMEROS ══════════ -->
+<section class="secao sobe">
+  <div class="cabeca">
+    <p class="rotulo">Números</p>
+    <h2 class="titulo">Onde o clube <b>chegou</b></h2>
+  </div>
+
+  <!-- ┌──────────────────────────────────────────────────────────────┐
+       │  DADOS DO CLUBE — ÚNICO LUGAR DA PÁGINA. EDITE AQUI.         │
+       │                                                              │
+       │  Confirmados por Messias Olivindo em 8 de agosto de 2026.    │
+       │  Só o 25 foi contado contra Projetos.js; os outros três      │
+       │  vieram do site antigo e não foram recontados.               │
+       │  É o dado com maior chance de envelhecer — ver SPEC §5.      │
+       └──────────────────────────────────────────────────────────────┘ -->
+  <div class="numeros">
+    <div class="numero"><b>30+</b><span>membros ativos</span></div>
+    <div class="numero"><b>25</b><span>projetos entregues</span></div>
+    <div class="numero"><b>20+</b><span>eventos realizados</span></div>
+    <div class="numero"><b>10+</b><span>parceiros</span></div>
+  </div>
+</section>
+
+<!-- ══════════ 7 · LINHA DO TEMPO ══════════ -->
+<section class="secao sobe" id="historia">
+  <div class="cabeca">
+    <p class="rotulo">Histórico</p>
+    <h2 class="titulo">De 2022 até <b>agora</b></h2>
+  </div>
+
+  <div>
+    <div class="marco">
+      <b>2022</b>
+      <ul><li>Fundação do clube</li><li>Ethereum SP</li><li>DEVCON VI</li></ul>
+    </div>
+    <div class="marco">
+      <b>2023</b>
+      <ul><li>Workshop Web3</li><li>Workshop preparatório</li><li>Inteli Blockchain Challenge</li></ul>
+    </div>
+    <div class="marco">
+      <b>2024</b>
+      <ul><li>Processo seletivo</li></ul>
+    </div>
+    <div class="marco marco--atual">
+      <b>2025</b>
+      <ul><li>Starknet Basecamp</li><li>1º Bitcoin Students Day</li><li>Tokennation</li><li>Lançamento do Docs³</li><li>1º Workshop ZK</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 8 · PARCEIROS ══════════ -->
+<section class="secao sobe">
+  <div class="cabeca">
+    <p class="rotulo">Rede</p>
+    <h2 class="titulo">Quem anda <b>junto</b></h2>
+  </div>
+
+  <div class="carrossel">
+    <div class="carrossel__trilho">
+        <a class="parceiro" href="https://stellar.org/" target="_blank" rel="noopener">
+          <img src="assets/parceiros/stellar.png" alt="Stellar">
+          <span class="parceiro__nome">Stellar</span>
+        </a>
+        <a class="parceiro" href="https://www.ethereumbrasil.com/" target="_blank" rel="noopener">
+          <img src="assets/parceiros/ethereumbrasil.png" alt="Ethereum Brasil">
+          <span class="parceiro__nome">Ethereum Brasil</span>
+        </a>
+        <a class="parceiro" href="https://vinteum.org/" target="_blank" rel="noopener">
+          <img src="assets/parceiros/vinteum.png" alt="VinteUm">
+          <span class="parceiro__nome">VinteUm</span>
+        </a>
+        <a class="parceiro" href="https://ethsamba.org/pt/" target="_blank" rel="noopener">
+          <img src="assets/parceiros/ethsamba.png" alt="EthSamba">
+          <span class="parceiro__nome">EthSamba</span>
+        </a>
+        <a class="parceiro" href="https://ethereumlatam.org/" target="_blank" rel="noopener">
+          <img src="assets/parceiros/ethlatam.png" alt="EthLatam">
+          <span class="parceiro__nome">EthLatam</span>
+        </a>
+        <a class="parceiro" href="https://www.starknet.org/" target="_blank" rel="noopener">
+          <img src="assets/parceiros/starknet.png" alt="Starknet Foundation">
+          <span class="parceiro__nome">Starknet Foundation</span>
+        </a>
+        <a class="parceiro" href="https://chain.link/" target="_blank" rel="noopener">
+          <img src="assets/parceiros/chainlink.png" alt="Chainlink Labs">
+          <span class="parceiro__nome">Chainlink Labs</span>
+        </a>
+        <a class="parceiro" href="https://nearx.com.br/" target="_blank" rel="noopener">
+          <img src="assets/parceiros/nearx.png" alt="NearX">
+          <span class="parceiro__nome">NearX</span>
+        </a>
+        <a class="parceiro" href="https://stellar.org/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/parceiros/stellar.png" alt="">
+          <span class="parceiro__nome">Stellar</span>
+        </a>
+        <a class="parceiro" href="https://www.ethereumbrasil.com/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/parceiros/ethereumbrasil.png" alt="">
+          <span class="parceiro__nome">Ethereum Brasil</span>
+        </a>
+        <a class="parceiro" href="https://vinteum.org/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/parceiros/vinteum.png" alt="">
+          <span class="parceiro__nome">VinteUm</span>
+        </a>
+        <a class="parceiro" href="https://ethsamba.org/pt/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/parceiros/ethsamba.png" alt="">
+          <span class="parceiro__nome">EthSamba</span>
+        </a>
+        <a class="parceiro" href="https://ethereumlatam.org/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/parceiros/ethlatam.png" alt="">
+          <span class="parceiro__nome">EthLatam</span>
+        </a>
+        <a class="parceiro" href="https://www.starknet.org/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/parceiros/starknet.png" alt="">
+          <span class="parceiro__nome">Starknet Foundation</span>
+        </a>
+        <a class="parceiro" href="https://chain.link/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/parceiros/chainlink.png" alt="">
+          <span class="parceiro__nome">Chainlink Labs</span>
+        </a>
+        <a class="parceiro" href="https://nearx.com.br/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/parceiros/nearx.png" alt="">
+          <span class="parceiro__nome">NearX</span>
+        </a>
+    </div>
+  </div>
+</section>
+
+<!-- A seção de identidade (mascote) sai da v1: em stand-by até haver mais
+     material gráfico do ornitorrinco. O CSS dela foi removido junto. -->
+
+<!-- ══════════ 9 · RODAPÉ ══════════ -->
+<footer class="rodape">
+  <div class="rodape__topo">
+    <div>
+      <img src="assets/logo-horizontal-marca.png" alt="Inteli Blockchain" style="height:36px;width:auto">
+      <p class="rodape__missao">
+        Levar tecnologias descentralizadas para dentro do Inteli e tornar o clube
+        uma referência no ecossistema web3, em inovação e em projetos.
+      </p>
+    </div>
+    <div>
+      <h4>Onde a gente está</h4>
+      <ul>
+        <li><a href="https://github.com/InteliBlockchain-IBC" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/company/inteli-blockchain" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/inteli_blockchain" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Para estudar</h4>
+      <ul>
+        <li><a href="https://docs3.inteliblockchain.org" target="_blank" rel="noopener">Docs³ — tutoriais</a></li>
+        <li><a href="https://github.com/InteliBlockchain-IBC/educational" target="_blank" rel="noopener">Material das aulas</a></li>
+        <li><a href="https://inteliblockchain-ibc.github.io/docs3/blog" target="_blank" rel="noopener">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="rodape__base">
+    <span>© 2026 Inteli Blockchain — Instituto de Tecnologia e Liderança</span>
+    <span>Domínio institucional: @sou.inteli.edu.br</span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+/* A malha: retículo triangular desenhado linha a linha, adensando da esquerda
+   para a direita como o padrão de fundo do guia. Ruído determinístico, sem
+   Math.random, para o desenho ser o mesmo a cada carga. */
+(function () {
+  const svg = document.getElementById('malha');
+  const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NS = 'http://www.w3.org/2000/svg';
+
+  const sorte = (a, b, c) => {
+    const v = Math.sin(a * 12.9898 + b * 78.233 + c * 37.719) * 43758.5453;
+    return v - Math.floor(v);
+  };
+
+  function desenhar() {
+    const L = window.innerWidth, A = window.innerHeight;
+    svg.setAttribute('viewBox', `0 0 ${L} ${A}`);
+    svg.textContent = '';
+
+    const lado = L < 640 ? 88 : 128;
+    const alt = lado * 0.866;
+    const cols = Math.ceil(L / lado) + 2;
+    const linhas = Math.ceil(A / alt) + 2;
+    const segs = [];
+
+    for (let j = 0; j < linhas; j++) {
+      const y = j * alt, desloc = (j % 2) * (lado / 2);
+      for (let i = 0; i < cols; i++) {
+        const x = i * lado - lado + desloc;
+        const p = 0.10 + 0.70 * Math.pow(Math.max(0, x) / L, 1.8);
+        [[x + lado, y], [x + lado / 2, y + alt], [x - lado / 2, y + alt]]
+          .forEach(([x2, y2], d) => { if (sorte(i, j, d) < p) segs.push([x, y, x2, y2]); });
+      }
+    }
+
+    segs.forEach((s, k) => {
+      const [x1, y1, x2, y2] = s;
+      const ln = document.createElementNS(NS, 'line');
+      ln.setAttribute('x1', x1.toFixed(1)); ln.setAttribute('y1', y1.toFixed(1));
+      ln.setAttribute('x2', x2.toFixed(1)); ln.setAttribute('y2', y2.toFixed(1));
+      ln.style.setProperty('--c', Math.hypot(x2 - x1, y2 - y1).toFixed(1));
+      ln.style.strokeOpacity = (0.07 + 0.26 * Math.max(0, Math.min(1, x1 / L))).toFixed(3);
+      ln.style.animationDelay = calmo ? '0s' : (0.15 + (x1 / L) * 0.9 + (k % 7) * 0.02).toFixed(2) + 's';
+      svg.appendChild(ln);
+    });
+  }
+
+  desenhar();
+  let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(desenhar, 220); });
+})();
+
+/* o nó segue o ponteiro dentro da dobra. Sem ponteiro (toque) e sob
+   prefers-reduced-motion ele fica parado, no ângulo de repouso. */
+(function () {
+  const dobra = document.querySelector('.dobra');
+  const slot  = document.querySelector('.no-slot');
+  const palco = document.querySelector('.no-slot__palco');
+  if (!dobra || !slot || !palco) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.matchMedia('(hover: hover)').matches) return;
+
+  const LIM = 26;                       // graus máximos de giro
+  let bruto = null, rodando = false;
+
+  function pintar() {
+    rodando = false;
+    if (!bruto) return;
+    const r = dobra.getBoundingClientRect();
+    const x = (bruto.clientX - r.left) / r.width  - .5;
+    const y = (bruto.clientY - r.top)  / r.height - .5;
+    palco.style.setProperty('--ry', ( x * LIM * 2).toFixed(2) + 'deg');
+    palco.style.setProperty('--rx', (-y * LIM).toFixed(2) + 'deg');
+  }
+
+  dobra.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
+    bruto = e; slot.classList.add('no-slot--vivo');
+    if (!rodando) { rodando = true; requestAnimationFrame(pintar); }
+  });
+  dobra.addEventListener('pointerleave', () => {
+    slot.classList.remove('no-slot--vivo');
+    palco.style.setProperty('--rx', '0deg');
+    palco.style.setProperty('--ry', '0deg');
+  });
+})();
+
+/* o glitch do wordmark só roda enquanto a dobra está visível: piscar para
+   ninguém gasta bateria e distrai quem já rolou para longe */
+(function () {
+  const dobra = document.querySelector('.dobra');
+  if (!dobra) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  new IntersectionObserver(
+    es => es.forEach(e => dobra.classList.toggle('dobra--visivel', e.isIntersecting)),
+    { threshold: .25 }
+  ).observe(dobra);
+})();
+
+/* seções sobem ao entrar na viewport */
+(function () {
+  const alvos = document.querySelectorAll('.sobe');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    alvos.forEach(el => el.classList.add('visivel')); return;
+  }
+  const obs = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visivel'); obs.unobserve(e.target); } });
+  }, { threshold: .1 });
+  alvos.forEach(el => obs.observe(el));
+})();
+</script>
+</body>
+</html>
