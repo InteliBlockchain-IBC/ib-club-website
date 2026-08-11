@@ -153,16 +153,18 @@ git push -u origin feat/minha-mudanca
 gh pr create --base main
 ```
 
-**A `main` não está protegida hoje** — aceita push direto, e quem abre um PR
-consegue mergear sozinho. É convenção, não regra imposta.
+A `main` tem um ruleset chamado **Protect Main**, criado em junho de 2025.
+Ele exige pull request com **uma aprovação**, e bloqueia force push e exclusão
+da branch. O autor não pode aprovar o próprio PR — isso o GitHub garante.
 
-Se um dia quiser que seja regra, agora dá: ruleset e branch protection não
-funcionavam enquanto o repositório era privado no plano Free da organização.
-Ficaria em Settings → Rules, exigindo PR com uma aprovação (o GitHub já
-impede o autor de aprovar o próprio) e bloqueando force push. Uma ressalva:
-admin de repositório passa por cima de ruleset por padrão, e quase todo mundo
-com escrita aqui é admin — então também precisaria mexer na lista de bypass
-ou na quantidade de admins.
+Ele ficou inerte enquanto o repositório era privado, porque ruleset não
+funciona em repositório privado no plano Free da organização. Voltou a valer
+sozinho quando o repositório foi aberto.
+
+**O bypass é `OrganizationAdmin`**, e a organização tem oito owners. Para eles
+a regra não vale: continuam podendo dar push direto na `main`. Se a intenção
+for que a revisão valha para todo mundo, o que precisa mudar é a lista de
+bypass do ruleset ou a quantidade de owners — não o ruleset em si.
 
 ## Licença
 
