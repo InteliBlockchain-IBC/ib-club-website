@@ -1,0 +1,691 @@
+/* ══════════════════════════════════════════════════════════════════
+   INTELI BLOCKCHAIN — landing híbrida
+   Implementa SPEC-landing-hibrida.md. Regras que a folha obedece:
+
+   · A malha governa. Montserrat 300, retículo de 1px, hairline.
+   · A moldura é componente, não sistema: 5 lugares e mais nenhum.
+   · Canto: 0 no painel da malha, 20 no card de moldura. Nada entre.
+   · Montserrat 900 existe só no nome das áreas.
+   · Ciano tem 5 usos contáveis. Estão marcados no código: CIANO 1..5
+   · Preenchimento chapado só nos 4 cards de área — a cor é a taxonomia.
+   ══════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* as oito do Guia de Estilos 2026, sem invenção */
+  --tinta:    #081119;
+  --noite:    #13293d;
+  --aco:      #247ba0;
+  --profundo: #006494;   /* não usado na v1 — consta para a paleta ficar inteira */
+  --sinal:    #1b98e0;
+  --gelo:     #e8f1f2;
+  --magenta:  #9f0e5d;
+  --vinho:    #380f2e;   /* paleta Educacional — fora desta página */
+
+  /* neutros = gelo em alfa sobre a tinta, nunca cinza puro.
+     .55 é o piso: .40 dá 3,49:1 e reprova em AA. */
+  --texto:    var(--gelo);
+  --texto-2:  rgba(232,241,242,.72);
+  --texto-3:  rgba(232,241,242,.58);
+  --fio:      rgba(232,241,242,.11);
+  --fio-2:    rgba(232,241,242,.22);
+
+  --display:'Montserrat', system-ui, sans-serif;
+  --corpo:'Open Sans', system-ui, sans-serif;
+
+  --borda-mold: 3px;
+  --canto-mold: 20px;
+  --desloc: 14px;                  /* o mesmo nos 5, para o encaixe ler como regra */
+
+  --margem: clamp(1.25rem, 5vw, 6rem);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--tinta);color:var(--texto);
+  font-family:var(--corpo);
+  font-size:clamp(.9375rem,.32vw + .87rem,1.0625rem);
+  line-height:1.75;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:400;text-wrap:balance}
+p{margin:0}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--sinal);outline-offset:4px}   /* CIANO 4 */
+
+/* ─────────── a malha, desenhada em SVG ─────────── */
+#malha{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#malha line{
+  stroke:var(--gelo);stroke-width:1;
+  stroke-dasharray:var(--c);stroke-dashoffset:var(--c);
+  animation:tracar 1.1s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes tracar{to{stroke-dashoffset:0}}
+.pagina{position:relative;z-index:1}
+
+/* ─────────── tipografia ─────────── */
+.rotulo{
+  font-family:var(--display);font-weight:700;
+  font-size:.6875rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--texto-3);
+}
+.titulo{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(1.5rem,3.4vw,2.5rem);line-height:1.2;
+  letter-spacing:.035em;text-transform:uppercase;max-width:22ch;
+}
+.titulo b{font-weight:700}
+.corpo{color:var(--texto-2);max-width:60ch}
+/* pedido do Messias: o texto que segue o título de seção deve ocupar toda a
+   largura da div, até a ponta direita — não a largura de leitura de 60ch */
+.cabeca .corpo{max-width:none}
+
+/* ─────────── navegação ─────────── */
+.nav{
+  position:sticky;top:0;z-index:40;
+  background:rgba(8,17,25,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--fio);
+}
+.nav__cx{
+  max-width:90rem;margin:0 auto;padding:1rem var(--margem);
+  display:flex;align-items:center;gap:2.5rem;
+}
+.nav__marca{margin-right:auto;display:flex;align-items:center}
+.nav__marca img{height:38px;width:auto}
+.nav__itens{display:flex;gap:2.25rem}
+.nav__itens a{
+  font-family:var(--display);font-weight:400;font-size:.75rem;
+  letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
+  color:var(--texto-2);transition:color .2s;
+}
+.nav__itens a:hover{color:var(--texto)}
+@media (max-width:900px){.nav__itens{display:none}}
+
+/* ══════════ A MOLDURA — componente, 5 usos ══════════ */
+.mold{
+  border:var(--borda-mold) solid var(--gelo);
+  border-radius:var(--canto-mold);
+  box-shadow:var(--desloc) var(--desloc) 0 0 var(--magenta);
+  transition:transform .24s cubic-bezier(.2,.7,.3,1),
+             box-shadow .24s cubic-bezier(.2,.7,.3,1);
+}
+.mold--ciano{box-shadow:var(--desloc) var(--desloc) 0 0 var(--sinal)}
+/* preenchimento chapado: só aqui na página inteira */
+.mold--aco  {background:var(--aco)}
+.mold--noite{background:var(--noite)}
+.mold--vinho{background:var(--magenta)}
+.mold--gelo {background:var(--gelo);border-color:var(--tinta);color:var(--tinta)}
+/* a assinatura: encaixa na própria sombra */
+.mold:is(:hover,:focus-visible){
+  transform:translate(var(--desloc),var(--desloc));
+  box-shadow:0 0 0 0 var(--magenta);
+}
+.mold--ciano:is(:hover,:focus-visible){box-shadow:0 0 0 0 var(--sinal)}
+
+/* ─────────── o painel da malha — canto 0 ─────────── */
+.painel{
+  background:var(--noite);border-radius:0;
+  box-shadow:inset 0 0 0 1px var(--fio-2);
+  padding:clamp(1.6rem,3vw,2.4rem);
+}
+
+/* ─────────── seção ─────────── */
+.secao{
+  max-width:90rem;margin:0 auto;
+  padding:clamp(4rem,9vh,7rem) var(--margem);
+}
+.secao + .secao{border-top:1px solid var(--fio)}
+.cabeca{display:grid;gap:1.1rem;margin-bottom:clamp(2.5rem,6vh,4rem)}
+.cabeca > .corpo{margin-top:.4rem}
+
+/* ══════════ 1 · DOBRA ══════════ */
+.dobra{
+  position:relative;max-width:90rem;margin:0 auto;
+  padding:clamp(4rem,12vh,8rem) var(--margem) clamp(4rem,10vh,7rem);
+  min-height:min(92vh,54rem);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;
+}
+.dobra__texto{display:flex;flex-direction:column;align-items:center;min-width:0}
+.dobra__kicker{justify-content:center;flex-wrap:wrap}
+.dobra__kicker .rotulo{min-width:0}
+/* o kicker é longo: com .28em de tracking ele não cabe em tela estreita
+   e "SÃO PAULO" era cortado pela margem */
+.dobra__tese{border:0;padding:0;max-width:32ch}
+
+/* ── LOCKUP: proporções medidas no arquivo oficial da marca.
+      No logotipo real "inteli" é alinhado à ESQUERDA com "BLOCKCHAIN"
+      (+4px em 770px), o nó quase encosta no texto (7px de folga) e tem
+      cerca de 2x a altura do bloco de texto. Centralizar o "inteli" era
+      o que deixava o conjunto torto. ── */
+.lockup{
+  justify-content:center;align-items:center;
+  gap:clamp(.4rem,1vw,.9rem);
+  margin-bottom:clamp(2rem,5vh,3rem);
+}
+.marca-nome{text-align:left}
+.marca-nome .leve{
+  font-size:clamp(.78rem,2vw,1.55rem);letter-spacing:.3em;
+  margin-bottom:.16em;padding-left:.24em;
+}
+.marca-nome .forte,.marca-nome::before,.marca-nome::after{
+  font-size:clamp(2.5rem,8.6vw,7rem);
+}
+.no-slot{width:clamp(16.8rem,40.5vw,33rem)}
+
+/* o botão herdava align-self:flex-start do layout alinhado à esquerda.
+   A margem à direita é correção ótica: a sombra deslocada joga 14px de
+   massa visual para aquele lado, então centralizar só a caixa deixava o
+   conjunto parecendo torto. */
+.dobra__texto .acao{align-self:center;margin-right:var(--desloc)}
+/* SLOT DA MARCA — segura o PNG empilhado por padrão; quando o 3D prova que
+   desenhou (WebGL disponível, sem prefers-reduced-motion, com ponteiro),
+   troca para o <canvas> sem que a dobra precise ser refeita (spec §7). */
+.no-slot{
+  display:block;position:relative;flex:none;
+  width:clamp(13.5rem,33vw,27rem);aspect-ratio:1/1;   /* pedido: +200% do tamanho original */
+  perspective:900px;
+  animation:surgir 1.4s .35s cubic-bezier(.2,.7,.3,1) backwards;
+}
+/* o canvas começa escondido: só aparece depois do primeiro quadro
+   confirmado (gl.getError()===0), nunca antes — ver script no fim do body */
+.no-slot__gl{display:none;position:absolute;inset:0;width:100%;height:100%}
+.no-slot--gl .no-slot__palco{display:none}
+.no-slot--gl .no-slot__gl{display:block}
+/* extrusão por empilhamento: cópias do PNG oficial deslocadas em Z.
+   Sem dependência e sem perder um pixel da arte original — o nó é uma
+   forma chapada de espessura constante, que é o caso ideral para isso. */
+.no-slot__palco{
+  display:block;                 /* span inline ignora width/height */
+  position:relative;width:100%;height:100%;
+  transform-style:preserve-3d;
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  transition:transform .5s cubic-bezier(.2,.7,.3,1);
+}
+.no-slot--vivo .no-slot__palco{transition:transform .12s linear}
+.no-slot__palco span{
+  position:absolute;inset:0;
+  background:url(assets/marca-gradiente.png) center/contain no-repeat;
+  transform:translateZ(calc(var(--i) * -1.1px));
+  filter:brightness(calc(1 - var(--i) * .052));
+}
+.no-slot__palco span:first-child{filter:none}
+@keyframes surgir{from{opacity:0;transform:scale(.85) rotate(-10deg)}}
+
+/* o lockup: nó + nome, como no logotipo */
+/* o nó real quase encosta no texto (7px de folga) — com o nó 3x maior o
+   gap antigo (até 1.6rem) lia como um buraco entre os dois */
+.lockup{display:flex;align-items:center;gap:0}
+/* gap:0 sozinho não bastava — sobra moldura vazia dentro do próprio PNG/
+   canvas do nó. Puxa o texto por cima dessa margem interna. */
+.marca-nome{margin-left:clamp(-1.4rem,-2.2vw,-.6rem)}
+
+.dobra__kicker{display:flex;align-items:center;gap:1rem;margin-bottom:clamp(2.5rem,6vh,4rem)}
+.dobra__kicker i{width:9px;height:9px;background:var(--sinal);flex:none}  /* CIANO 1 */
+/* ── O WORDMARK: nó + nome como um lockup só, para o nome do clube não
+      aparecer três vezes na mesma tela (navbar, nó e texto).
+      O glitch usa o ciano e o magenta do guia como canais de deslocamento,
+      em vez do vermelho/ciano de monitor que é o clichê da categoria. ── */
+.dobra h1{
+  font-family:var(--display);text-transform:uppercase;
+  margin-bottom:clamp(1.5rem,4vh,2.25rem);line-height:.92;
+}
+.marca-nome{
+  position:relative;display:inline-block;
+  color:var(--gelo);
+  text-shadow:0 0 26px rgba(27,152,224,.28), 0 0 2px rgba(232,241,242,.5);
+}
+.marca-nome .leve{
+  display:block;font-weight:300;letter-spacing:.34em;
+  font-size:clamp(.85rem,2.1vw,1.7rem);margin-bottom:.1em;
+  padding-left:.2em;
+}
+.marca-nome .forte{
+  display:block;font-weight:700;letter-spacing:-.005em;
+  font-size:clamp(2.2rem,7.4vw,6rem);
+}
+
+/* as duas cópias deslocadas — só existem durante o glitch */
+.marca-nome::before,.marca-nome::after{
+  content:attr(data-nome);position:absolute;inset:0;
+  font-weight:700;letter-spacing:-.005em;
+  font-size:clamp(2.2rem,7.4vw,6rem);line-height:.92;
+  top:auto;bottom:0;left:0;
+  opacity:0;pointer-events:none;text-shadow:none;
+}
+.marca-nome::before{color:var(--sinal)}
+.marca-nome::after{color:var(--magenta)}
+
+/* entrada: um glitch mais forte, uma vez */
+.marca-nome{animation:entra-nome .5s .15s cubic-bezier(.2,.7,.3,1) backwards}
+@keyframes entra-nome{from{opacity:0;transform:translateY(10px)}}
+
+/* periódico: o ruído ocupa só os primeiros 4% de um ciclo de 11s,
+   então dispara uma vez a cada onze segundos e some */
+.dobra--visivel .marca-nome::before{animation:fx-ciano 11s 1.2s infinite steps(1,end)}
+.dobra--visivel .marca-nome::after{animation:fx-magenta 11s 1.2s infinite steps(1,end)}
+.dobra--visivel .marca-nome .forte{animation:fx-corpo 11s 1.2s infinite steps(1,end)}
+
+@keyframes fx-ciano{
+  0%,100%{opacity:0;transform:none;clip-path:inset(0 0 100% 0)}
+  1%  {opacity:.9;transform:translate(-6px,-2px);clip-path:inset(12% 0 62% 0)}
+  2%  {opacity:.9;transform:translate(5px,1px);clip-path:inset(58% 0 22% 0)}
+  3%  {opacity:.9;transform:translate(-3px,2px);clip-path:inset(34% 0 44% 0)}
+  4%  {opacity:0}
+}
+@keyframes fx-magenta{
+  0%,100%{opacity:0;transform:none;clip-path:inset(0 0 100% 0)}
+  1%  {opacity:.85;transform:translate(6px,2px);clip-path:inset(66% 0 8% 0)}
+  2%  {opacity:.85;transform:translate(-5px,-1px);clip-path:inset(20% 0 56% 0)}
+  3%  {opacity:.85;transform:translate(4px,-2px);clip-path:inset(46% 0 30% 0)}
+  4%  {opacity:0}
+}
+@keyframes fx-corpo{
+  0%,100%{transform:none}
+  1%{transform:translateX(-2px)}
+  2%{transform:translateX(3px)}
+  3%{transform:translateX(-1px)}
+  4%{transform:none}
+}
+
+/* a tese, logo abaixo do nome */
+.dobra__tese{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(1rem,2.2vw,1.5rem);line-height:1.45;
+  letter-spacing:.05em;text-transform:uppercase;text-wrap:balance;
+  color:var(--texto-2);max-width:34ch;
+  margin-bottom:clamp(2rem,5vh,2.75rem);
+}
+.dobra__tese b{font-weight:700;color:var(--texto)}
+.dobra__lead{
+  color:var(--texto-2);max-width:56ch;
+  padding-left:clamp(0rem,2vw,2rem);border-left:1px solid var(--fio-2);
+  margin-bottom:clamp(2.5rem,6vh,3.5rem);
+}
+.dobra__lead strong{color:var(--texto);font-weight:600}
+
+/* MOLDURA 1 · a ação principal — leva para dentro da prova */
+.acao{
+  align-self:flex-start;display:inline-flex;align-items:center;gap:.9rem;
+  font-family:var(--display);font-weight:700;
+  font-size:.8125rem;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;padding:1rem 1.6rem;
+}
+.acao svg{width:1.1em;height:1.1em;flex:none}
+@media (max-width:900px){
+  .dobra{min-height:0;padding-top:3.5rem}
+  /* nó menor que no desktop: o piso do 3x original (10.2rem) não sobrava
+     espaço pro texto ao lado em tela estreita e estourava a largura —
+     bug real, o headless nunca provou abaixo de 500px pra pegar isto antes */
+  .no-slot{width:clamp(6.1rem,23vw,9rem)}
+  /* rede de segurança: se ainda assim não couber numa linha, quebra em
+     vez de estourar — mais robusto que só acertar o número certo */
+  .lockup{flex-wrap:wrap;justify-content:center}
+  /* o kicker é longo: com .28em de tracking ele encostava na margem direita */
+  .dobra__kicker .rotulo{letter-spacing:.16em}
+}
+
+/* ══════════ 2 · O RITMO ══════════ */
+.ritmo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,2.5rem)}
+.ritmo h3{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(1.3rem,2.6vw,1.9rem);letter-spacing:.04em;
+  text-transform:uppercase;margin:1.15rem 0 1rem;
+}
+.ritmo p{color:var(--texto-2)}
+@media (max-width:780px){.ritmo{grid-template-columns:1fr}}
+
+/* ─────────── fotos ───────────
+   TODA foto usa moldura. É o que a página MOLDURAS do guia mostra literalmente:
+   foto com borda 3, canto 20 e sombra sólida deslocada. Foto com a ponta sem
+   borda não entra aqui.
+   height:auto é obrigatório em todas: os atributos width/height do HTML (que
+   existem para reservar espaço e evitar o pulo de layout) valem como altura
+   fixa, e sem isto a foto estica. */
+
+/* ── o destaque: o time do ano, com o título dentro da própria foto ── */
+.destaque{
+  position:relative;overflow:hidden;margin:0 0 clamp(5rem,13vh,8.5rem);
+  /* entrada própria — mais lenta e com brilho subindo, diferente do fade
+     genérico de 0.6s do resto das seções: esta é a primeira prova visual
+     depois da dobra, merece mais peso que um fade padrão */
+  opacity:0;filter:brightness(.4);transform:scale(1.035);
+  transition:opacity 1.7s cubic-bezier(.16,.8,.24,1),
+             filter 1.7s cubic-bezier(.16,.8,.24,1),
+             transform 1.7s cubic-bezier(.16,.8,.24,1);
+}
+.sobe.visivel .destaque{opacity:1;filter:brightness(1);transform:scale(1)}
+.destaque img{display:block;width:100%;height:auto}
+/* de volta ao formato de linha na própria borda — as variações em bolha/
+   elipse/cometa soltas dentro do card não funcionaram. Isto é o anel
+   (espessura = --borda-mold) com um feixe brilhante girando por dentro
+   dele via conic-gradient; @property deixa o ângulo animar suave em vez
+   de pular. mask-composite pinta só o anel, não a foto por baixo. */
+@property --ang-onda{
+  syntax:'<angle>';inherits:false;initial-value:0deg;
+}
+.destaque::after{
+  content:'';
+  position:absolute;inset:0;border-radius:inherit;
+  padding:calc(var(--borda-mold) * 3.4);
+  background:conic-gradient(from var(--ang-onda),
+    transparent 0deg, transparent 320deg,
+    rgba(232,241,242,0) 336deg, rgba(232,241,242,1) 348deg,
+    rgba(27,152,224,1) 353deg, rgba(159,14,93,.9) 358deg,
+    rgba(159,14,93,0) 360deg);
+  filter:blur(3px);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  animation:onda-moldura 4s linear infinite;
+  pointer-events:none;
+}
+@keyframes onda-moldura{
+  to{--ang-onda:360deg}
+}
+/* Não recebe o encaixe do hover: não é clicável, e mover uma foto de 1200px
+   sob o ponteiro anuncia uma ação que não existe. A especificidade de classe
+   dupla ganha de `.mold:is(:hover,…)` sem depender de ordem no arquivo. */
+.destaque.mold:is(:hover,:focus-within){
+  transform:none;box-shadow:var(--desloc) var(--desloc) 0 0 var(--magenta);
+}
+.destaque figcaption{
+  position:absolute;top:0;left:0;right:0;
+  /* o degradê desce bem além do texto: cortar rente deixa uma borda dura
+     atravessando a foto, que é justamente o que se quer evitar */
+  padding:clamp(1.1rem,3vw,2.2rem) clamp(1.2rem,3vw,2.4rem) clamp(3.5rem,9vw,6.5rem);
+  background:linear-gradient(180deg,
+    rgba(19,41,61,.96) 0%, rgba(19,41,61,.86) 28%,
+    rgba(19,41,61,.5) 62%, rgba(19,41,61,0) 100%);
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(1.5rem,5vw,3.25rem);line-height:1;
+  letter-spacing:.05em;text-transform:uppercase;
+  color:var(--gelo);
+  /* o mesmo brilho do logotipo na dobra, para o par ler como uma família */
+  text-shadow:0 0 26px rgba(27,152,224,.28), 0 0 2px rgba(232,241,242,.5);
+}
+
+/* ── o carrossel ── */
+/* infinito, mesma técnica e mesma velocidade do carrossel de parceiros
+   (42s linear): trilho duplicado, anima translateX(-50%), pausa no
+   hover/foco. Ao contrário dos parceiros, as fotos não são aria-hidden —
+   são conteúdo informativo, não logo redundante com uma lista ao lado —
+   então a segunda cópia (visual, para o loop ficar sem costura) é que
+   leva aria-hidden+tabindex=-1, não o trilho inteiro. */
+/* mesmo fade nas pontas do carrossel de parceiros — sem ele a rolagem
+   infinita corta as fotos de repente na borda da seção */
+.galeria{
+  position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+}
+.galeria__trilho{
+  display:flex;width:max-content;gap:clamp(1.25rem,3vw,2.25rem);
+  animation:desfilarFotos 42s linear infinite;
+  /* espaço para a sombra deslocada não ser cortada pelo overflow:hidden */
+  padding:0 var(--desloc) var(--desloc) 0;
+}
+.galeria:hover .galeria__trilho,
+.galeria:focus-within .galeria__trilho{animation-play-state:paused}
+@keyframes desfilarFotos{to{transform:translateX(-50%)}}
+.galeria__item{
+  flex:none;margin:0;
+  width:min(26rem,80vw);
+  overflow:hidden;background:var(--noite);
+}
+.galeria__item img{
+  display:block;width:100%;height:auto;
+  aspect-ratio:3/2;object-fit:cover;    /* as quatro já vêm em 3:2; isto é o cinto */
+}
+.galeria__item figcaption{
+  padding:1rem 1.25rem 1.15rem;
+  font-family:var(--display);font-weight:400;
+  font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--texto-2);
+}
+
+/* ══════════ 3a · PROJETOS COM PARCEIRO — MOLDURA 6 de 7 ══════════ */
+.card-parceria{
+  display:flex;flex-direction:column;gap:1.15rem;
+  padding:clamp(1.8rem,3vw,2.4rem);
+  /* full-width testado e reprovado: o gelo esticado numa faixa comprida
+     destoava. Volta ao tamanho original, mas centralizado na div — hoje só
+     existe um projeto com parceiro. Quando houver um segundo, isto vira grid. */
+  max-width:40rem;margin-left:auto;margin-right:auto;
+  text-decoration:none;
+  margin-bottom:clamp(2.5rem,5vh,3.5rem);
+}
+.card-parceria__co{display:flex;align-items:center;gap:.9rem}
+/* altura óptica, não caixa — mesma lição do carrossel de parceiros: o nó do
+   clube preenche o próprio recorte quase até a borda, mas o "AP" da
+   Alphractal (tirado do favicon.svg deles) tem folga interna de ~25%. Com a
+   mesma altura de caixa o "AP" leria menor. O viewBox abaixo recorta o SVG
+   rente à tinta do próprio traçado — não altera a marca, só a moldura dela,
+   igualando as duas alturas ópticas sem reescalar à mão. */
+.card-parceria__no{height:2.6rem;width:auto;flex:none}
+.card-parceria__ap{height:2.6rem;width:auto;flex:none}
+.card-parceria__x{
+  font-family:var(--display);font-weight:300;font-size:1.4rem;
+  color:rgba(8,17,25,.55);flex:none;
+}
+.card-parceria h3{
+  font-family:var(--display);font-weight:700;font-size:1.1rem;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.card-parceria p{font-size:.9375rem;line-height:1.65}
+.card-parceria__ir{
+  margin-top:.35rem;font-family:var(--display);font-weight:700;
+  font-size:.6875rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(8,17,25,.76);         /* mesmo par testado em .mold--gelo p: 8,4:1 */
+}
+/* MOLDURA 1 do CTA de contato não é — é .secundario, o padrão de link já
+   existente (CIANO). margin-top some porque quem já espaça é o wrapper. */
+.parceria__contato{margin-top:2.5rem;text-align:center}
+.parceria__contato .secundario{margin-top:0;margin-left:1.1rem}
+
+/* ══════════ 3b · FEITO EM HACKATHON — retículo de 1px ══════════ */
+.reticulo{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--fio)}
+.proj{
+  background:var(--tinta);padding:clamp(1.4rem,2.4vw,1.9rem);
+  display:flex;flex-direction:column;min-height:12.5rem;
+  text-decoration:none;transition:background .25s;
+}
+.proj:hover,.proj:focus-visible{background:var(--noite)}
+.proj h3{
+  font-family:var(--display);font-weight:700;font-size:1.1rem;
+  letter-spacing:.06em;text-transform:uppercase;margin:1rem 0 .7rem;
+  transition:color .2s;
+}
+.proj:hover h3{color:var(--sinal)}                                   /* CIANO 3 */
+.proj p{font-size:.875rem;line-height:1.65;color:var(--texto-2);margin-bottom:1.25rem}
+.proj__ir{
+  margin-top:auto;font-family:var(--display);font-weight:700;
+  font-size:.6875rem;letter-spacing:.2em;text-transform:uppercase;color:var(--texto-3);
+}
+@media (max-width:900px){.reticulo{grid-template-columns:1fr 1fr}}
+.proj-mais{display:none}
+@media (max-width:560px){
+  .reticulo{grid-template-columns:1fr}
+  /* seis primeiros ficam, o resto só aparece depois do clique */
+  .reticulo:not(.reticulo--tudo) .proj:nth-child(n+7){display:none}
+  .proj-mais{
+    display:inline-flex;align-items:center;gap:.6rem;margin-top:1.5rem;
+    font-family:var(--display);font-weight:700;font-size:.75rem;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--texto-2);
+    background:none;border:1px solid var(--fio-2);padding:.9rem 1.4rem;
+    cursor:pointer;transition:border-color .2s,color .2s;
+  }
+  .proj-mais:hover,.proj-mais:focus-visible{border-color:var(--texto-3);color:var(--texto)}
+}
+
+.secundario{
+  display:inline-flex;align-items:center;gap:.8rem;margin-top:2.5rem;
+  font-family:var(--display);font-weight:700;
+  font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
+  text-decoration:none;color:var(--texto);
+  padding-bottom:.55rem;border-bottom:1px solid var(--sinal);        /* CIANO 2 */
+  transition:gap .22s;
+}
+.secundario:hover{gap:1.35rem}
+.secundario svg{width:1.1em;height:1.1em;flex:none}
+
+/* ══════════ 4 · AS QUATRO ÁREAS — MOLDURAS 2 a 5 ══════════ */
+.areas{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(1.5rem,3vw,2.25rem);
+  padding-right:var(--desloc);padding-bottom:var(--desloc);
+}
+.area{padding:1.7rem 1.5rem 1.8rem;display:flex;flex-direction:column;min-height:14rem}
+.area__ord{
+  font-family:var(--display);font-weight:300;font-size:2.2rem;
+  line-height:1;opacity:.5;
+}
+/* o único Montserrat 900 da página inteira */
+.area h3{
+  font-family:var(--display);font-weight:900;font-size:1.15rem;
+  letter-spacing:-.01em;text-transform:uppercase;margin:1.1rem 0 .6rem;
+}
+.area p{font-size:.875rem;line-height:1.6;margin-top:auto}
+.mold--aco   p,.mold--vinho p{color:rgba(232,241,242,.88)}
+.mold--gelo  p{color:rgba(8,17,25,.76)}
+.mold--noite p{color:var(--texto-2)}
+@media (max-width:960px){.areas{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.areas{grid-template-columns:1fr}}
+
+/* ══════════ 6 · OS NÚMEROS ══════════ */
+.numeros{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--fio)}
+.numero{background:var(--tinta);padding:clamp(1.75rem,3vw,2.5rem) 1.25rem}
+.numero b{
+  display:block;font-family:var(--display);font-weight:300;
+  font-size:clamp(2.4rem,5.4vw,4rem);line-height:1;
+  letter-spacing:.01em;margin-bottom:.85rem;font-variant-numeric:tabular-nums;
+}
+.numero span{
+  font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--texto-3);
+}
+@media (max-width:820px){.numeros{grid-template-columns:1fr 1fr}}
+
+/* ══════════ 7 · LINHA DO TEMPO ══════════ */
+.marco{
+  display:grid;grid-template-columns:7rem minmax(0,1fr);
+  gap:clamp(1rem,4vw,3rem);
+  padding:1.9rem 0;border-top:1px solid var(--fio);
+}
+.marco:last-of-type{border-bottom:1px solid var(--fio)}
+.marco b{
+  font-family:var(--display);font-weight:300;font-size:1.75rem;
+  letter-spacing:.06em;color:var(--texto-3);line-height:1.2;
+  font-variant-numeric:tabular-nums;
+}
+.marco--atual b{color:var(--sinal)}                                  /* CIANO 5 */
+.marco ul{display:flex;flex-wrap:wrap;gap:.4rem 1.75rem;align-self:center}
+.marco li{font-size:.9375rem;color:var(--texto-2)}
+@media (max-width:640px){.marco{grid-template-columns:minmax(0,1fr);gap:.75rem}}
+
+/* ══════════ 8 · PARCEIROS ══════════ */
+/* carrossel: trilho duplicado rodando em loop; os logos ficam em P&B e
+   apagados, e voltam à cor cheia sob o ponteiro. O nome aparece numa
+   moldura ao passar o mouse, e o tile inteiro é o link para o parceiro. */
+.carrossel{
+  position:relative;overflow:hidden;
+  padding-block:1.25rem 4.5rem;         /* espaço para a moldura do nome */
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.carrossel__trilho{
+  display:flex;width:max-content;gap:clamp(2rem,5vw,4rem);
+  animation:desfilar 42s linear infinite;
+}
+.carrossel:hover .carrossel__trilho,
+.carrossel:focus-within .carrossel__trilho{animation-play-state:paused}
+@keyframes desfilar{to{transform:translateX(-50%)}}
+
+/* os arquivos já vêm normalizados por peso óptico, em tiles de 2:1 —
+   aqui basta exibir o tile inteiro no tamanho certo */
+.parceiro{
+  position:relative;flex:none;display:grid;place-items:center;
+  width:clamp(7.5rem,11.5vw,10rem);aspect-ratio:2/1;
+  filter:grayscale(1);opacity:.72;text-decoration:none;
+  transition:filter .3s ease,opacity .3s ease,transform .3s ease;
+}
+.parceiro img{width:100%;height:100%;object-fit:contain}
+.parceiro:is(:hover,:focus-visible){filter:none;opacity:1;transform:scale(1.06)}
+
+/* a moldura do nome — mesmos ingredientes do componente: borda 3,
+   canto 20, sombra sólida deslocada */
+.parceiro__nome{
+  position:absolute;top:calc(100% + .5rem);left:50%;
+  transform:translateX(-50%) translateY(6px);
+  opacity:0;pointer-events:none;white-space:nowrap;
+  background:var(--gelo);color:var(--tinta);
+  border:3px solid var(--tinta);border-radius:20px;
+  box-shadow:8px 8px 0 0 var(--magenta);
+  font-family:var(--display);font-weight:700;font-size:.6875rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:.5rem .95rem;
+  filter:grayscale(0);
+  transition:opacity .22s ease,transform .22s cubic-bezier(.2,.7,.3,1);
+}
+.parceiro:is(:hover,:focus-visible) .parceiro__nome{
+  opacity:1;transform:translateX(-50%) translateY(0);
+}
+
+/* ══════════ 9 · RODAPÉ ══════════ */
+.rodape{
+  border-top:1px solid var(--fio-2);max-width:90rem;margin:0 auto;
+  padding:clamp(3.5rem,7vh,5.5rem) var(--margem) 3rem;
+}
+.rodape__topo{
+  display:grid;grid-template-columns:minmax(0,1.5fr) repeat(2,minmax(0,1fr));
+  gap:clamp(1.5rem,4vw,3.5rem);padding-bottom:3rem;
+}
+.rodape__missao{color:var(--texto-2);max-width:40ch;margin-top:1.35rem;font-size:.9375rem}
+.rodape h4{
+  font-family:var(--display);font-weight:700;font-size:.6875rem;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--texto-3);margin-bottom:1.15rem;
+}
+.rodape ul{display:grid;gap:.65rem}
+.rodape ul a{text-decoration:none;font-size:.9375rem;color:var(--texto-2);transition:color .2s}
+.rodape ul a:hover{color:var(--texto)}
+.rodape__base{
+  border-top:1px solid var(--fio);padding-top:1.75rem;
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
+  font-size:.8125rem;color:var(--texto-3);
+}
+@media (max-width:780px){.rodape__topo{grid-template-columns:1fr}}
+
+/* ─────────── entrada das seções ─────────── */
+.sobe{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.sobe.visivel{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  #malha line{stroke-dashoffset:0}
+  .sobe{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+  /* a animação para (regra acima), mas sem ela o trilho ficaria parado no
+     translateX(0) com as últimas fotos fora da vista e sem jeito de
+     alcançar. Vira rolagem manual só aqui, pra ninguém perder conteúdo. */
+  .galeria{overflow-x:auto}
+}
+/* sem ponteiro a moldura fica em repouso: colapsar a sombra esconderia
+   justamente o que define o componente */
+
+/* ══ ajustes de tela estreita — ficam no fim da folha de propósito:
+   regras de mesma especificidade são decididas por ordem, e estas
+   precisam vencer as bases ══ */
+@media (max-width:680px){
+  /* deixa de ser flex: assim o quadradinho não cai sozinho numa linha */
+  .dobra__kicker{display:block}
+  .dobra__kicker i{display:inline-block;vertical-align:middle;margin-right:.55em}
+  .dobra__kicker .rotulo{font-size:.625rem;letter-spacing:.1em}
+}
+/* abaixo de 480px o piso do clamp do wordmark não cabe ao lado do nó */
+@media (max-width:480px){
+  .lockup{gap:.35rem}
+  .no-slot{width:clamp(5.5rem,27vw,9.5rem)}
+  .marca-nome .forte,.marca-nome::before,.marca-nome::after{font-size:clamp(1.75rem,9.4vw,2.5rem)}
+  .marca-nome .leve{font-size:clamp(.6rem,2.6vw,.78rem);letter-spacing:.26em}
+}

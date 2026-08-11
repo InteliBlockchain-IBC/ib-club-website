@@ -1,6 +1,7 @@
 # Ignorar pastas específicas
 /.cache/
 /node_modules/
+/client/dist/
 
 .vercel
 
