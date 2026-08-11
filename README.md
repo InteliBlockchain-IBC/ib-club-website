@@ -52,11 +52,36 @@ texto faltando não vale uma tela branca para quem está visitando.
 
 ## Deploy
 
-Ver **[DEPLOY.md](DEPLOY.md)**. Resumo: é um contêiner com Express servindo
-estático em `PORT`, sem banco e sem segredo. O push em `main` publica a
-imagem no GHCR pelo GitHub Actions; o `DEPLOY.md` também descreve o caminho
-mais curto, em que o Easypanel constrói direto do repositório e dispensa
-registry e workflow.
+O Easypanel constrói o `Dockerfile` deste repositório e serve o contêiner.
+Sem registry, sem GitHub Actions, sem token: o repositório é público e o
+Easypanel clona direto.
+
+**Create Service → App**, e então:
+
+| Campo | Valor |
+| --- | --- |
+| Source | GitHub → `InteliBlockchain-IBC/ib-club-website`, branch `main` |
+| Build method | Dockerfile |
+| Port | `3000` (container), exposta |
+| Domains | `inteliblockchain.org` e `www.`, com HTTPS |
+
+Na tela do serviço aparece um **Deploy Webhook**. Cadastrando essa URL em
+GitHub → Settings → Webhooks, todo push em `main` reconstrói o site.
+
+**O build precisa de ~1 GB de RAM livre.** Medido: pico de **849 MiB**, quase
+tudo do Parcel empacotando o React. Numa VPS de 1 GB isso divide espaço com o
+sistema e com o próprio Easypanel, e o build morre por OOM sem dizer o
+motivo. Se for o caso, a saída é construir a imagem fora e só puxar pronta —
+tinha um workflow para isso em `c517e76`, removido quando escolhemos deixar o
+Easypanel construir.
+
+Sobre variáveis: existe **uma**, `PORT`, e o Easypanel injeta sozinha. Sem
+ela o Express usa 3000. Não há banco, segredo nem chamada de API. Se aparecer
+uma segunda variável, ela é a primeira coisa a desconfiar.
+
+⚠️ O DNS é o trabalho que sobra: enquanto `inteliblockchain.org` estiver
+estacionado na Hostinger, nada disso aparece no domínio. Os registros `A` de
+`@` e `www` precisam apontar para o IP da VPS.
 
 ## Três coisas que quebram se você não souber
 
@@ -77,18 +102,28 @@ montar o canvas.
 
 ## Design
 
-O sistema (paleta, tipografia, regra do canto, orçamento de cor, as nove
-seções) está em `design-concepts/`:
+A folha de estilo obedece a um sistema fechado, e as regras abaixo são as que
+mais parecem arbitrárias quando se lê o CSS sem contexto:
 
-- `SPEC-landing-hibrida.md` — o sistema de design
-- `SPEC-rodada-2.md` — parceria/hackathon, o nó 3D, as fotos
-- `PLANO-rodada-2.md` — armadilhas de verificação já pagas em tempo
-- `hibrido-v1-central.html` — o protótipo estático aprovado, de onde este
-  código foi portado. Fica como registro; não é servido.
+- **Paleta:** as oito cores do Guia de Estilos 2026, sem invenção.
+- **Regra do canto:** arredondamento `0` no painel de malha, `20px` no card
+  de moldura, e **nenhum valor intermediário existe na folha**.
+- **Orçamento de cor:** o ciano `#1b98e0` tem **cinco usos contáveis**, todos
+  marcados no CSS como `CIANO 1..5`. Um sexto uso é decisão nova, não detalhe.
+- **Preenchimento chapado** só nos quatro cards de área: a cor *é* a
+  taxonomia, uma por departamento do enum `Department` da plataforma de
+  gestão.
+- **Montserrat 900** existe num lugar só: o nome das áreas.
 
-As fotos originais em alta resolução **não estão no git** (8,4 MB). Ficam no
-Canva do clube. As derivadas web em `client/src/landing/assets/fotos/` são 1x
-— gerar 2x e `srcset` continua pendente (SPEC-rodada-2 §3.7).
+As specs completas (o porquê de cada uma, as nove seções, o protótipo
+estático aprovado de onde este código foi portado) **não estão versionadas** —
+ficam na máquina do Messias, em `design-concepts/`. Quem precisar delas as
+encontra no histórico, no commit `11b5b48`.
+
+As fotos originais em alta resolução também **não estão no git** (8,4 MB).
+Ficam no Canva do clube. As derivadas web em
+`client/src/landing/assets/fotos/` são 1x — gerar 2x e `srcset` continua
+pendente.
 
 ## Licença
 

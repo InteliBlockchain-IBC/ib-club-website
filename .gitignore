@@ -7,8 +7,9 @@
 
 # Fotos originais em alta resolução (8,4 MB). Ficam fora do histórico:
 # são fonte, não entregável, e a origem delas é o Canva do clube.
-# As derivadas web usadas na landing estão em design-concepts/assets/fotos/.
+# As derivadas web usadas na landing estão em client/src/landing/assets/fotos/.
 /ai/
 
-# Ponto de retorno de antes de a pasta existir no git. O git é a rede agora.
-design-concepts/*.bak.html
+# Exploração de design: specs, protótipo estático e os modelos descartados.
+# Fica local — o entregável é o código. Está no histórico, no commit 11b5b48.
+/design-concepts/
