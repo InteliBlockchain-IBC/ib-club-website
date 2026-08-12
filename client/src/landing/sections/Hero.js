@@ -17,8 +17,11 @@ export default function Hero() {
   const stageRef = useRef(null);
   const canvasRef = useRef(null);
 
-  // o nó segue o ponteiro dentro da dobra. Sem ponteiro (toque) e sob
-  // prefers-reduced-motion ele fica parado, no ângulo de repouso.
+  // Isto é só o efeito da peça em CSS EMPILHADO (o fallback) seguindo o
+  // mouse — não decide se o 3D real carrega, isso é knot3d.js. Continua
+  // mouse-only de propósito: sem contato contínuo, um touchscreen não tem
+  // "posição do ponteiro" para seguir. Sob prefers-reduced-motion ele fica
+  // parado, no ângulo de repouso.
   useEffect(() => {
     const hero = heroRef.current;
     const slot = slotRef.current;

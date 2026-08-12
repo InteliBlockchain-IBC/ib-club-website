@@ -1,15 +1,28 @@
 /* ══════════ A MARCA EM 3D — carregamento tardio, com fallback ══════════
-   SPEC-rodada-2 §2, PLANO §2. Só inicializa se: sem prefers-reduced-motion,
-   com ponteiro (hover:hover), e WebGL de verdade disponível. Three.js só é
-   baixado depois de provar as três condições — quem não vai renderizar
-   nunca paga os ~600KB (SPEC §2.6, §2.5 do plano). Qualquer falha em
-   qualquer etapa deixa o PNG empilhado em CSS no lugar — ele nunca é
-   removido antes do 3D estar provado.
+   SPEC-rodada-2 §2, PLANO §2. Inicializa em qualquer dispositivo — inclusive
+   touch, a pedido do Messias — desde que sem prefers-reduced-motion e com
+   WebGL de verdade disponível. Three.js só é baixado depois de provar as
+   duas condições (SPEC §2.6, §2.5 do plano). Qualquer falha em qualquer
+   etapa deixa o PNG empilhado em CSS no lugar — ele nunca é removido antes
+   do 3D estar provado.
+
+   Sem mouse a peça não perde vida: a auto-rotação (`autoPhase`/`OSC`, mais
+   abaixo) roda sozinha, independente de ponteiro. O que muda por tipo de
+   entrada é só a INTERAÇÃO: `onPointerMove` segue o cursor e é mouse-only de
+   propósito (não existe posição contínua sem contato num touchscreen);
+   `onPointerDown`/`onDrag`/`onPointerUp` não filtram tipo, então arrastar
+   com o dedo já girava a peça mesmo antes desta mudança — só faltava deixar
+   o touch entrar na porta principal.
+
+   O custo dito com todas as letras: ligar isto em touch manda ~680KB de
+   Three.js para todo celular que rolar até a dobra, não só para quem tem
+   mouse. Continua lazy (só baixa perto da viewport) e morre sob
+   prefers-reduced-motion — o que não dá é para não pagar o download.
 
    O `import('three')` é o que mantém essa promessa dentro do Parcel: ele
    vira um bundle separado, baixado só quando esta linha executa. Trocar por
    um import estático no topo do arquivo mandaria a biblioteca inteira para
-   todo mundo, inclusive para o celular que nunca vai montar o canvas. */
+   todo mundo, inclusive para quem nunca rola até o hero. */
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
@@ -27,7 +40,6 @@ const POLYGONS = [
 export default function mountKnot3d(slot, canvas) {
   if (!slot || !canvas) return () => {};
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return () => {};
-  if (!window.matchMedia('(hover: hover)').matches) return () => {};
 
   // prova mínima de WebGL antes de baixar a biblioteca inteira
   let hasWebgl = false;

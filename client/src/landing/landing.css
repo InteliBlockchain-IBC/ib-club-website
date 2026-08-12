@@ -176,17 +176,20 @@ address{font-style:normal}
    e "SÃO PAULO" era cortado pela margem */
 .hero__thesis{border:0;padding:0;max-width:32ch}
 
-/* ── LOCKUP: proporções medidas no arquivo oficial da marca.
-      No logotipo real "inteli" é alinhado à ESQUERDA com "BLOCKCHAIN"
-      (+4px em 770px), o nó quase encosta no texto (7px de folga) e tem
-      cerca de 2x a altura do bloco de texto. Centralizar o "inteli" era
-      o que deixava o conjunto torto. ── */
+/* ── LOCKUP: empilhado, nó em cima e nome embaixo — pedido do Messias.
+      O logotipo oficial é horizontal (a navbar usa esse PNG estático sem
+      alteração, ver assets/logo-horizontal.png); este é um tratamento
+      deliberadamente diferente para o centro de peso da dobra, não uma
+      tentativa de reproduzir o lockup literal. A versão horizontal cramava
+      o nó contra o texto em qualquer largura, porque os dois competiam pelo
+      mesmo espaço lateral — vertical, cada um tem a largura inteira da
+      dobra para si, sem hack de margem negativa para compensar. ── */
 .lockup{
-  justify-content:center;align-items:center;
-  gap:clamp(.4rem,1vw,.9rem);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(1.1rem,3vh,2rem);
   margin-bottom:clamp(2rem,5vh,3rem);
 }
-.wordmark{text-align:left}
+.wordmark{text-align:center}
 .wordmark .light{
   font-size:clamp(.78rem,2vw,1.55rem);letter-spacing:.3em;
   margin-bottom:.16em;padding-left:.24em;
@@ -194,7 +197,6 @@ address{font-style:normal}
 .wordmark .bold,.wordmark::before,.wordmark::after{
   font-size:clamp(2.5rem,8.6vw,7rem);
 }
-.knot{width:clamp(16.8rem,40.5vw,33rem)}
 
 /* o botão herdava align-self:flex-start do layout alinhado à esquerda.
    A margem à direita é correção ótica: a sombra deslocada joga 14px de
@@ -206,7 +208,9 @@ address{font-style:normal}
    troca para o <canvas> sem que a dobra precise ser refeita (spec §7). */
 .knot{
   display:block;position:relative;flex:none;
-  width:clamp(13.5rem,33vw,27rem);aspect-ratio:1/1;   /* pedido: +200% do tamanho original */
+  /* vertical, o nó não compete por largura com o texto — pode crescer mais
+     que a versão horizontal (que ia até 27rem) sem apertar mais nada */
+  width:clamp(14rem,30vw,29rem);aspect-ratio:1/1;
   perspective:900px;
   animation:emerge 1.4s .35s cubic-bezier(.2,.7,.3,1) backwards;
 }
@@ -248,14 +252,6 @@ address{font-style:normal}
 }
 .knot__stage span:first-child{filter:none}
 @keyframes emerge{from{opacity:0;transform:scale(.85) rotate(-10deg)}}
-
-/* o lockup: nó + nome, como no logotipo */
-/* o nó real quase encosta no texto (7px de folga) — com o nó 3x maior o
-   gap antigo (até 1.6rem) lia como um buraco entre os dois */
-.lockup{display:flex;align-items:center;gap:0}
-/* gap:0 sozinho não bastava — sobra moldura vazia dentro do próprio PNG/
-   canvas do nó. Puxa o texto por cima dessa margem interna. */
-.wordmark{margin-left:clamp(-1.4rem,-2.2vw,-.6rem)}
 
 .hero__kicker{display:flex;align-items:center;gap:1rem;margin-bottom:clamp(2.5rem,6vh,4rem)}
 .hero__kicker i{width:9px;height:9px;background:var(--signal);flex:none}  /* CIANO 1 */
@@ -351,13 +347,10 @@ address{font-style:normal}
 .cta svg{width:1.1em;height:1.1em;flex:none}
 @media (max-width:900px){
   .hero{min-height:0;padding-top:3.5rem}
-  /* nó menor que no desktop: o piso do 3x original (10.2rem) não sobrava
-     espaço pro texto ao lado em tela estreita e estourava a largura —
-     bug real, o headless nunca provou abaixo de 500px pra pegar isto antes */
-  .knot{width:clamp(6.1rem,23vw,9rem)}
-  /* rede de segurança: se ainda assim não couber numa linha, quebra em
-     vez de estourar — mais robusto que só acertar o número certo */
-  .lockup{flex-wrap:wrap;justify-content:center}
+  /* empilhado, o nó não briga com o texto por largura — só precisa caber
+     na dobra inteira, então fica bem maior aqui do que na versão horizontal
+     antiga (que ia a 9rem para não estourar ao lado do wordmark) */
+  .knot{width:clamp(10rem,42vw,15rem)}
   /* o kicker é longo: com .28em de tracking ele encostava na margem direita */
   .hero__kicker .label{letter-spacing:.16em}
 }
@@ -729,10 +722,10 @@ address{font-style:normal}
   .hero__kicker i{display:inline-block;vertical-align:middle;margin-right:.55em}
   .hero__kicker .label{font-size:.625rem;letter-spacing:.1em}
 }
-/* abaixo de 480px o piso do clamp do wordmark não cabe ao lado do nó */
+/* telas bem estreitas: o nó continua livre pra ser generoso (empilhado, só
+   compete por largura consigo mesmo), o wordmark encolhe um degrau a mais */
 @media (max-width:480px){
-  .lockup{gap:.35rem}
-  .knot{width:clamp(5.5rem,27vw,9.5rem)}
+  .knot{width:clamp(9rem,48vw,12rem)}
   .wordmark .bold,.wordmark::before,.wordmark::after{font-size:clamp(1.75rem,9.4vw,2.5rem)}
   .wordmark .light{font-size:clamp(.6rem,2.6vw,.78rem);letter-spacing:.26em}
 }
