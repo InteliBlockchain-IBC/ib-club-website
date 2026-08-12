@@ -176,20 +176,19 @@ address{font-style:normal}
    e "SÃO PAULO" era cortado pela margem */
 .hero__thesis{border:0;padding:0;max-width:32ch}
 
-/* ── LOCKUP: empilhado, nó em cima e nome embaixo — pedido do Messias.
-      O logotipo oficial é horizontal (a navbar usa esse PNG estático sem
-      alteração, ver assets/logo-horizontal.png); este é um tratamento
-      deliberadamente diferente para o centro de peso da dobra, não uma
-      tentativa de reproduzir o lockup literal. A versão horizontal cramava
-      o nó contra o texto em qualquer largura, porque os dois competiam pelo
-      mesmo espaço lateral — vertical, cada um tem a largura inteira da
-      dobra para si, sem hack de margem negativa para compensar. ── */
+/* ── LOCKUP: proporções medidas no arquivo oficial da marca.
+      No logotipo real "inteli" é alinhado à ESQUERDA com "BLOCKCHAIN"
+      (+4px em 770px), o nó quase encosta no texto (7px de folga) e tem
+      cerca de 2x a altura do bloco de texto. Centralizar o "inteli" era
+      o que deixava o conjunto torto — horizontal no desktop.
+      Empilhado (nó em cima, nome embaixo) só abaixo de 900px, ver
+      @media(max-width:900px): nó e nome competiam pelo mesmo espaço
+      lateral em tela estreita. ── */
 .lockup{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:clamp(1.1rem,3vh,2rem);
+  display:flex;align-items:center;justify-content:center;gap:0;
   margin-bottom:clamp(2rem,5vh,3rem);
 }
-.wordmark{text-align:center}
+.wordmark{text-align:left;margin-left:clamp(-1.4rem,-2.2vw,-.6rem)}
 .wordmark .light{
   font-size:clamp(.78rem,2vw,1.55rem);letter-spacing:.3em;
   margin-bottom:.16em;padding-left:.24em;
@@ -208,9 +207,7 @@ address{font-style:normal}
    troca para o <canvas> sem que a dobra precise ser refeita (spec §7). */
 .knot{
   display:block;position:relative;flex:none;
-  /* vertical, o nó não compete por largura com o texto — pode crescer mais
-     que a versão horizontal (que ia até 27rem) sem apertar mais nada */
-  width:clamp(14rem,30vw,29rem);aspect-ratio:1/1;
+  width:clamp(13.5rem,33vw,27rem);aspect-ratio:1/1;   /* pedido: +200% do tamanho original */
   perspective:900px;
   animation:emerge 1.4s .35s cubic-bezier(.2,.7,.3,1) backwards;
 }
@@ -347,9 +344,13 @@ address{font-style:normal}
 .cta svg{width:1.1em;height:1.1em;flex:none}
 @media (max-width:900px){
   .hero{min-height:0;padding-top:3.5rem}
-  /* empilhado, o nó não briga com o texto por largura — só precisa caber
-     na dobra inteira, então fica bem maior aqui do que na versão horizontal
-     antiga (que ia a 9rem para não estourar ao lado do wordmark) */
+  /* empilhado (nó em cima, nome embaixo) só aqui: no horizontal do desktop
+     os dois competem pelo mesmo espaço lateral em tela estreita — vertical,
+     cada um tem a largura inteira da dobra para si, sem hack de margem
+     negativa para compensar. O nó pode crescer mais que a versão horizontal
+     (que ia a 9rem) porque não aperta mais nada ao lado. */
+  .lockup{flex-direction:column;gap:clamp(1.1rem,3vh,2rem)}
+  .wordmark{text-align:center;margin-left:0}
   .knot{width:clamp(10rem,42vw,15rem)}
   /* o kicker é longo: com .28em de tracking ele encostava na margem direita */
   .hero__kicker .label{letter-spacing:.16em}
