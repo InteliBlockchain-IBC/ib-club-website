@@ -56,7 +56,23 @@ export default function Mesh() {
 
     draw();
     let t;
-    const onResize = () => { clearTimeout(t); t = setTimeout(draw, 220); };
+    let lastWidth = window.innerWidth;
+    /* Em mobile, a barra de endereço do navegador some e aparece durante o
+       scroll comum — e isso muda `window.innerHeight` sem o usuário ter
+       redimensionado nada. Cada mudança disparava um `resize`, que apagava
+       e redesenhava a malha inteira, replayando a animação de traçado a
+       cada rolagem: era o "recarregando o tempo todo" relatado.
+       A largura é o que decide a densidade da malha (`side` muda no breakpoint
+       de 640px); a altura só decide quantas linhas cabem, e a folga de +2
+       linhas do cálculo já absorve a variação típica da barra de endereço
+       sem cortar nada. Por isso só redesenha quando a LARGURA muda de verdade
+       — giro de tela inclusive, porque aí a largura muda junto. */
+    const onResize = () => {
+      if (window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
+      clearTimeout(t);
+      t = setTimeout(draw, 220);
+    };
     window.addEventListener('resize', onResize);
     return () => { clearTimeout(t); window.removeEventListener('resize', onResize); };
   }, []);
